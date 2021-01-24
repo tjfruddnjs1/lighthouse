@@ -8,6 +8,9 @@ const dotenv = require('dotenv');
 const { sequelize } = require('./models');
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
+// 히노 작업
+const mentorRouter = require('./routes/mentor');
+//
 const passportConfig = require('./passport');
 
 dotenv.config();
@@ -45,6 +48,9 @@ app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
 app.use('/auth', authRouter);
+// 히노 작업
+app.use('/register', mentorRouter);
+//
 
 //ejs 파일에서 바로 사용가능, isAuthenticated는 user가 로그인되어 있는지
 //currentUser는 로그인된 user의 정보를 불러오는데 사용

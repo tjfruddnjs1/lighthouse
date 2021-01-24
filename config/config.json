@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "q2208080",
+    "password": "1234",
     "database": "lighthouse",
     "host": "127.0.0.1",
     "dialect": "mysql"
