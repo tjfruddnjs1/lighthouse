@@ -4,9 +4,26 @@
     <%- include('../partials/head') %>
   </head>
   <style>
-    .one_half{
+     .one_half{
       margin : 0 0 0 40%;
     }
+    
+    .btn{
+      width : 330px;
+      padding : 10px 12px 12px;
+    }
+
+    #mail{
+     background-color: #8FDFFF;
+   }
+
+   #kakao{
+     background-color: yellow;
+   }
+
+   #naver{
+     background-color: #3cbf3c;
+   }
 
     body input, button{
       color : #FFFFFF;
@@ -14,8 +31,14 @@
       background-color: #829DA2;
       display : block;
       widows: 100%;
-      padding: 12px;
+      padding: 14px;
+      width : 330px;
       border : 1px solid;
+    }
+    img{
+      width : 30px;
+      height: 30px;
+      float : left;
     }
 
   </style>
@@ -37,12 +60,12 @@
                 <label for="password">Password</label>
                 <input class="btmspace-15" type="password" name="password" value placeholder="password">
                 
-                <button id="regist" type="submit" class="btn">Regist</button>
+                <button id="mail" type="submit" class="btn"><img src="/images/login/mail.png" alt="메일가입" title="메일가입">Sign in</button>
                 
                 <footer>
-                <a href="/auth/kakao" class="btn">KakaoTalk Registration</a>
+                <a href="/auth/kakao" id="kakao" class="btn" style="text-align: right;"><img src="/images/login/kakao.png" alt="카카오톡" title="카카오톡">KakaoTalk Registration</a>
                 <br>
-                <a href="/auth/naver" class="btn">Naver Registration</a>
+                <a href="/auth/naver" id="naver" class="btn" style="text-align: right;"><img src="/images/login/naver.png" alt="네이버" title="네이버">Naver Registration</a>
                 </footer>
               </fieldset>
             </form>

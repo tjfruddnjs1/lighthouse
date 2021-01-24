@@ -10,8 +10,8 @@ const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
 
-dotenv.config();
 const app = express();
+dotenv.config();
 passportConfig();
 
 app.set('port', process.env.PORT || 8000);

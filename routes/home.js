@@ -13,7 +13,7 @@ router.use((req,res,next)=>{
 });
 
 //처음 페이지
-router.get('/', async (req, res, next) => {
+router.get('/',  async (req, res, next) => {
   try {
     res.render('home/index');
   } catch (err) {
