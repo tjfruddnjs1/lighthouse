@@ -17,7 +17,9 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
-      return res.redirect('/auth?error=exist');
+      // res.send('<script type="text/javascript">alert("이미 존재하는 메일입니다");</script>');
+      // return res.redirect('/login');
+      return res.render('home/validate',{title:'중복 메일 가입', passAuth:false, passLogin:true});
     }
     const hash = await bcrypt.hash(password, 12);
     await User.create({

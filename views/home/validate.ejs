@@ -1,0 +1,17 @@
+<% 
+if(passAuth == false){
+%>
+<script type="text/javascript">
+    alert("가입된 메일이 존재합니다");
+    history.back();
+</script>
+<% 
+}if(passLogin == false){
+%>
+<script type="text/javascript">
+    alert("로그인 정보를 확인해주세요");
+    history.back();
+</script>
+<% 
+}
+%>

@@ -34,8 +34,15 @@
         <li><a href="#">개발자 이야기</a></li>
         <li><a href="#">스터디 공고</a></li>
         <li><a href="#">홍보</a></li>
+        <% if(!(user && user.id)) { %>
         <li><a href="/login">로그인</a></li>
-        <li><a href="/auth/logout">로그아웃</a></li>
+        <% }else { %>
+        <li><a class="drop" href="#">마이페이지</a>
+          <ul>
+            <li><a href="/auth/logout">로그아웃</a></li>
+          </ul>
+        </li>
+        <% } %>
       </ul>
     </nav> 
   </header>
