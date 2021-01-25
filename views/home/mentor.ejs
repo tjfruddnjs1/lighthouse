@@ -84,6 +84,11 @@
 </head>
 
 <body id="top">
+  <% if(flag){ %>
+  <script>alert('멘토 등록 되었습니다.');</script>
+  <% }else{ %>
+  <script>alert('이미 등록된 멘토입니다.');</script>
+  <% } %>
   <!-- Top Background Image Wrapper -->
   <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
     <%- include('../partials/nav') %>
@@ -109,7 +114,7 @@
           <p>멘토가 되기 위한 기본 정보 입력란 입니다.</p>
         </div>
         <div id="updatemento">
-          <form action="/register" method="post">
+          <form action="/register" method="post" enctype="multipart/form-data">
             <fieldset>
               <label for="username">이름</label>
               <input type="text" id="username" name="username">
@@ -182,7 +187,7 @@
             <fieldset>
               <a name="image"></a>
               <label for="name">프로필 사진</label>
-              <input type="file" value="업로드">
+              <input type="file" value="업로드" name = "image">
               <div id="imagebox">
                 <p>
                   - 얼굴이 포함된 사진을 등록해주세요. <br>
@@ -213,6 +218,12 @@
                 radio[i].checked = true;
               }
             })
+          }
+          
+          if(flag){
+            alert('멘토 등록 되었습니다.');
+          }else{
+            alert('이미 가입된 멘토입니다.');
           }
         </script>
 </body>
