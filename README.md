@@ -9,7 +9,8 @@
 
 - [언어,프레임워크,모듈](#언어,-프레임워크,-모듈-선정)
 - [개발 기능](#개발-기능)
-- [구현 방법](#구현-방법-및-개발-규칙)
+- [구현 방법](#구현-방법)
+- [개발 규칙](#개발-규칙)
 
 ## 언어, 프레임워크, 모듈 선정
 
@@ -81,7 +82,7 @@
   <img width=40% float:left src="https://user-images.githubusercontent.com/41010744/105857370-91bfe800-602d-11eb-834e-6c9cd581740b.png">
   <img width=31% float:right src="https://user-images.githubusercontent.com/41010744/105857768-f24f2500-602d-11eb-86df-2db454eeff3c.png">
 
-## 구현 방법 및 개발 규칙
+## 구현 방법
 
 > 디렉터리 구성 `(계속 업데이트 예정)`
 
@@ -101,32 +102,21 @@
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
 - `index.js` : `npm install`을 통해 설치한 모듈들을 실제로 연동하고 설정
 
-> Github Commit 규칙 및 README.md 작성 , `2021-01-27 적용`
+> 기능에 따른 구현 방법
 
-- `각자의 branch 사용`
-  - 각자의 기능을 branch 별로 만들어 master branch에 merge시 pull request
-  - request 내용은 `commit 규칙`과 동일
-- `Commit 규칙` : [기능명] Commit 내용
-- ex. [로그인] 로그아웃 기능 오류 수정
-- `README.md작성 규칙`
-  - 작성법 : 자신이 맡은 기능에 관련한 `설명,사진` 작성
-  - 요청 사항 : 이후 회의에서 이야기 해볼만한 사항들이 있다면 상대방이 작성한 부분에 ` ` 을 통해 작성 > 회의후 삭제
-  - 작성 기간 : 다음 회의 이전 자신이 구현한 부분에 관해 작성 완료
-  - `README.md Commit 규칙` : [README.md] [기능명] Commit 내용
+- 진로 탐색 `(임종묵 작성 예정)`
 
-> 진로 탐색 `(임종묵 작성 예정)`
+- 멘토 등록 `(문현호 작성 예정)`
 
-> 멘토 등록 `(문현호 작성 예정)`
+- 멘토 찾기
 
-> 멘토 찾기
+- 개발자 이야기
 
-> 개발자 이야기
+- 스터디 공고
 
-> 스터디 공고
+- 홍보
 
-> 홍보
-
-> 로그인
+- 로그인
 
 1. [models/user.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/user.js)를 통해 User 테이블 생성
    - `id(PK,PK 미 지정시 자동 생성) ,username, email, password, provider, snsId` 컬럼으로 구성
@@ -142,3 +132,18 @@
    - `views/home/auth.ejs` : 회원가입 페이지
    - `views/home/validate.ejs` : routes의 `res.locals.user`를 통해 로그인 및 회원가입 시 이미 DataBase에 등록한 사용자일 경우 오류 팝업창
 5. [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)를 통해 라우터 및 Database Model 연결, Passport Configuration, Passport-Session 설정
+
+## 개발 규칙
+
+> Github Commit 규칙 및 README.md 작성 , `2021-01-27 적용`
+
+- `각자의 branch 사용`
+  - 각자의 기능을 branch 별로 만들어 master branch에 merge시 pull request
+  - request 내용은 `commit 규칙`과 동일
+- `Commit 규칙` : [기능명] Commit 내용
+- ex. [로그인] 로그아웃 기능 오류 수정
+- `README.md작성 규칙`
+  - 작성법 : 자신이 맡은 기능에 관련한 `설명,사진` 작성
+  - 요청 사항 : 이후 회의에서 이야기 해볼만한 사항들이 있다면 상대방이 작성한 부분에 ` ` 을 통해 작성 > 회의후 삭제
+  - 작성 기간 : 다음 회의 이전 자신이 구현한 부분에 관해 작성 완료
+  - `README.md Commit 규칙` : [README.md] [기능명] Commit 내용
