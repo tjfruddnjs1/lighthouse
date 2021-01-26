@@ -2,93 +2,11 @@
 <html lang="">
 
 <head>
-  <%- include('../partials/head') %>
-
-    <style>
-      .subhead {
-        font-family: sans-serif;
-        font-size: 30px;
-        font-weight: bold;
-      }
-
-      #updatemento {
-        width: 50%;
-        margin: 0 auto;
-        text-align: left;
-        color: #6D6D72;
-      }
-
-      #updatemento input[type="text"],
-      input[type="submit"],
-      input[type="email"],
-      #gender,
-      textarea {
-        border: 1px solid #8080805c;
-        width: 100%;
-        padding: 12px 5px;
-        margin: 20px auto;
-      }
-
-      #updatemento input[type="submit"] {
-        cursor: pointer;
-      }
-
-      .container {
-        padding: 40px 0;
-      }
-
-      #footer {
-        width: 100%;
-      }
-
-      .field {
-        width: 100%;
-        text-align: center;
-      }
-
-      #updatemento input[type="radio"] {
-        display: inline;
-        border: 1px solid #8080805c;
-        width: 20%;
-        cursor: pointer;
-      }
-
-      input[type="file"] {
-        outline: none;
-        border: 0;
-        padding: 7px 2px;
-        background-color: #f5f5f5;
-        width: 30%;
-      }
-
-      .item-list {
-        float: left;
-        width: 30%;
-        border: 1px solid #8080805c;
-        padding: 10px 5px;
-        margin: 5px;
-        display: inline;
-        text-align: left;
-        cursor: pointer;
-      }
-
-      .item-list:active {
-        background-color: #8080805c;
-        transition: 0.3s;
-      }
-
-      label {
-        font-weight: bold;
-      }
-    </style>
+  <%- include('../partials/head') %>  
+  <link rel="stylesheet" href="/css/mentor.css">    
 </head>
 
-<body id="top">
-  <% if(flag){ %>
-  <script>alert('멘토 등록 되었습니다.');</script>
-  <% }else{ %>
-  <script>alert('이미 등록된 멘토입니다.');</script>
-  <% } %>
+<body id="top">  
   <!-- Top Background Image Wrapper -->
   <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
     <%- include('../partials/nav') %>
@@ -114,7 +32,7 @@
           <p>멘토가 되기 위한 기본 정보 입력란 입니다.</p>
         </div>
         <div id="updatemento">
-          <form action="/register" method="post" enctype="multipart/form-data">
+          <form action="/register" method="post" enctype="multipart/form-data" id = "mentorForm">
             <fieldset>
               <label for="username">이름</label>
               <input type="text" id="username" name="username">
@@ -197,7 +115,7 @@
                 </p>
               </div>
             </fieldset>
-            <input type="submit" value="멘토 신청하기">
+            <input type="submit" value="멘토 신청하기" id = "submit">
           </form>
         </div>
       </section>
@@ -206,26 +124,8 @@
   </div>
   <%- include('../partials/foot') %>
     <%- include('../partials/copyright') %>
-      <%- include('../partials/top') %>
-        <script>
-          const radio = document.getElementsByClassName('job');
-          const radiobox = document.getElementsByClassName('item-list');
-          for (let i = 0; i < radiobox.length; i++) {
-            radiobox[i].addEventListener('click', function () {
-              if (radio[i].checked) {
-                radio[i].checked = false;
-              } else {
-                radio[i].checked = true;
-              }
-            })
-          }
-          
-          if(flag){
-            alert('멘토 등록 되었습니다.');
-          }else{
-            alert('이미 가입된 멘토입니다.');
-          }
-        </script>
+      <%- include('../partials/top') %>                                               
+        <script src = "/js/mentor.js"></script>
 </body>
 
 </html>

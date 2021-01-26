@@ -37,6 +37,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/',  upload.single('image'), async(req, res, next) => {    
+    let flag = true;
     const {username, gender, firm, department, career, field, email, intro, path} = req.body;
     try{
         const mentor = await Mentor.findOne({
@@ -44,13 +45,19 @@ router.post('/',  upload.single('image'), async(req, res, next) => {
                 username
             }
         });
-        if(mentor){
-            res.render('home/mentor', {flag : false})                        
+        if(mentor){ 
+            flag = false;            
+            res.send(
+                "<script type='text/javascript'>alert('이미 등록된 회원입니다.'); history.back(-1);</script>"
+            );
+            // res.redirect('/registor', {"flag": false})                        
         }
         await Mentor.create({
             username, gender, firm, department, career, field, email, intro, path
-        });                
-        res.render('home/mentor', {flag : true})                        
+        });                 
+        res.send(
+            "<script>alert('멘토 등록 되었습니다.'); window.location = '/';</script>"
+        );
     }catch(err){
         console.error(err);
         return next(err);
