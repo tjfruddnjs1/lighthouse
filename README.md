@@ -89,14 +89,14 @@
 
 - `config, migrations, models, seeders` : Sequelize Module 설치 후, `npx sequelize init` 명령어 실행시 폴더 생성
   - config : `config.json`파일을 통해 id, password 등과 같은 Database 설정
-  - models : [models/index.js]()파일을 통해 서버 실행시 MySQL과의 연동
+  - models : [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js)파일을 통해 서버 실행시 MySQL과의 연동
 - `passport` : 로그인을 위해 passport 관련 코드 작성
 - `public` : 웹 페이지 디자인을 위한 `css,images`, 동적인 웹페이지를 위한 `js`, 중 공통적으로 사용하는 부분을 모아놓은 폴더, 경로 연결을 통한 사용
-- `routes` : 라우터를 [index.js]()파일을 통해 연결하면 길어지기 때문에 분리하여 `GET,POST,PUT,DELETE 등`에 대한 라우트 처리
+- `routes` : 라우터를 [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)파일을 통해 연결하면 길어지기 때문에 분리하여 `GET,POST,PUT,DELETE 등`에 대한 라우트 처리
 - `uploads` : `(문현호 작성 예정)`
 - `views` : 실제 웹 페이지에서 클라이언트와 상호작용하는 부분으로 ejs 템플릿을 사용하여 더욱 편리한 동적인 작용하는 폴더
-  - [views/home/index.ejs]() : 메인 페이지
-  - [views/partials]() : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
+  - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
+  - [views/partials](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/partials) : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
 - `.env` : 유출되면 안되는 비밀키를 관리
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
 - `index.js` : `npm install`을 통해 설치한 모듈들을 실제로 연동하고 설정
@@ -128,17 +128,17 @@
 
 > 로그인
 
-1. [models/user.js]()를 통해 테이블 생성
+1. [models/user.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/user.js)를 통해 User 테이블 생성
    - `id(PK,PK 미 지정시 자동 생성) ,username, email, password, provider, snsId` 컬럼으로 구성
-   - [models/index.js]()에 테이블 연결
-2. [passport/kakaoStrategy.js](),[passport/localStrategy.js](),[passport/naverStrategy.js]() 작성
+   - [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js)에 테이블 연결
+2. [passport/kakaoStrategy.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/passport/kakaoStrategy.js),[passport/localStrategy.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/passport/localStrategy.js),[passport/naverStrategy.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/passport/naverStrategy.js) 작성
    - 각각 kakao, local, naver 로그인시 Database에 저장할 방법 명시 및 오류 발생시 처리
-3. [routes/home.js](), [routes/auth.js](), [routes/middleware.js]() 작성
+3. [routes/home.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/home.js), [routes/auth.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/auth.js), [routes/middleware.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/middlewares.js) 작성
    - `home.js` : 로그인 버튼에 대한 GET/POST 요청 , 회원가입 버튼에 대한 GET 요청, 로그인 상태 session을 유지하기 위한 `res.locals.user`
    - `auth.js` : 회원가입(local,kakao,naver)에 대한 GET/POST 요청, 로그아웃에 대한 GET 요청 처리
    - `middleware.js` : 다른 라우터에서 로그인 상태인지 아닌지를 확인하기 위해 작성, `isLoggedIn`은 로그인 상태임을 알려주고 `isNotLoggedIn`은 로그인이 안된 상태임을 알려준다.
-4. [views/home/login.ejs](), [views/home/auth.ejs](), [views/home/validate.ejs]()를 통한 client와 상호 작용
+4. [views/home/login.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/login.ejs), [views/home/auth.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/auth.ejs), [views/home/validate.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/validate.ejs)를 통한 client와 상호 작용
    - `views/home/login.ejs` : 로그인 페이지
    - `views/home/auth.ejs` : 회원가입 페이지
    - `views/home/validate.ejs` : routes의 `res.locals.user`를 통해 로그인 및 회원가입 시 이미 DataBase에 등록한 사용자일 경우 오류 팝업창
-5. [index.js]()를 통해 라우터 및 Database Model 연결, Passport Configuration, Passport-Session 설정
+5. [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)를 통해 라우터 및 Database Model 연결, Passport Configuration, Passport-Session 설정
