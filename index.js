@@ -13,8 +13,8 @@ const mentorRouter = require('./routes/mentor');
 //
 const passportConfig = require('./passport');
 
-dotenv.config();
 const app = express();
+dotenv.config();
 passportConfig();
 
 app.set('port', process.env.PORT || 8000);
@@ -41,6 +41,7 @@ app.use(session({
     secure: false,
   },
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
