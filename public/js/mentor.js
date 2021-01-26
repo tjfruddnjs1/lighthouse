@@ -10,7 +10,7 @@
               }
             })
           }          
-          const username = document.getElementById('username');
+   const username = document.getElementById('username');
    const gender = document.getElementsByName('gender'); // 배열
    const firm = document.getElementById('firm');
    const department = document.getElementById('department');
@@ -23,8 +23,7 @@
 
 
 function submit(){
-  document.getElementById('submit').addEventListener('click',  function(e){
-        e.preventDefault();
+  document.getElementById('submit').addEventListener('click',  function(e){        
         var flag = false;
         if(!username.value){
           alert('이름 입력하세요');

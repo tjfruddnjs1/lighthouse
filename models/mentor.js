@@ -41,7 +41,7 @@ module.exports = class Mentor extends Sequelize.Model {
         allowNull : false,        
       },  
       path : {
-        type : Sequelize.STRING(50),
+        type : Sequelize.STRING(100),
         allowNull: true,            
       },  
     }, {

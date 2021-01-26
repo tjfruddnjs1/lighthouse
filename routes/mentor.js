@@ -36,17 +36,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/',  upload.single('image'), async(req, res, next) => {    
-    let flag = true;
-    const {username, gender, firm, department, career, field, email, intro, path} = req.body;
+router.post('/',  upload.single('image'), async(req, res, next) => {            
+    const {username, gender, firm, department, career, field, email, intro} = req.body;
+    const path = req.file.path;    
     try{
         const mentor = await Mentor.findOne({
             where : {
                 username
             }
         });
-        if(mentor){ 
-            flag = false;            
+        if(mentor){             
             res.send(
                 "<script type='text/javascript'>alert('이미 등록된 회원입니다.'); history.back(-1);</script>"
             );
