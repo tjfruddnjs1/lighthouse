@@ -52,19 +52,18 @@
   <br>
   <img width=100% src="https://user-images.githubusercontent.com/41010744/105853762-64713b00-6029-11eb-8293-46811b98256c.png">
   <br>
-- 진로 탐색 
-  * 진로 탐색 소개페이지 구현 : 페이지 디자인 및 라우팅 처리 `일부 구현 > 2021-01-28 12:38(KST)기준 9개의 직업을 도출하였고, 세부 자료조사는 지속 업데이트가 필요`
-  ![alt text](https://user-images.githubusercontent.com/57579709/106015263-a66db000-6101-11eb-9e38-01a842640008.png)
+- 진로 탐색 `(계속 업데이트 예정)`
 
-  * 사용자가 한 직종에 대해 **MORE DETAILS**버튼을 누르면 해당 직종에 대해 자세한 설명이 있는 페이지로 이동. `구현 완료`
-  ![alt text](https://user-images.githubusercontent.com/57579709/106015617-006e7580-6102-11eb-8698-e8c5c72ca4d2.png)
-  * 관심 분야에 추가 버튼을 누르면 해당 분야가 관심분야로 추가 `(계속 업데이트 예정)`
-  
-- 멘토 등록 `(문현호 작성 예정)`
+  - 진로 탐색 소개페이지 구현 : 페이지 디자인 및 라우팅 처리 `일부 구현 > 2021-01-28 12:38(KST)기준 9개의 직업을 도출하였고, 세부 자료조사는 지속적인 업데이트 필요`
+
+  - 사용자가 한 직종에 대해 **MORE DETAILS**버튼을 누르면 해당 직종에 대해 자세한 설명이 있는 페이지로 이동. `구현 완료`
+
+  - 관심 분야에 추가 버튼을 누르면 해당 분야가 관심분야로 추가
+
+- 멘토 등록
   - 멘토 등록 페이지 : 기존 멘티 신분인 사용자를 멘토로 만들기 위한 기능 `일부 구현 > 현재 프로필 사진 등록 안할 시 오류 발생`
   - home 페이지에서 헤더의 `멘토등록` 버튼 클릭시 멘토 등록 페이지로 이동 `구현 완료`
   - 멘토 등록시 이미 등록된 멘토인지 검사 `구현 완료`
-  
 - 멘토 찾기
 - 개발자 이야기
 - 스터디 공고
@@ -75,14 +74,18 @@
   - `마이페이지` 항목은 자신의 정보 및 진로탐색결과/멘토링/스터디 상태 및 로그아웃 가능하다. `일부 구현 > 로그아웃만 구현`
   - 회원가입시 중복된 email의 User를 검사하고 로그인시 Database에 등록된 User인지 검사한다. `구현 완료`
 
-> 메인 페이지는 header navigation의 일부 항목 및 사이트 소개 페이지로 구성 예정 `현재 소개페이지만 간단하게 구현 상태` > `(계속 업데이트 예정)`
-
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/105859241-a309f400-602f-11eb-8784-0da84d4c96fc.png">
-
 > 페이지 구현 상태 `(계속 업데이트 예정)`
 
-- 진로 탐색
+- 메인 페이지
+  <br>
+  <img src="https://user-images.githubusercontent.com/41010744/105859241-a309f400-602f-11eb-8784-0da84d4c96fc.png">
+
+- 진로 탐색 : `소개 , 해당 직종 설명` 페이지
+  <br>
+  <img width=80% src="https://user-images.githubusercontent.com/57579709/106015263-a66db000-6101-11eb-9e38-01a842640008.png">
+  <br>
+  <img width="80%" src="https://user-images.githubusercontent.com/57579709/106015617-006e7580-6102-11eb-8698-e8c5c72ca4d2.png">
+
 - 멘토 등록 : `멘토 등록` 페이지
   <br>
   <img width=42.5% float:left src ="https://user-images.githubusercontent.com/57825856/106027266-141fd900-610e-11eb-9f97-51d187ae9686.PNG">
@@ -120,29 +123,29 @@
 
 - 진로 탐색
 
-> 진로 탐색 `(임종묵 작성 예정)`
 1. 상단의 `진로 탐색`을 누르면 직종 소개 페이지로 이동
-    * `href`속성은 `views/partials/nav.ejs`안에 정의
-    * `href=/job_seeking/intro`을 요청하면 라우터는 `views/job_seeking/intro.ejs`를 렌더링
+   - `href`속성은 `views/partials/nav.ejs`안에 정의
+   - `href=/job_seeking/intro`을 요청하면 라우터는 `views/job_seeking/intro.ejs`를 렌더링
 2. `intro.ejs`단순히 라우터에게 페이지를 요청하는 형태
-    * 이 페이지에는 직종별로 `MORE DATAILS`버튼이 존재하며, 이 버튼을 누르면 `.json`을 이용하여 동적으로 설명 페이지로 라우팅
+   - 이 페이지에는 직종별로 `MORE DATAILS`버튼이 존재하며, 이 버튼을 누르면 `.json`을 이용하여 동적으로 설명 페이지로 라우팅
 3. `MORE DETAILS` 버튼을 누르면 해당 직종에 대한 자세한 설명 페이지로 이동
-    * `JSON`을 사용하여 로컬(또는 데이터베이스로 바뀔 수 있음)의 `public/asset/front.json(임시 파일이름)`을 읽어오고, 페이지에 표시할 정보들이 키-값으로 저장
-    * 해당 버튼에 직종에 대한 정보를 함께 request, 라우터는 그 직종에 맞는 정보를 json으로부터 동적으로 읽어오고 브라우저에게 json 객체형태로 response
+   - `JSON`을 사용하여 로컬(또는 데이터베이스로 바뀔 수 있음)의 `public/asset/front.json(임시 파일이름)`을 읽어오고, 페이지에 표시할 정보들이 키-값으로 저장
+   - 해당 버튼에 직종에 대한 정보를 함께 request, 라우터는 그 직종에 맞는 정보를 json으로부터 동적으로 읽어오고 브라우저에게 json 객체형태로 response
 4. 직종 설명 페이지에 `관심 분야에 추가`버튼 프레임을 만들어 두어 이후 마이페이지 기능 구현 후 연동되게 할 예정
 
-- 멘토 등록 `(문현호 작성 예정)`
+- 멘토 등록
+
 1. `models/mentor.js`를 통해 mentor 테이블 생성
-    - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
-    - `models/index.js`에 테이블 연결
+   - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
+   - `models/index.js`에 테이블 연결
 2. `routes/mentors.js` 작성
-    - 프로필 이미지 저장하기 위해`upload` 폴더 생성 
-    - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
+   - 프로필 이미지 저장하기 위해`upload` 폴더 생성
+   - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
 3. `views/home/mentor.ejs` 작성
-    - mentor 등록 페이지를 보여준는 파일    
+   - mentor 등록 페이지를 보여준는 파일
 4. `public/css/mentor.css, public/js/mentor.js` 작성
-    - `mentor.css` : 멘토 등록 페이지 css 파일 
-    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
+   - `mentor.css` : 멘토 등록 페이지 css 파일
+   - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
 - 멘토 찾기
 
