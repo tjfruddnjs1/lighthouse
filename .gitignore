@@ -1,0 +1,7 @@
+# ignore node_modules
+/node_modules
+/uploads
+.env
+
+# personal local database settings - for development
+/config
