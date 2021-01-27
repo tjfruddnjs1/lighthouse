@@ -8,16 +8,19 @@ const dotenv = require('dotenv');
 const { sequelize } = require('./models');
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
+// 히노 작업
+const mentorRouter = require('./routes/mentor');
+//
 const passportConfig = require('./passport');
 
-dotenv.config();
 const app = express();
+dotenv.config();
 passportConfig();
 
 app.set('port', process.env.PORT || 8000);
 app.set('view engine', 'ejs');
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
@@ -38,6 +41,7 @@ app.use(session({
     secure: false,
   },
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,6 +49,9 @@ app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
 app.use('/auth', authRouter);
+// 히노 작업
+app.use('/register', mentorRouter);
+//
 
 //ejs 파일에서 바로 사용가능, isAuthenticated는 user가 로그인되어 있는지
 //currentUser는 로그인된 user의 정보를 불러오는데 사용

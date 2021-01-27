@@ -95,7 +95,7 @@ File: Layout CSS
 #references .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 #references .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase;}
 #references .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-#references .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
+#references .ref-sort li::after{position:absolute; top:0; right:0; content:"|";}
 #references .ref-sort li:last-child{margin:0; padding:0;}
 #references .ref-sort li:last-child::after{display:none;}
 #references .ref-sort li a{}

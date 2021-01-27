@@ -6,12 +6,20 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+//session 유지를 위한 > passport module
+router.use((req,res,next)=>{
+  res.locals.user = req.user;
+  next();
+});
+
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   const { email, username, password } = req.body;
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
-      return res.redirect('/auth?error=exist');
+      // res.send('<script type="text/javascript">alert("이미 존재하는 메일입니다");</script>');
+      // return res.redirect('/login');
+      return res.render('home/validate',{title:'중복 메일 가입', passAuth:false, passLogin:true});
     }
     const hash = await bcrypt.hash(password, 12);
     await User.create({
@@ -35,6 +43,14 @@ router.get('/logout', isLoggedIn, (req, res) => {
 router.get('/kakao', passport.authenticate('kakao'));
 
 router.get('/kakao/callback', passport.authenticate('kakao', {
+  failureRedirect: '/',
+}), (req, res) => {
+  res.redirect('/');
+});
+
+router.get('/naver', passport.authenticate('naver'));
+
+router.get('/naver/callback', passport.authenticate('naver', {
   failureRedirect: '/',
 }), (req, res) => {
   res.redirect('/');
