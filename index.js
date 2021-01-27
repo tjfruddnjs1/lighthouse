@@ -10,8 +10,12 @@ const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 // 히노 작업
 const mentorRouter = require('./routes/mentor');
+//종묵 작업
+const careerRouter = require('./routes/career');
+
 //
 const passportConfig = require('./passport');
+
 
 const app = express();
 dotenv.config();
@@ -52,6 +56,9 @@ app.use('/auth', authRouter);
 // 히노 작업
 app.use('/register', mentorRouter);
 //
+
+//종묵 작업
+app.use('/career', careerRouter);
 
 //ejs 파일에서 바로 사용가능, isAuthenticated는 user가 로그인되어 있는지
 //currentUser는 로그인된 user의 정보를 불러오는데 사용
