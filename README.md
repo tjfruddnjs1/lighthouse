@@ -53,6 +53,10 @@
   <br>
 - 진로 탐색 `(임종묵 작성 예정)`
 - 멘토 등록 `(문현호 작성 예정)`
+  - 멘토 등록 페이지 : 기존 멘티 신분인 사용자를 멘토로 만들기 위한 기능 `일부 구현 > 현재 프로필 사진 등록 안할 시 오류 발생`
+  - home 페이지에서 헤더의 `멘토등록` 버튼 클릭시 멘토 등록 페이지로 이동 `구현 완료`
+  - 멘토 등록시 이미 등록된 멘토인지 검사 `구현 완료`
+  
 - 멘토 찾기
 - 개발자 이야기
 - 스터디 공고
@@ -71,7 +75,10 @@
 > 페이지 구현 상태 `(계속 업데이트 예정)`
 
 - 진로 탐색
-- 멘토 등록
+- 멘토 등록 : `멘토 등록` 페이지
+  <br>
+  <img width=42.5% float:left src ="https://user-images.githubusercontent.com/57825856/106027266-141fd900-610e-11eb-9f97-51d187ae9686.PNG">
+  <img width=40% float:right src = "https://user-images.githubusercontent.com/57825856/106027278-16823300-610e-11eb-838d-9720abe320ef.PNG">
 - 멘토 찾기
 - 개발자 이야기
 - 스터디 공고
@@ -93,7 +100,7 @@
 - `passport` : 로그인을 위해 passport 관련 코드 작성
 - `public` : 웹 페이지 디자인을 위한 `css,images`, 동적인 웹페이지를 위한 `js`, 중 공통적으로 사용하는 부분을 모아놓은 폴더, 경로 연결을 통한 사용
 - `routes` : 라우터를 [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)파일을 통해 연결하면 길어지기 때문에 분리하여 `GET,POST,PUT,DELETE 등`에 대한 라우트 처리
-- `uploads` : `(문현호 작성 예정)`
+- `uploads` : 멘토 등록시 프로필 사진에 대한 파일들을 저장하는 폴더
 - `views` : 실제 웹 페이지에서 클라이언트와 상호작용하는 부분으로 ejs 템플릿을 사용하여 더욱 편리한 동적인 작용하는 폴더
   - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
   - [views/partials](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/partials) : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
@@ -114,9 +121,25 @@
   - 작성 기간 : 다음 회의 이전 자신이 구현한 부분에 관해 작성 완료
   - `README.md Commit 규칙` : [README.md] [기능명] Commit 내용
 
+<<<<<<< Updated upstream
 > 진로 탐색 `(임종묵 작성 예정)`
 
 > 멘토 등록 `(문현호 작성 예정)`
+=======
+- 멘토 등록 `(문현호 작성 예정)`
+1. `models/mentor.js`를 통해 mentor 테이블 생성
+    - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
+    - `models/index.js`에 테이블 연결
+2. `routes/mentors.js` 작성
+    - 프로필 이미지 저장하기 위해`upload` 폴더 생성 
+    - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
+3. `views/home/mentor.ejs` 작성
+    - mentor 등록 페이지를 보여준는 파일    
+4. `public/css/mentor.css, public/js/mentor.js` 작성
+    - `mentor.css` : 멘토 등록 페이지 css 파일 
+    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
+- 멘토 찾기
+>>>>>>> Stashed changes
 
 > 멘토 찾기
 
