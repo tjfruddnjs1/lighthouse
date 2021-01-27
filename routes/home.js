@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const User = require('../models/user');
 
+const fs = require('fs');
+
 const router = express.Router();
 
 //session 유지를 위한 > passport module
@@ -71,5 +73,17 @@ router.get('/auth', isNotLoggedIn, async(req,res,next)=>{
     next(err);
   }
 });
+
+//직업소개페이지 개요
+router.get('/job_seeking/intro', async(req, res, next) => {
+  try{
+    res.render('job_seeking/intro');
+
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
 
 module.exports = router;
