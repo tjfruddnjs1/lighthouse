@@ -14,14 +14,8 @@ router.use((req,res,next)=>{
   next();
 });
 
-//처음 페이지
-router.get('/', async (req, res, next) => {
-  try {
-    res.render('home/index');
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
+router.get('/', (req,res)=>{
+  res.render('home/index');
 });
 
 //등 대 눌렀을때
@@ -51,9 +45,13 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       console.error(authError);
       return next(authError);
     }
+
+    //info.message
     if (!user) {
-      return res.redirect(`/?loginError=${info.message}`);
+      console.log(info.message);
+      return res.render('home/validate',{title:'로그인 에러 정보', passLogin:false, passAuth:true});
     }
+
     return req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);
@@ -63,6 +61,8 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
     });
   })(req, res, next);
 });
+
+
 
 //회원가입 눌렀을 때
 router.get('/auth', isNotLoggedIn, async(req,res,next)=>{
