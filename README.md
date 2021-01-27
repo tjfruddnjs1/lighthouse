@@ -124,26 +124,26 @@
 - 진로 탐색
 
 1. 상단의 `진로 탐색`을 누르면 직종 소개 페이지로 이동
-   - `href`속성은 `views/partials/nav.ejs`안에 정의
-   - `href=/job_seeking/intro`을 요청하면 라우터는 `views/job_seeking/intro.ejs`를 렌더링
+   - `href`속성은 [views/partials/nav.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/partials/nav.ejs)안에 정의
+   - `href=/job_seeking/intro`을 요청하면 라우터는 [views/job_seeking/intro.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/job_seeking/intro.ejs)를 렌더링
 2. `intro.ejs`단순히 라우터에게 페이지를 요청하는 형태
    - 이 페이지에는 직종별로 `MORE DATAILS`버튼이 존재하며, 이 버튼을 누르면 `.json`을 이용하여 동적으로 설명 페이지로 라우팅
 3. `MORE DETAILS` 버튼을 누르면 해당 직종에 대한 자세한 설명 페이지로 이동
-   - `JSON`을 사용하여 로컬(또는 데이터베이스로 바뀔 수 있음)의 `public/asset/front.json(임시 파일이름)`을 읽어오고, 페이지에 표시할 정보들이 키-값으로 저장
+   - `JSON`을 사용하여 로컬(또는 데이터베이스로 바뀔 수 있음)의 [public/asset/front.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/asset/front.json)(임시 파일이름)`을 읽어오고, 페이지에 표시할 정보들이 키-값으로 저장
    - 해당 버튼에 직종에 대한 정보를 함께 request, 라우터는 그 직종에 맞는 정보를 json으로부터 동적으로 읽어오고 브라우저에게 json 객체형태로 response
 4. 직종 설명 페이지에 `관심 분야에 추가`버튼 프레임을 만들어 두어 이후 마이페이지 기능 구현 후 연동되게 할 예정
 
 - 멘토 등록
 
-1. `models/mentor.js`를 통해 mentor 테이블 생성
+1. [models/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentor.js) 를 통해 mentor 테이블 생성
    - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
-   - `models/index.js`에 테이블 연결
-2. `routes/mentors.js` 작성
+   - [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js) 에 테이블 연결
+2. [routes/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/mentor.js) 작성
    - 프로필 이미지 저장하기 위해`upload` 폴더 생성
    - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
-3. `views/home/mentor.ejs` 작성
+3. [views/home/mentor.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/mentor.ejs) 작성
    - mentor 등록 페이지를 보여준는 파일
-4. `public/css/mentor.css, public/js/mentor.js` 작성
+4. [public/css/mentor.css](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/css/mentor.css), [public/js/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/js/mentor.js) 작성
    - `mentor.css` : 멘토 등록 페이지 css 파일
    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
