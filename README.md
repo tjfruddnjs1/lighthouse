@@ -121,8 +121,6 @@
 - 진로 탐색
 
 > 진로 탐색 `(임종묵 작성 예정)`
-
-> 멘토 등록 `(문현호 작성 예정)`
 1. 상단의 `진로 탐색`을 누르면 직종 소개 페이지로 이동
     * `href`속성은 `views/partials/nav.ejs`안에 정의
     * `href=/job_seeking/intro`을 요청하면 라우터는 `views/job_seeking/intro.ejs`를 렌더링
@@ -134,6 +132,17 @@
 4. 직종 설명 페이지에 `관심 분야에 추가`버튼 프레임을 만들어 두어 이후 마이페이지 기능 구현 후 연동되게 할 예정
 
 - 멘토 등록 `(문현호 작성 예정)`
+1. `models/mentor.js`를 통해 mentor 테이블 생성
+    - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
+    - `models/index.js`에 테이블 연결
+2. `routes/mentors.js` 작성
+    - 프로필 이미지 저장하기 위해`upload` 폴더 생성 
+    - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
+3. `views/home/mentor.ejs` 작성
+    - mentor 등록 페이지를 보여준는 파일    
+4. `public/css/mentor.css, public/js/mentor.js` 작성
+    - `mentor.css` : 멘토 등록 페이지 css 파일 
+    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
 - 멘토 찾기
 
