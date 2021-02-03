@@ -8,139 +8,254 @@
         <title>Document</title>
 
         <style>
-            h1 {
+            h2 {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: bold;
+            }
+
+            .nav-container {
+                display: flex;
+                flex-direction: row;
+                padding: 0;
+                background-color: rgba(0, 0, 0, .5);
+                list-style-type: none;
+                width: 1140px;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 5px;
+                margin-top: 8px;
+                color: inherit;
+            }
+
+            .nav-item {
+                border: 0.5px solid white;
+                text-align: center;
+                padding: 15px;
+                cursor: pointer;
+                /* float: left; */
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            }
+
+            .nav-item a {
+                text-align: center;
+                text-decoration: none;
+                color: white;
+            }
+
+            .main {
+                background-color: black;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            ul,
+            li {
+                list-style: none;
+
+            }
+
+            #slide {
+                height: 800px;
+                position: relative;
+            }
+
+            #slide ul {
+                width: 400%;
+                height: 100%;
+                transition: 1s;
+            }
+
+            #slide ul:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            #slide li {
+                float: left;
+                width: 25%;
+                height: 100%;
+            }
+
+
+
+            #slide li:nth-child(1) {
+                background: inherit;
+            }
+
+            #slide li:nth-child(2) {
+                background: inherit;
+            }
+
+            #slide li:nth-child(3) {
+                background: inherit;
+            }
+
+            #slide li:nth-child(4) {
+                background: inherit;
+            }
+
+            #slide input {
+                display: none;
+                list-style: none;
+            }
+
+            #slide label {
+                display: inline-block;
+                vertical-align: middle;
+                /* width: 100px;
+                height: 100px; */
+                padding: 30px;
+                /* border: 2px solid #666; */
+                background-color: #ccc;
+                transition: 0.3s;
+                /* border-radius: 50%; */
+                cursor: pointer;
+            }
+
+            #slide .pos {
+                text-align: center;
+                position: absolute;
+                bottom: 10px;
+                left: 0;
+                width: 100%;
+            }
+
+            #pos1:checked~ul {
+                margin-left: 0%;
+            }
+
+            #pos2:checked~ul {
+                margin-left: -100%;
+
+            }
+
+            #pos3:checked~ul {
+                margin-left: -200%;
+            }
+
+            #pos4:checked~ul {
+                margin-left: -300%;
+            }
+
+            #pos1:checked~.pos>label:nth-child(1) {
+                background: #666;
+            }
+
+            #pos2:checked~.pos>label:nth-child(2) {
+                background: #666;
+            }
+
+            #pos3:checked~.pos>label:nth-child(3) {
+                background: #666;
+            }
+
+            #pos4:checked~.pos>label:nth-child(4) {
+                background: #666;
+            }
+
+            body {
+                color: black;
+            }
+
+            h3,
+            h4 {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+
+            main .div-text {
+                display: inline;
+                float: left;
+            }
+
+            main .div-img {
+                /* border: 1px solid black; */
+                width: 400px;
+                float: right;
+                /* background-color: blue; */
+                /* text-align: center; */
+                margin-top: 40px;
             }
         </style>
 
 </head>
 
 <body>
-    <div class="bgded overlay" style="background-image:url('<%= sendJson.img_title %>');">
-        <!-- <div class="bgded overlay" > -->
+    <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+
         <%- include('../partials/nav') %>
-            <div id="pageintro" class="hoc clear">
-                <article>
-                    <h1 class="heading"
-                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-                        <%= sendJson.title%>
-                    </h1>
-                    <p id="story" style="text-align: left;">
-                        <%= sendJson.introduction %>
-                    </p>
-                    <footer>
-                    </footer>
-                </article>
-            </div>
-            <div class="wrapper row3">
-                <main class="hoc container clear">
-                    <!-- main body -->
-                    <!-- ################################################################################################ -->
-                    <div class="content">
+            <div style="background-color: white; color: black;">
+                </h2>
+                <div id="slide">
+                    <nav class="nav-container">
+                        <ul>
+                            <li class="nav-item"><a href="">프론트엔드 개발자</a></li>
+                            <li class="nav-item"><a href="">백엔드 개발자</a></li>
+                            <li class="nav-item"><a href="">풀스택 개발자</a></li>
+                            <li class="nav-item"><a href="">데스크탑 개발자</a></li>
+                            <li class="nav-item"><a href="">모바일 개발자</a></li>
+                            <li class="nav-item"><a href="">게임 개발자</a></li>
+                            <li class="nav-item"><a href="">빅데이터 전문가</a></li>
+                            <li class="nav-item"><a href="">임베디드 개발자</a></li>
+                            <li class="nav-item"><a href="">교육자</a></li>
+                        </ul>
+                    </nav>
 
-                        <!-- 소개 -->
-                        <hr>
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">
-                            <%= sendJson.title%> 소개
-                        </h1>
-                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgr.gif" alt="">
-                        <p>
-                            <%= sendJson.introduction%>
+                    <main class="hoc container clear">
+
+                        <input type="radio" name="pos" id="pos1" checked>
+                        <input type="radio" name="pos" id="pos2">
+                        <input type="radio" name="pos" id="pos3">
+                        <input type="radio" name="pos" id="pos4">
+
+                        <ul>
+                            <li>
+                                <div>
+                                    <div class="div-text">
+                                        <h2>
+                                            <%= sendJson.title %>
+                                        </h2>
+                                        <h3>
+                                            <%= sendJson.introduction %>
+                                        </h3>
+                                        <h4>
+                                            <%= sendJson.introduction %>
+                                        </h4>
+                                    </div>
+                                    <div class="div-img">
+                                        <img src="/asset/job_seeking/front_intro.png" alt="">
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li>
+                                <h2>프론트엔드 결과물</h2>
+                                <img src="<%= sendJson.dir_img %> " alt="" style="height: 200px;">
+                            </li>
+                            <li>
+                                <h2>언어</h2>
+                            </li>
+                            <li>
+                                <h2>^^</h2>
+                            </li>
+                        </ul>
+                        <p class="pos">
+                            <label for="pos1">소개</label>
+                            <label for="pos2">결과물</label>
+                            <label for="pos3">언어</label>
+                            <label for="pos4">학습지식</label>
                         </p>
-                        <hr>
+                    </main>
+                </div>
 
-                        <!-- 결과물 -->
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">
-                            <%= sendJson.title%>의 결과물 : <span style="color: darkslategrey;">
-                                    <%= sendJson.product %>
-                                </span>
-
-                        </h1>
-                        <img class="imgl borderedbox inspace-5" src="../images/demo/imgr.gif" alt="">
-                        <p>
-                            <%= sendJson.introduction%>
-                        </p>
-                        <hr>
-
-                        <!-- 언어 -->
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">프로그래밍 언어</h1>
-
-                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
-                        <p>
-                            <%= sendJson.title%>의 프로그래밍 언어는 <span style="color: darkslategrey;">
-                                <%= sendJson.language %>
-                            </span>
-                            입니다.
-                        </p>
-                        <p><%= sendJson.language_desc %> </p>
-
-                        <hr>
-                        <!-- 사용기술 -->
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">적용 기술</h1>
-
-                        <img class="imgl borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
-                        <p>
-                            <%= sendJson.tech %> 
-                        </p>
-                        <p>
-                            <%= sendJson.tech_desc %> 
-                        </p>
-
-                        <hr>
-                        <!-- 평균연봉 -->
-                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">평균 연봉</h1>
-
-                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
-                        <p>
-                            <%= sendJson.salary %> 
-                        </p>
-                        <p>
-                            <%= sendJson.salary_desc %> 
-                        </p>
-
-                        <hr>
-                        <footer style="text-align: center;">
-                            <a class="btn" href="" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
-                            >관심 분야에 추가</a>
-                            <a class="btn" href="/job_seeking/intro" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                            background-color: rgb(255, 255, 255);">소개 페이지로 돌아가기</a>
-                        </footer>
-            
-                        <!-- **************재사용할 때에는 아래의 템플릿을 이용************* 
-                        
-                            <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-                        font-weight: bold;">
-
-                        </h1>
-
-                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
-                        <p></p> 
-
-                        **************재사용할 때에는 아래의 템플릿을 이용*************  -->
-
-                        <!-- ################################################################################################ -->
-                    </div>
-                    <!-- ################################################################################################ -->
-                    <!-- / main body -->
-                    <div class="clear"></div>
-                </main>
             </div>
 
-    </div>
-    <%- include('../partials/copyright') %>
-        <%- include('../partials/top') %>
+            <%- include('../partials/copyright') %>
+                <%- include('../partials/top') %>
 </body>
 
 </html>
