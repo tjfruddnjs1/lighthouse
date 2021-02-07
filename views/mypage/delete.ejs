@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <%- include('../partials/head') %>  
+  <link rel="stylesheet" href="/css/mentor.css">    
+</head>
+
+<style>
+    #drop{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin : 20px auto;
+        border : 1px solid #8080805c;
+        padding : 12px 5px;
+        width : 40%;
+        float : left;
+        color : #829DA2;
+        widows : 100%;
+        
+    }
+
+    #etc{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin : 20px auto;
+        border : 1px solid #8080805c;
+        padding : 12px 5px;
+        width : 100%;
+        float : left;
+        color : #829DA2;
+        widows : 100%;
+        height: 300;
+        
+    }
+
+    .info{
+        font-weight:bold;
+        font-size : 12px;
+        color : red;
+    }
+
+    label{
+        padding : 4px 2px;
+        width : 100%;
+    }
+    input[type="submit"],
+    input[type="dropuser"]{        
+        text-align : center;
+        border: 1px solid #8080805c;
+        width: 100%;
+        padding: 12px 5px;
+        margin: 20px auto;
+        color : #829DA2;
+        cursor : pointer;
+    }
+
+    input[name="dropuser"]{
+        width : 20%;
+        float : left;
+    }
+
+    input[type="file"]{
+        background-color: #f5f5f5;
+        width: 100%;
+    }
+
+    .content{        
+        width : 66%;
+        float : left;
+    }
+    .profile{        
+        width : 100%;
+        display : inline-block;        
+    }
+
+    .image{
+        margin : 20px auto;
+        width : 25%;
+        height: 25%;
+        float : right; 
+        margin-right : 15%;     
+    }
+
+    .button{
+        margin : 0 auto;
+        width : 100%;
+    }
+    #preview{
+        background-color: aquamarine;
+    }
+</style>
+
+
+<body id="top">  
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <%- include('../partials/nav') %>
+
+    <div id="breadcrumb" class="hoc clear"> 
+        <h6 class="heading">마이 페이지</h6>
+        <br>
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/account">나의 계정</a></li>
+          <li><a href="/mypage/delete">회원 탈퇴</a></li>
+        </ul>
+      </div>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+        <!--네비게이션-->
+        <div class="sidebar one_quarter first"> 
+            <nav class="sdb_holder">
+                <ul>
+                    <li><a href="#">계정 설정</a></li>
+                    <li><a href="#">멘티 정보</a></li>
+                    <li><a href="#">비밀번호 설정</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!--본 문-->
+        <div class="content three_quarter"> 
+            <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif;">회원탈퇴</h2>
+            <form action="/mypage/delete" method="post">
+                <div class="profile">
+                      <div class="one_two">
+                        <label class="info" for="info">* 회원탈퇴사유</label>
+                        <h5 style="text-align:left; font-family: Verdana, Geneva, Tahoma, sans-serif;">그동안 등대와 함께해 주셔서 감사합니다. 탈퇴 사유를 남겨 주시면 향후 서비스 개선에 적극적으로 반영하겠습니다.</h5>
+                        <label for="drop">사유 선택</label>
+                        <select name="drop" id="drop">
+                          <option value>사유를 선택해주세요</option>
+                          <option value="service1">취업 후, 서비스를 이용할 일이 없어서</option>
+                          <option value="service2">서비스 이용이 불편해서</option>
+                          <option value="service3">답변을 받지 못해서</option>
+                          <option value="service4">기타 의견</option>
+                        </select>              
+                      </div>
+                </div>
+                <div class="one_two">
+                    <p><textarea name="etc" id="etc" cols="50" rows="10" placeholder="기타 의견을 작성해주세요"></textarea></p>
+                </div>                              
+    
+                <div class="button">
+                    <input type="submit" name="submit" value="탈퇴 하기">               
+                </div>
+            </form>
+        </div>
+      <div class="clear"></div>
+    </main>
+  </div>
+<%- include('../partials/foot') %>
+<%- include('../partials/copyright') %>
+<%- include('../partials/top') %>                                               
+</body>
+</html>

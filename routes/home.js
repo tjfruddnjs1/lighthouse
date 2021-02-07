@@ -1,10 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const User = require('../models/user');
-
-const fs = require('fs');
 
 const router = express.Router();
 
@@ -14,11 +10,17 @@ router.use((req,res,next)=>{
   next();
 });
 
+//메인 페이지
 router.get('/', (req,res)=>{
+  try{
   res.render('home/index');
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
 });
 
-//등 대 눌렀을때
+//등 대 버튼 눌렀을때
 router.get('/index',async(req,res,next)=>{
   try{
     res.render('home/index');
@@ -61,8 +63,6 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
     });
   })(req, res, next);
 });
-
-
 
 //회원가입 눌렀을 때
 router.get('/auth', isNotLoggedIn, async(req,res,next)=>{

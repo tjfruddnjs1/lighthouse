@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/mentor.css" />
+  </head>
+
+  <style>
+    #email,
+    #username,
+    #phone,
+    #gender {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 20px auto;
+      border: 1px solid #8080805c;
+      padding: 12px 5px;
+      width: 85%;
+      float: left;
+      color: #829da2;
+      widows: 100%;
+    }
+
+    .info {
+      font-weight: bold;
+      font-size: 12px;
+      color: red;
+    }
+
+    label {
+      padding: 4px 2px;
+      width: 60%;
+    }
+
+    input[type="submit"],
+    input[type="dropuser"] {
+      text-align: center;
+      border: 1px solid #8080805c;
+      width: 100%;
+      padding: 12px 5px;
+      margin: 20px auto;
+      color: #829da2;
+      text-transform: uppercase;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .btn {
+      color: #829da2;
+      border: 1px solid #8080805c;
+    }
+
+    input[name="dropuser"] {
+      width: 20%;
+      float: left;
+    }
+
+    input[type="file"] {
+      background-color: #f5f5f5;
+      width: 100%;
+    }
+
+    input {
+      color: #829da2;
+    }
+
+    .content {
+      width: 66%;
+      float: left;
+    }
+    .profile {
+      width: 50%;
+      display: inline-block;
+    }
+
+    .image {
+      margin: 20px auto;
+      width: 25%;
+      height: 25%;
+      float: right;
+      margin-right: 15%;
+    }
+
+    .button {
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    #user_image {
+      height: 140px;
+    }
+
+    #btn {
+      color: #829da2;
+      background-color: #dbe5e7;
+      border: 1px solid #8080805c;
+    }
+    #btn:hover {
+      color: #dbe5e7;
+      background-color: inherit;
+      color: black;
+      border: 1px solid black;
+    }
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/lighthouse.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading">마이 페이지</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/account">나의 계정</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <div class="sidebar one_quarter first">
+          <nav class="sdb_holder">
+            <ul>
+              <li><a id="x" href="#">계정 설정</a></li>
+              <li><a href="#">멘티 정보</a></li>
+              <li><a href="#">비밀번호 설정</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!--본 문-->
+        <div class="content three_quarter">
+          <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+            계정 설정
+          </h2>
+          <form
+            action="/mypage/account"
+            enctype="multipart/form-data"
+            method="post"
+            id="mypageForm"
+          >
+            <div class="profile">
+              <div class="one_two first">
+                <label for="name">이메일<span>*</span></label>
+                <input
+                  type="email"
+                  name="email"
+                  value=" <%= user.email %>"
+                  id="email"
+                  size="22"
+                  required
+                />
+              </div>
+              <div class="one_two">
+                <label for="email">이름<span>*</span></label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  value="<%= user.username %>"
+                  size="22"
+                  required
+                />
+              </div>
+              <div class="one_two">
+                <label for="phone">핸드폰 번호</label>
+                <% if(!(user.phone)){ %>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  size="22"
+                  value="010"
+                />
+                <% }else{%>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  value="<%= user.phone %>"
+                  size="22"
+                />
+                <% } %>
+                <label class="info" for="info">* 번호 등록 안내</label>
+                <h5
+                  style="
+                    text-align: left;
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                  "
+                >
+                  '-'를 제외한 번호를 입력해주세요
+                </h5>
+              </div>
+              <div class="one_two">
+                <label for="gender">성 별</label>
+                <select name="gender" id="gender">
+                  <option value="man">남성</option>
+                  <option value="woman">여성</option>
+                </select>
+                <label class="info" for="info">* 성별 등록 안내</label>
+                <h5
+                  style="
+                    text-align: left;
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                  "
+                >
+                  통게 목적으로 사용되며 회원들에게 공개되지 않습니다.
+                </h5>
+              </div>
+            </div>
+            <div class="image">
+              <img
+                src="/images/file_add.png"
+                onclick="document.getElementById('upload').click();"
+              />
+              <input
+                type="file"
+                id="upload"
+                name="upload"
+                style="display: none"
+                accept="image/*"
+              />
+              <!-- accpet로 image file만 받아오기-->
+
+              <br />
+              <br />
+              <h3
+                style="
+                  text-align: center;
+                  font-family: Verdana, Geneva, Tahoma, sans-serif;
+                "
+              >
+                이미지를 첨부해주세요
+              </h3>
+              <label class="info" for="info">* 사진 등록 안내</label>
+              <h5
+                style="
+                  text-align: center;
+                  font-family: Verdana, Geneva, Tahoma, sans-serif;
+                "
+              >
+                얼굴이 포함된 사진을 등록해주세요
+              </h5>
+              <h5
+                style="
+                  text-align: left;
+                  font-family: Verdana, Geneva, Tahoma, sans-serif;
+                "
+              >
+                타인을 불쾌하게 하거나, <br />
+                비방하는 사진은 관리자에 의해 <br />
+                삭제될 수 있습니다
+              </h5>
+              <br />
+              <label class="info" for="info">* 이미지 미리보기</label>
+              <div id="preview">
+                <% if(user.path){%>
+                <img id="user_image" src="<%= user.path %>" />
+                <% }else{ %>
+                <img id="user_image" src="/images/no_image.png" />
+                <% } %>
+              </div>
+            </div>
+            <div class="button">
+              <input type="submit" id="btn" name="submit" value="변경 하기" />
+            </div>
+          </form>
+          <a href="/mypage/delete" class="btn" style="text-align: left"
+            >회원 탈퇴하기</a
+          >
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+
+  <script>
+    const preview = document.querySelector("#preview");
+    const upload = document.querySelector("#upload");
+
+    upload.addEventListener("change", function (e) {
+      const get_file = e.target.files;
+      const image = document.createElement("img");
+      image.setAttribute("id", "user_image");
+
+      const reader = new FileReader();
+
+      reader.onload = (function (aImg) {
+        return function (e) {
+          /*base64 인코딩 된 스트링 데이터*/
+          aImg.src = e.target.result;
+        };
+      })(image);
+
+      if (get_file) {
+        /*
+                    get_file[0]을 읽어 read행위가 종료되면 loaded 이벤트가 트리거되고
+                    onload에 설정했던 return으로 넘어간다
+                    이와 함께 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다
+                */
+        reader.readAsDataURL(get_file[0]);
+      }
+
+      //이전 이미지 삭제
+      let has_image = document.getElementById("user_image");
+      if (has_image) {
+        has_image.parentNode.removeChild(has_image);
+        preview.appendChild(image);
+      } else {
+        preview.appendChild(image);
+      }
+    });
+
+    let has_image = document.getElementById("user_image");
+    let image = document.getElementById("upload");
+    let mypageForm = document.getElementById("mypage");
+
+    function submit() {
+      document.getElementById("btn").addEventListener("click", function (e) {
+        let imgsrc = has_image.src.replace(/^.*\//, "");
+        console.log(imgsrc);
+
+        if (imgsrc == "no_image.png") {
+          if (!image.value) {
+            alert("이미지를 첨부해주세요");
+            e.preventDefault();
+          }
+        }
+        mypageForm.submit();
+      });
+    }
+
+    submit();
+  </script>
+</html>
