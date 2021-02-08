@@ -123,6 +123,7 @@
 
 - 진로 탐색
 
+> 진로 탐색 `(임종묵 작성 예정)`
 1. 상단의 `진로 탐색`을 누르면 직종 소개 페이지로 이동
    - `href`속성은 [views/partials/nav.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/partials/nav.ejs)안에 정의
    - `href=/job_seeking/intro`을 요청하면 라우터는 [views/job_seeking/intro.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/job_seeking/intro.ejs)를 렌더링
@@ -146,6 +147,7 @@
 4. [public/css/mentor.css](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/css/mentor.css), [public/js/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/js/mentor.js) 작성
    - `mentor.css` : 멘토 등록 페이지 css 파일
    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
+
 
 - 멘토 찾기
 
