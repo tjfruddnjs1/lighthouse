@@ -123,7 +123,6 @@
 
 - 진로 탐색
 
-> 진로 탐색 `(임종묵 작성 예정)`
 1. 상단의 `진로 탐색`을 누르면 직종 소개 페이지로 이동
    - `href`속성은 [views/partials/nav.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/partials/nav.ejs)안에 정의
    - `href=/job_seeking/intro`을 요청하면 라우터는 [views/job_seeking/intro.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/job_seeking/intro.ejs)를 렌더링

@@ -35,15 +35,16 @@ User.init(sequelize);
 Drop.init(sequelize);
 Mentor.init(sequelize);
 Mentee.init(sequelize);
-
 Lang.init(sequelize);
 Job.init(sequelize);
 MentorJob.init(sequelize);
 MentorLang.init(sequelize);
 
+
 User.associate(db);
 Drop.associate(db);
 Mentor.associate(db);
+Mentee.associate(db);
 
 Mentee.associate(db);
 Lang.associate(db);
