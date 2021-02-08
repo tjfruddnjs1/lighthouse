@@ -50,9 +50,14 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.hasOne(db.Mentor, {
+    db.User.hasOne(db.Mentor, {                                        
+      foreignKey : 'user_id', 
+      targetKey : 'username',                                    
+    });
+
+    db.User.hasOne(db.Mentee,{
       foreignKey : 'user_email', 
-      sourceKey : 'email',                                    
+      sourceKey : 'email', 
     });
   }
 };

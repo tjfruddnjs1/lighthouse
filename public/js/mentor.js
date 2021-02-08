@@ -1,29 +1,18 @@
-
-          const radio = document.getElementsByClassName('job');
-          const radiobox = document.getElementsByClassName('item-list');
-          for (let i = 0; i < radiobox.length; i++) {
-            radiobox[i].addEventListener('click', function () {
-              if (radio[i].checked) {
-                radio[i].checked = false;
-              } else {
-                radio[i].checked = true;
-              }
-            })
-          }          
    const username = document.getElementById('username');
    const gender = document.getElementsByName('gender'); // 배열
    const firm = document.getElementById('firm');
    const department = document.getElementById('department');
-   const career = document.getElementById('career');
-   const field = document.getElementsByName('field'); // 배열
-   const phone = document.getElementById('phone');
+   const career = document.getElementById('career');   
+   const phone = document.getElementById('phone');   
    const email = document.getElementById('email');
    const intro = document.getElementById('intro');
    const image = document.getElementById('image');
+   const form = document.getElementById('mentorForm');
 
 
 function submit(){
-  document.getElementById('submit').addEventListener('click',  function(e){        
+  document.getElementById('submit').addEventListener('click',  function(e){       
+    
         var flag = false;
         if(!username.value){
           alert('이름 입력하세요');
@@ -60,17 +49,15 @@ function submit(){
           email.focus();
           email.style.borderColor = "red";
           return false;
-        }        
-        for(var i =0; i<field.length; i++){
-          if(field[i].checked){
-            flag = true;
-          }
         }
-        if(!flag)
-        alert('멘토링 분야 선택 요망');
-        field[0].focus();
+        if(!image.value){
+          alert('사진을 선택하세요');
+          return false;
+        }      
+        form.submit();
         return false;
    });
+
 }
 
 submit();

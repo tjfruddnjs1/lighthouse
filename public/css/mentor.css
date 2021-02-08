@@ -39,7 +39,7 @@ textarea {
   text-align: center;
 }
 
-#updatemento input[type="radio"] {
+#updatemento input[type="checkbox"] {
   display: inline;
   border: 1px solid #8080805c;
   width: 20%;
@@ -54,7 +54,7 @@ input[type="file"] {
   width: 30%;
 }
 
-.item-list {
+.item-list, .lang-list {
   float: left;
   width: 30%;
   border: 1px solid #8080805c;

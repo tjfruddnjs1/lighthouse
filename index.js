@@ -9,9 +9,8 @@ const { sequelize } = require('./models');
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
-// 히노 작업
 const mentorRouter = require('./routes/mentor');
-//종묵 작업
+const mentorListRouter = require('./routes/mentorList')
 const careerRouter = require('./routes/career');
 
 const passportConfig = require('./passport');
@@ -54,6 +53,8 @@ app.use(methodOverride('_method'));
 app.use('/',homeRouter);
 app.use('/auth', authRouter);
 app.use('/register', mentorRouter);
+app.use('/mentorlist', mentorListRouter);
+
 app.use('/career', careerRouter);
 app.use('/mypage',mypageRouter);
 

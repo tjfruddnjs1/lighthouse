@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <%- include('../partials/head') %>  
+  <link rel="stylesheet" href="/css/mentorList.css">    
+</head>
+
+<body id="top">  
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <%- include('../partials/nav') %>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <div class="category">
+        <h1 class = "title">직업</h1>
+        <a href="?job=game" class="job" id = "1" >게임</a>
+        <a href="?job=bigdata" class="job" id = "2">빅데이터</a>
+        <a href="?job=front" class="job" id = "3">프론트</a>
+        <a href="?job=backend" class="job" id = "4">백엔드</a>
+        <a href="?job=secure" class="job" id = "5">보안</a>
+        <a href="?job=educator" class="job" id = "6">교육자</a>
+        <a href="?job=embeded" class="job" id = "7">임베디드</a>
+        <a href="?job=desktop" class="job" id = "8">데이크탑</a>
+        <a href="?job=mobile" class="job" id = "9">모바일</a>
+      </div>
+      <div class="languages">
+        <h1 class = "title">언어</h1>
+        <a href="?lang=C" class="lang" id = "1">C</a>
+        <a href="?lang=C++" class="lang" id = "2">C++</a>
+        <a href="?lang=C#" class="lang" id = "3">C#</a>
+        <a href="?lang=javascript" class="lang" id = "4">javascript</a>
+        <a href="?lang=java" class="lang" id = "5">java</a>
+        <a href="?lang=jsp" class="lang" id = "6">jsp</a>
+        <a href="?lang=PHP" class="lang" id = "7">php</a>
+        <a href="?lang=Nodejs" class="lang" id = "8">nodejs</a>
+        <a href="?lang=Assembly" class="lang" id = "9">Assembly</a>
+        <a href="?lang=mech" class="lang" id = "10">기계어</a>
+      </div>
+      <div class="container">
+        <div class="mentors">      
+          <% if(mentors.length >= 1) {%>              
+          <% for(let i = 0; i <mentors.length; i++){ %>
+            <div class="mentorBox">                    
+              <a href="#" class="mentor">
+                <div class="left">
+                  <div class="firm"><%= mentors[i].firm %></div>
+                  <span><%= mentors[i].department %></span>
+                </div>                
+                <img src="<%= mentors[i].path %>" alt="" class = "profile" style = "margin-top : 20px;">
+                <div class="job_category"><%= mentors[i].department %></div>
+                <div class="name"><%= mentors[i].username %></div>
+                <div class="fields">                                    
+                  <% for(let j = 0; j < mentors[i].MentoJobs.length; j++) { %>
+                    <span><%= mentors[i].MentoJobs[j].Job.job %></span>
+                  <% } %>
+                </div> 
+                <div class="language">
+                  <% for(let k = 0; k < mentors[i].MentoLangs.length; k++) { %>
+                    <span><%= mentors[i].MentoLangs[k].Lang.language %></span>
+                  <% } %>
+                </div>
+                <div class="button">
+              </a>
+              <a href="" class = "follow">팔로우</a>
+              </div>            
+            </div>  
+            <% }%>        
+            <% }%>                   
+        </div>
+      </div>     
+      <div class="clear"></div>
+    </main>
+  </div>
+  <script src = "/js/mentoList.js"></script>  
+    <%- include('../partials/foot') %>
+    <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>                                                         
+</body>
+
+</html>
