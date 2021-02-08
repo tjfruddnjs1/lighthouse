@@ -116,7 +116,7 @@
         <ul>
           <li><a href="/index">메인</a></li>
           <li><a href="#">마이 페이지</a></li>
-          <li><a href="/mypage/account">나의 계정</a></li>
+          <li><a href="/mypage/account">계정 설정</a></li>
         </ul>
       </div>
     </div>
@@ -124,15 +124,7 @@
     <div class="wrapper row3">
       <main class="hoc container clear">
         <!--네비게이션-->
-        <div class="sidebar one_quarter first">
-          <nav class="sdb_holder">
-            <ul>
-              <li><a id="x" href="#">계정 설정</a></li>
-              <li><a href="#">멘티 정보</a></li>
-              <li><a href="#">비밀번호 설정</a></li>
-            </ul>
-          </nav>
-        </div>
+        <%- include('mypage_nav') %>
         <!--본 문-->
         <div class="content three_quarter">
           <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif">

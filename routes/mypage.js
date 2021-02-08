@@ -3,6 +3,8 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const User = require('../models/user');
 const Drop = require('../models/drop');
+
+const bcrypt = require('bcrypt');
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
@@ -29,6 +31,8 @@ const upload = multer({
     limits : {fileSize : 5 * 1024 * 1024},
 });
 
+
+//계정 설정 page get/post
 router.get('/account',isLoggedIn,(req,res,next)=>{
     try{
         res.render('mypage/account');
@@ -63,6 +67,7 @@ router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=
         }else{
             let path = req.file.path;
             path = path.replace('public','');
+            
             await User.update({
                 email : email,
                 username : username,
@@ -84,6 +89,8 @@ router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=
     }
 });
 
+
+//계정 삭제 get,post
 router.get('/delete',isLoggedIn,(req,res,next)=>{
     try{
         res.render('mypage/delete');
@@ -95,7 +102,6 @@ router.get('/delete',isLoggedIn,(req,res,next)=>{
 
 router.post('/delete', isLoggedIn, async(req,res,next)=>{
     try{
-        console.log(req.params.in)
         await Drop.create({
            email : req.user.email,
            reason : req.body.drop,
@@ -108,6 +114,51 @@ router.post('/delete', isLoggedIn, async(req,res,next)=>{
         res.send(
             "<script>alert('정상적으로 탈퇴되었습니다.'); window.location='/'</script>"
         );
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
+//비밀번호 변경
+router.get('/password',isLoggedIn, async(req,res,next)=>{
+    try{
+        const user = await User.findOne({where : {email : req.user.email}});
+        if(user.provider != 'local'){
+            res.send(
+            "<script>alert('카카오톡, 네이버 로그인은 비밀번호 변경이 불가능합니다.'); history.back();</script>"
+            )
+        }else{
+            res.render('mypage/password');
+        }   
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
+router.post('/password',isLoggedIn,async(req,res,next)=>{
+    try{
+        const {current_password, new_password} = req.body;
+        const hash = await bcrypt.hash(new_password, 12);
+        const isUser = await User.findOne({where: {email : req.user.email}});
+        const result = await bcrypt.compare(current_password, isUser.password);
+
+        if(result){
+            await User.update({
+                password : hash,
+            },{
+                where: {id:req.user.id},
+            });
+            res.send(
+                "<script>alert('비밀번호가 변경되었습니다.'); window.location='/'</script>"
+            );
+        }else{
+            res.send(
+                "<script>alert('현재 비밀번호를 확인해주세요.'); window.location='/'</script>"
+            );
+        }
+        
     }catch(err){
         console.error(err);
         next(err);
