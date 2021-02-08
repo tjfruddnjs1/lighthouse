@@ -1,6 +1,6 @@
 # ignore node_modules
 /node_modules
-/uploads
+/public/images/uploads
 .env
 
 # personal local database settings - for development

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <%- include('../partials/head') %>  
+  <link rel="stylesheet" href="/css/mentor.css">    
+</head>
+
+<body id="top">  
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <%- include('../partials/nav') %>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <section id="introblocks">
+        <div class="sectiontitle">
+          <section id="references" class="hoc container clear">
+            <nav class="ref-sort">
+              <ul>
+                <li class="current"><a href="/register">기본정보</a></li>
+                <li><a href="/register/fields">멘토링 분야</a></li>      
+              </ul>
+            </nav>
+          </section>
+          <a href="#info"></a>
+          <h1 class="subhead">분야 선택</h1>
+          <p>멘토님과 관련된 직업과 언어 선택 페이지입니다. </p>
+        </div>
+        <div id="updatemento">
+          <form action="/register/fields" method="post" id = "mentorForm">            
+            <fieldset>              
+              <label for="name">멘토링 가능 분야</label>
+              <div id="field">
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="1">게임
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="2">빅데이터
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="3">프론트
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="4">백엔드
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="5">보안
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="6">게임 개발자
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="7">임베디드 개발자
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="8">데스크탑 개발자
+                </div>
+                <div class="item-list">
+                  <input type="checkbox" name="job" class="job" value="9">모바일 개발자
+                </div>
+              </div>
+            </fieldset>
+            <fieldset style = "margin-top: 15px;">              
+              <label for="name">멘토링 가능 언어</label>
+              <div id="field">
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="1">C
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="2">C++
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="3">C#
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="4">javascript
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="5">java
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="6">Jsp
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="7">PHP
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="8">node.js
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="9">Assembly
+                </div>
+                <div class="lang-list">
+                  <input type="checkbox" name="lang" class="lang" value="10">기계어
+                </div>
+              </div>
+            </fieldset>                        
+            <input type="submit" value="멘토 신청하기" id = "submit">
+          </form>
+        </div>
+      </section>
+      <div class="clear"></div>
+    </main>
+  </div>
+  <%- include('../partials/foot') %>
+    <%- include('../partials/copyright') %>
+      <%- include('../partials/top') %>                                               
+        <script src = "/js/mentorField.js"></script>
+</body>
+
+</html>

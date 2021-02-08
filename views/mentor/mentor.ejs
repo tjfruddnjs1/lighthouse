@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <%- include('../partials/head') %>  
+  <link rel="stylesheet" href="/css/mentor.css">    
+</head>
+
+<body id="top">  
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <%- include('../partials/nav') %>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <section id="introblocks">
+        <div class="sectiontitle">
+          <section id="references" class="hoc container clear">
+            <nav class="ref-sort">
+              <ul>
+                <li class="current"><a href="/register">기본정보</a></li>
+                <li><a href="/register/fields">멘토링 분야</a></li>                
+              </ul>
+            </nav>
+          </section>          
+          <h1 class="subhead">기본 정보</h1>
+          <p>멘토가 되기 위한 기본 정보 입력란 입니다.</p>
+        </div>
+        <div id="updatemento">          
+          <form action="/register" method="post" enctype="multipart/form-data" id = "mentorForm">
+            <fieldset>
+              <label for="username">이름</label>
+              <input type="text" id="username" name="username" value = "">
+            </fieldset>
+            <fieldset>
+              <label for="gender">성별</label>
+              <select name="gender" id="gender">
+                <option value="남자">남자</option>
+                <option value="여자">여자</option>
+              </select>
+            </fieldset>
+            <fieldset>
+              <label for="firm">회사명</label>
+              <input type="text" id="firm" name="firm">
+            </fieldset>
+            <fieldset>
+              <label for="department">부서</label>
+              <input type="text" id="department" name="department">
+            </fieldset>
+            <fieldset>
+              <label for="career">주요경력</label>
+              <textarea name="career" id="career" cols="30" rows="10">
+                  </textarea>
+            </fieldset> 
+            <fieldset>
+              <label for="phone">휴대전화 번호</label>
+              <input type="text" id="phone" name="phone">
+            </fieldset>
+            <fieldset>
+              <label for="email">이메일</label>
+              <input type="email" id="email" name="email">
+            </fieldset>
+            <fieldset>
+              <label for="intro">멘토 소개</label>
+              <textarea name="intro" id="intro" cols="30" rows="10"></textarea>
+            </fieldset>
+            <fieldset>                       
+            <fieldset>              
+              <label for="name">프로필 사진</label>
+              <input type="file" value="업로드" name = "image" id = "image">
+              <div id="imagebox">
+                <p>
+                  - 얼굴이 포함된 사진을 등록해주세요. <br>
+                  - 얼굴 확인이 어려울 경우, 수정 요청이 있을 수 있습니다. <br>
+                  - 해당 사진의 최적 사이즈는 800 x 800px 입니다. <br>
+                  - 등록 가능한 파일 형식은 jpg, png, gif 입니다.
+                </p>
+              </div>
+            </fieldset>
+            <input type="submit" value="다음" id = "submit">
+          </form>
+        </div>
+      </section>
+      <div class="clear"></div>
+    </main>
+  </div>
+  <%- include('../partials/foot') %>
+    <%- include('../partials/copyright') %>
+      <%- include('../partials/top') %>                                               
+        <script src = "/js/mentor.js"></script>
+</body>
+
+</html>
