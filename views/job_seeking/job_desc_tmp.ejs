@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <style>
+            h1 {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight: bold;
+            }
+        </style>
+
+</head>
+
+<body>
+    <div class="bgded overlay" style="background-image:url('<%= sendJson.img_title %>');">
+        <!-- <div class="bgded overlay" > -->
+        <%- include('../partials/nav') %>
+            <div id="pageintro" class="hoc clear">
+                <article>
+                    <h1 class="heading"
+                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                        <%= sendJson.title%>
+                    </h1>
+                    <p id="story" style="text-align: left;">
+                        <%= sendJson.introduction %>
+                    </p>
+                    <footer>
+                    </footer>
+                </article>
+            </div>
+            <div class="wrapper row3">
+                <main class="hoc container clear">
+                    <!-- main body -->
+                    <!-- ################################################################################################ -->
+                    <div class="content">
+
+                        <!-- 소개 -->
+                        <hr>
+                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">
+                            <%= sendJson.title%> 소개
+                        </h1>
+                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgr.gif" alt="">
+                        <p>
+                            <%= sendJson.introduction%>
+                        </p>
+                        <hr>
+
+                        <!-- 결과물 -->
+                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">
+                            <%= sendJson.title%>의 결과물 : <span style="color: darkslategrey;">
+                                    <%= sendJson.product %>
+                                </span>
+
+                        </h1>
+                        <img class="imgl borderedbox inspace-5" src="../images/demo/imgr.gif" alt="">
+                        <p>
+                            <%= sendJson.introduction%>
+                        </p>
+                        <hr>
+
+                        <!-- 언어 -->
+                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">프로그래밍 언어</h1>
+
+                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
+                        <p>
+                            <%= sendJson.title%>의 프로그래밍 언어는 <span style="color: darkslategrey;">
+                                <%= sendJson.language %>
+                            </span>
+                            입니다.
+                        </p>
+                        <p><%= sendJson.language_desc %> </p>
+
+                        <hr>
+                        <!-- 사용기술 -->
+                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">적용 기술</h1>
+
+                        <img class="imgl borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
+                        <p>
+                            <%= sendJson.tech %> 
+                        </p>
+                        <p>
+                            <%= sendJson.tech_desc %> 
+                        </p>
+
+                        <hr>
+                        <!-- 평균연봉 -->
+                        <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">평균 연봉</h1>
+
+                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
+                        <p>
+                            <%= sendJson.salary %> 
+                        </p>
+                        <p>
+                            <%= sendJson.salary_desc %> 
+                        </p>
+
+                        <hr>
+                        <footer style="text-align: center;">
+                            <a class="btn" href="" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
+                            >관심 분야에 추가</a>
+                            <a class="btn" href="/job_seeking/intro" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                            background-color: rgb(255, 255, 255);">소개 페이지로 돌아가기</a>
+                        </footer>
+            
+                        <!-- **************재사용할 때에는 아래의 템플릿을 이용************* 
+                        
+                            <h1 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+                        font-weight: bold;">
+
+                        </h1>
+
+                        <img class="imgr borderedbox inspace-5" src="../images/demo/imgl.gif" alt="">
+                        <p></p> 
+
+                        **************재사용할 때에는 아래의 템플릿을 이용*************  -->
+
+                        <!-- ################################################################################################ -->
+                    </div>
+                    <!-- ################################################################################################ -->
+                    <!-- / main body -->
+                    <div class="clear"></div>
+                </main>
+            </div>
+
+    </div>
+    <%- include('../partials/copyright') %>
+        <%- include('../partials/top') %>
+</body>
+
+</html>

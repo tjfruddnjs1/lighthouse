@@ -16,6 +16,18 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(200),
         allowNull : true,
       },
+      phone :{
+        type : Sequelize.STRING(50),
+        allowNull : true,
+      },
+      gender : {
+        type : Sequelize.STRING(5),
+        allowNull : true,
+      },
+      path : {
+        type : Sequelize.STRING(100),
+        allowNull: true,            
+      }, 
       provider : {
         type : Sequelize.STRING(10),
         allowNull : false,
@@ -38,5 +50,9 @@ module.exports = class User extends Sequelize.Model {
   }
 
   static associate(db) {
+    db.User.hasOne(db.Mentor, {
+      foreignKey : 'user_email', 
+      sourceKey : 'email',                                    
+    });
   }
 };

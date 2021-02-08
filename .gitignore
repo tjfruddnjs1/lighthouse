@@ -5,3 +5,5 @@
 
 # personal local database settings - for development
 /config
+
+/public/images/user_image

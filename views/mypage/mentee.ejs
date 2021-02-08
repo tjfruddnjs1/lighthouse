@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/mentor.css" />
+  </head>
+
+  <style>
+    #drop {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 20px auto;
+      border: 1px solid #8080805c;
+      padding: 12px 5px;
+      width: 100%;
+      float: left;
+      color: #829da2;
+      widows: 100%;
+    }
+
+    #etc {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 20px auto;
+      border: 1px solid #8080805c;
+      padding: 12px 5px;
+      width: 100%;
+      float: left;
+      color: #829da2;
+      widows: 100%;
+      height: 300;
+    }
+
+    .info {
+      font-weight: bold;
+      font-size: 12px;
+      color: red;
+    }
+
+    label {
+      padding: 4px 2px;
+      width: 100%;
+    }
+    input[type="submit"],
+    input[type="dropuser"] {
+      text-align: center;
+      border: 1px solid #8080805c;
+      width: 80%;
+      padding: 12px 5px;
+      margin: 20px auto;
+      color: #829da2;
+      cursor: pointer;
+      float: left;
+    }
+
+    input[type="text"] {
+      text-align: left;
+      border: 1px solid #8080805c;
+      width: 100%;
+      padding: 12px 5px;
+      margin: 20px auto;
+      color: #829da2;
+      float: left;
+      cursor: auto;
+    }
+
+    input[name="dropuser"] {
+      width: 20%;
+      float: left;
+    }
+
+    input[type="file"] {
+      background-color: #f5f5f5;
+      width: 100%;
+    }
+
+    .content {
+      width: 66%;
+      float: left;
+    }
+    .profile {
+      width: 80%;
+      display: inline-block;
+    }
+
+    .image {
+      margin: 20px auto;
+      width: 25%;
+      height: 25%;
+      float: right;
+      margin-right: 15%;
+    }
+
+    .button {
+      margin: 0 auto;
+      width: 100%;
+      float: right;
+    }
+
+    .kind ul {
+      background-color: #efefef;
+      overflow: hidden;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .kind li {
+      float: left;
+      width: 40%;
+    }
+
+    .kind li a {
+      display: block;
+      background-color: #efefef;
+      color: #000000;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .kind li a.current {
+      background-color: #efefef;
+      color: white;
+    }
+
+    .kind li a:hover:not(.current) {
+      background-color: #cd853f;
+      color: white;
+    }
+
+    #preview {
+      background-color: aquamarine;
+    }
+
+    #btn {
+      color: #829da2;
+      background-color: #dbe5e7;
+      border: 1px solid #8080805c;
+    }
+    #btn:hover {
+      color: #dbe5e7;
+      background-color: inherit;
+      color: black;
+      border: 1px solid black;
+    }
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/lighthouse.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading">마이 페이지</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/mentee">멘티 정보</a></li>
+          <li><a href="/mypage/mentee">대학생/취준생</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <%- include('mypage_nav') %>
+        <!--본 문-->
+        <div class="content three_quarter">
+          <h2 style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+            멘티 정보
+          </h2>
+          <div class="one_two">
+            <h5
+              style="
+                text-align: left;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+              "
+            >
+              질문을 남길 때 멘토님에게 함께 전달되는 정보입니다. <br />
+              자세히 작성할수록 상세한 답변을 받을 수 있습니다. <br />
+              작성한 정보는 질문을 받은 멘토님만 보실 수 있으며 공개되지
+              않습니다.
+            </h5>
+          </div>
+
+          <ul class="kind" style="list-style-type: none; padding-left: 0">
+            <li><a href="/mypage/mentee">대학생/취준생</a></li>
+            <li><a href="/mypage/worker">직장인</a></li>
+          </ul>
+
+          <form action="/mypage/mentee" id="mentee" method="post">
+            <div class="profile">
+              <div class="one_two first">
+                <br />
+                <label for="school">학교<span>*</span></label>
+                <% if(!(mentee)) { %>
+                <input
+                  type="text"
+                  name="school"
+                  id="email"
+                  size="22"
+                  placeholder="학교를 작성해주세요."
+                  required
+                />
+                <% }else{ %>
+                <input
+                  type="text"
+                  name="school"
+                  id="email"
+                  size="22"
+                  value="<%= mentee.school %>"
+                  required
+                />
+                <% } %>
+              </div>
+              <div></div>
+              <div class="one_two">
+                <label for="major">전공<span>*</span></label>
+                <% if(!(mentee)) { %>
+                <input
+                  type="text"
+                  name="major"
+                  id="email"
+                  size="22"
+                  placeholder="전공을 작성해주세요."
+                  required
+                />
+                <% }else{ %>
+                <input
+                  type="text"
+                  name="major"
+                  id="email"
+                  size="22"
+                  value="<%= mentee.major %>"
+                  required
+                />
+                <% } %>
+              </div>
+
+              <div class="one_two">
+                <label for="isSchool">재학/졸업<span>*</span></label>
+                <select name="isSchool" id="drop" required>
+                  <option value="" selected disabled hidden>
+                    학적 상태를 선택해주세요
+                  </option>
+                  <option value="school">재학</option>
+                  <option value="graduate">졸업</option>
+                  <option value="etc">기타</option>
+                </select>
+              </div>
+
+              <div class="one_two">
+                <label for="schoolYear">학년</label>
+                <select name="schoolYear" id="drop">
+                  <option value="" selected disabled hidden>
+                    재학생만 선택해주세요
+                  </option>
+                  <option value="1">1학년</option>
+                  <option value="2">2학년</option>
+                  <option value="3">3학년</option>
+                  <option value="4">4학년</option>
+                </select>
+              </div>
+
+              <div class="one_two">
+                <label for="spec">스펙<span>*</span></label>
+                <% if(!(mentee)) { %>
+                <textarea
+                  name="spec"
+                  id="etc"
+                  cols="50"
+                  rows="10"
+                  placeholder="스펙을 작성해주세요"
+                  required
+                ></textarea>
+                <% }else{ %>
+                <textarea name="spec" id="etc" cols="50" rows="10" required>
+<%= mentee.spec %></textarea
+                >
+                <% } %>
+                <h5
+                  style="
+                    text-align: left;
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                  "
+                >
+                  공인 영어 성적, 공인 자격증, 어학연수, 공모전 수상경험, 인턴
+                  경험 등 취업에 활용할 능력이 있다면 적어주세요. <br />
+                  아직 없다면 '해당없음'이라고 적어주세요.
+                </h5>
+              </div>
+
+              <div class="one_two">
+                <label for="etc">기타</label>
+                <% if(!(mentee)) { %>
+                <textarea
+                  name="etc"
+                  id="etc"
+                  cols="50"
+                  rows="10"
+                  placeholder="기타 관심 분야 등 멘토님이 답변에 참고할 만한 사항을 작성해주세요"
+                ></textarea>
+                <% }else{ %>
+                <textarea name="etc" id="etc" cols="50" rows="10" required>
+<%= mentee.etc %></textarea
+                >
+                <% } %>
+                <h5
+                  style="
+                    text-align: left;
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                  "
+                >
+                  예시) 금융권 취업을 준비하고 있습니다.
+                </h5>
+              </div>
+            </div>
+
+            <div class="button">
+              <input type="submit" id="btn" name="submit" value="수정 하기" />
+            </div>
+          </form>
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+</html>

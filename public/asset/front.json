@@ -10,7 +10,8 @@
         "tech": "프론트 엔드에는 Javascript를 활용한 프레임워크가 이뤄지고 있습니다.",
         "tech_desc": "사용기술에 대한 설명",
         "salary": "3000",
-        "salary_desc": "진입 장벽이 낮아 경쟁률이 높은 편입니다."
+        "salary_desc": "진입 장벽이 낮아 경쟁률이 높은 편입니다.",
+        "dir_img" : "/asset/job_seeking/game_console.jpg"
     },
 
     "back": {
@@ -47,5 +48,8 @@
         "tech_desc": "최근 프론트엔드의 개발은 react, angular, vue 등 여러 프레임워크를 사용하는 추세입니다.",
         "salary": "3000",
         "salary_desc": "진입 장벽이 낮아 경쟁률이 높은 편입니다."
+    },
+    "game": {
+        
     }
 }
