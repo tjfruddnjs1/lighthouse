@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const { Mentee } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -66,7 +67,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 
 //회원가입 눌렀을 때
 router.get('/auth', isNotLoggedIn, async(req,res,next)=>{
-  try{
+  try{ 
     res.render('home/auth');
   }catch(err){
     console.error(err);

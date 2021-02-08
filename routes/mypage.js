@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const User = require('../models/user');
 const Drop = require('../models/drop');
+const Mentee = require('../models/mentee');
 
 const bcrypt = require('bcrypt');
 const fs = require('fs');
@@ -163,7 +164,106 @@ router.post('/password',isLoggedIn,async(req,res,next)=>{
         console.error(err);
         next(err);
     }
-})
+});
+
+//멘티 정보 > 대학생/취준생
+router.get('/mentee',isLoggedIn, async(req,res,next)=>{
+    try{  
+        const mentee = await Mentee.findOne({where : {user_email : req.user.email}});
+        res.render('mypage/mentee',{mentee});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/mentee',isLoggedIn, async(req,res,next)=>{
+    try{  
+        const {school, major, isSchool, schoolYear, spec, etc} = req.body;
+        const hasMentee = await Mentee.findOne({where : {user_email : req.user.email}});
+
+        //멘티 정보 새로 등록할 경우
+        if(!hasMentee){
+            await Mentee.create({
+                school : school,
+                major : major,
+                isSchool : isSchool,
+                schoolYear : schoolYear,
+                spec : spec,
+                etc : etc,
+                user_email : req.user.email,
+            });
+        }else{
+        //멘티 정보 수정할 경우
+            await Mentee.update({
+                school : school,
+                major : major,
+                isSchool : isSchool,
+                schoolYear : schoolYear,
+                spec : spec,
+                etc : etc,
+            },{
+                where : {user_email : req.user.email},
+            })
+        }
+
+        res.send(
+            "<script>alert('정보가 수정되었습니다.'); window.location='/'</script>"
+        );
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+//멘티 정보 > 직장인
+router.get('/worker',isLoggedIn, async(req,res,next)=>{
+    try{  
+        const mentee = await Mentee.findOne({where : {user_email : req.user.email}});
+        console.log(mentee);
+        res.render('mypage/worker',{mentee});
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/worker',isLoggedIn, async(req,res,next)=>{
+    try{  
+        const {jobYear, graduate, graduateSchool, career, etc} = req.body;
+        const hasMentee = await Mentee.findOne({where : {user_email : req.user.email}});
+
+        //멘티 정보 새로 등록할 경우
+        if(!hasMentee){
+            await Mentee.create({
+                jobYear : jobYear,
+                graduate : graduate,
+                graduateSchool : graduateSchool,
+                career : career,
+                etc : etc,
+                user_email : req.user.email,
+            });
+        }else{
+        //멘티 정보 수정할 경우
+            await Mentee.update({
+                jobYear : jobYear,
+                graduate : graduate,
+                graduateSchool : graduateSchool,
+                career : career,
+                etc : etc,
+            },{
+                where : {user_email : req.user.email},
+            })
+        }
+
+        res.send(
+            "<script>alert('정보가 수정되었습니다.'); window.location='/'</script>"
+        );
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 
 module.exports = router;
