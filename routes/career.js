@@ -14,20 +14,25 @@ const router = express.Router();
 router.get('/job_seeking/:title', async (req, res, next) => {
     try {
         let { title } = req.params;
-        console.log(title)
-        fs.readFile('public/asset/front.json', 'utf-8', (err, jsonFile) => {
+        fs.readFile('public/asset/job_seeking/job.json', 'utf-8', (err, jsonFile) => {
             // console.log(jsonFile)
 
             jsonData = JSON.parse(jsonFile)
-            console.log(jsonData)
+            // console.log(jsonData)
 
             sendJson = jsonData[title]
-            res.render('job_seeking/job_desc', sendJson);
+
+            if (title != 'edu')
+                res.render('job_seeking/job_desc', sendJson);
+            else
+                res.render('job_seeking/job_desc_edu', sendJson);
+            // res.render('job_seeking/new_desc', sendJson);
 
         })
 
     } catch (err) {
         console.error(err);
+        console.log(__dirname)
         next(err);
     }
 });
