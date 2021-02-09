@@ -6,18 +6,38 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-
         <style>
             h2 {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: bold;
+                font-size: 3em;
+            }
+
+            h2,
+            h3 {
+                margin-bottom: 50px;
+                width: 90%;
+            }
+
+            h2,
+            h3,
+            b {
+                color: brown;
+            }
+
+            h3 {
+                font-size: 2em;
+                width: 90%;
+            }
+
+            h4 {
+                font-size: 1.3em;
             }
 
             .nav-container {
                 display: flex;
                 flex-direction: row;
                 padding: 0;
-                background-color: rgba(0, 0, 0, .5);
                 list-style-type: none;
                 width: 1140px;
                 margin-left: auto;
@@ -28,14 +48,18 @@
             }
 
             .nav-item {
-                border: 0.5px solid white;
                 text-align: center;
                 padding: 15px;
                 cursor: pointer;
                 /* float: left; */
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+                background-color: black;
             }
+
+            .nav-item:hover {
+                background-color: gray;
+            }
+
 
             .nav-item a {
                 text-align: center;
@@ -55,17 +79,22 @@
             ul,
             li {
                 list-style: none;
-
             }
 
             #slide {
-                height: 800px;
                 position: relative;
             }
 
             #slide ul {
-                width: 400%;
+                width: 500%;
                 height: 100%;
+                transition: 1s;
+            }
+
+            /* 슬라이드 안 내용물 */
+
+            #slide ul #slide-ul {
+                width: 500%;
                 transition: 1s;
             }
 
@@ -77,26 +106,8 @@
 
             #slide li {
                 float: left;
-                width: 25%;
+                width: 20%;
                 height: 100%;
-            }
-
-
-
-            #slide li:nth-child(1) {
-                background: inherit;
-            }
-
-            #slide li:nth-child(2) {
-                background: inherit;
-            }
-
-            #slide li:nth-child(3) {
-                background: inherit;
-            }
-
-            #slide li:nth-child(4) {
-                background: inherit;
             }
 
             #slide input {
@@ -107,8 +118,8 @@
             #slide label {
                 display: inline-block;
                 vertical-align: middle;
-                /* width: 100px;
-                height: 100px; */
+                width: 150px;
+                /* height: 100px; */
                 padding: 30px;
                 /* border: 2px solid #666; */
                 background-color: #ccc;
@@ -119,10 +130,9 @@
 
             #slide .pos {
                 text-align: center;
-                position: absolute;
-                bottom: 10px;
-                left: 0;
                 width: 100%;
+                color: white;
+                margin-bottom: 5%;
             }
 
             #pos1:checked~ul {
@@ -142,6 +152,10 @@
                 margin-left: -300%;
             }
 
+            #pos5:checked~ul {
+                margin-left: -400%;
+            }
+
             #pos1:checked~.pos>label:nth-child(1) {
                 background: #666;
             }
@@ -158,6 +172,11 @@
                 background: #666;
             }
 
+            #pos5:checked~.pos>label:nth-child(5) {
+                background: #666;
+            }
+
+
             body {
                 color: black;
             }
@@ -170,92 +189,326 @@
             main .div-text {
                 display: inline;
                 float: left;
+                width: 50%;
             }
 
             main .div-img {
                 /* border: 1px solid black; */
-                width: 400px;
-                float: right;
+                width: 50%;
                 /* background-color: blue; */
                 /* text-align: center; */
-                margin-top: 40px;
+                /* margin: 0 auto; */
+                float: right;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            #ul-list {
+                align-content: flex-start;
+                flex-direction: column;
+                flex-wrap: wrap;
+                overflow: auto;
+                margin-top: 10px;
+            }
+
+            #intro_img {
+                width: 90%;
+                vertical-align: middle;
+                margin-top: 20%;
+            }
+
+            #img-output {
+                float: left;
+                width: 100px;
+                margin-right: 20px;
+            }
+
+            #img-background {
+                width: 300px;
+            }
+
+            .inner_li {
+                margin-left: 5%;
+                margin-right: 5%;
+                vertical-align: middle;
+            }
+
+            .inner_li * {}
+
+            .output_img {
+                float: right;
+                width: 40%;
+                vertical-align: middle;
+            }
+
+            .div-output {
+                margin: 10px;
+                padding: 10px;
             }
         </style>
 
 </head>
 
 <body>
-    <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <% const path=sendJson.path %>
+        <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+            <%- include('../partials/nav') %>
+                <div style="background-color: white; color: black;">
+                    </h2>
+                    <div id="slide">
 
-        <%- include('../partials/nav') %>
-            <div style="background-color: white; color: black;">
-                </h2>
-                <div id="slide">
-                    <nav class="nav-container">
-                        <ul>
-                            <li class="nav-item"><a href="">프론트엔드 개발자</a></li>
-                            <li class="nav-item"><a href="">백엔드 개발자</a></li>
-                            <li class="nav-item"><a href="">풀스택 개발자</a></li>
-                            <li class="nav-item"><a href="">데스크탑 개발자</a></li>
-                            <li class="nav-item"><a href="">모바일 개발자</a></li>
-                            <li class="nav-item"><a href="">게임 개발자</a></li>
-                            <li class="nav-item"><a href="">빅데이터 전문가</a></li>
-                            <li class="nav-item"><a href="">임베디드 개발자</a></li>
-                            <li class="nav-item"><a href="">교육자</a></li>
-                        </ul>
-                    </nav>
+                        <nav class="nav-container">
+                            <ul id="ul-list">
+                                <li id="front" class="nav-item"><a href="/career/job_seeking/front">프론트엔드 개발자</a></li>
+                                <li id="back" class="nav-item"><a href="/career/job_seeking/back">백엔드 개발자</a></li>
+                                <li id="security" class="nav-item"><a href="/career/job_seeking/security">보안 전문가</a>
+                                </li>
+                                <li id="mobile" class="nav-item"><a href="/career/job_seeking/mobile">모바일 개발자</a></li>
+                                <li id="game" class="nav-item"><a href="/career/job_seeking/game">게임 개발자</a></li>
+                                <li id="desktop" class="nav-item"><a href="/career/job_seeking/desktop">데스크탑 개발자</a>
+                                </li>
+                                <li id="big_data" class="nav-item"><a href="/career/job_seeking/big_data">빅데이터 전문가</a>
+                                </li>
+                                <li id="embedded" class="nav-item"><a href="/career/job_seeking/embedded">임베디드 개발자</a>
+                                </li>
+                                <li id="edu" class="nav-item"><a href="/career/job_seeking/edu">교육자</a></li>
+                            </ul>
+                        </nav>
+                        <main class="hoc container clear">
 
-                    <main class="hoc container clear">
+                            <input type="radio" name="pos" id="pos1" checked>
+                            <input type="radio" name="pos" id="pos2">
+                            <input type="radio" name="pos" id="pos3">
+                            <input type="radio" name="pos" id="pos4">
+                            <input type="radio" name="pos" id="pos5">
 
-                        <input type="radio" name="pos" id="pos1" checked>
-                        <input type="radio" name="pos" id="pos2">
-                        <input type="radio" name="pos" id="pos3">
-                        <input type="radio" name="pos" id="pos4">
+                            <p class="pos">
+                                <label for="pos1">소개</label>
+                                <label for="pos2">결과물</label>
+                                <label for="pos3">언어</label>
+                                <label for="pos4">학습지식</label>
+                                <label for="pos5">진로</label>
+                            </p>
+                            <ul id="slide-ul">
+                                <!--   소개   -->
+                                <li>
+                                    <div class="inner_li">
+                                        <div class="div-text">
+                                            <h2>
+                                                <%= sendJson.title %>란?
+                                            </h2>
+                                            <h3>
+                                                <%= sendJson.intro %>
+                                            </h3>
+                                            <h4>
+                                                <%= sendJson.intro_detail %>
+                                            </h4>
+                                        </div>
+                                        <div class="div-img">
+                                            <img id="intro_img" src="<%= `${path}intro.png` %> " alt="">
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- 결과물 -->
+                                <li>
+                                    <div class="inner_li">
+                                        <div class="div-text" style="width: 90%;">
+                                            <h2>사례</h2>
 
-                        <ul>
-                            <li>
-                                <div>
-                                    <div class="div-text">
-                                        <h2>
-                                            <%= sendJson.title %>
-                                        </h2>
+
+
+
+
+                                            <!-- 결과물 한 개 -->
+                                            <% const output=sendJson.output %>
+                                                <% const output_detail=sendJson.output_detail %>
+                                                    <% output.forEach(function(param1){ %>
+                                                        <hr>
+                                                        <div class="div-output">
+                                                            <!-- 결과물 설명글 -->
+                                                            <div
+                                                                style="margin-left: 20px; float: LEFT; margin-right: 0;">
+                                                                <h3><b>
+                                                                        <%= param1 %>
+                                                                    </b>
+                                                                </h3>
+
+                                                                <% output_detail[param1].forEach(function(param2){ %>
+                                                                    <h4>
+                                                                        - <%= param2 %>
+                                                                    </h4>
+                                                                    <% }) %>
+                                                            </div>
+                                                            <!-- 결과물 이미지 -->
+                                                            <div class="div-img">
+                                                                <img id="output_img"
+                                                                    src="<%= `${path}${param1}.png` %> " alt="alt">
+                                                            </div>
+
+                                                        </div>
+                                                        <div style="clear: both; margin-bottom: 50px;"></div>
+                                                        <% }) %>
+                                                            <hr>
+                                                            <div style="clear: both; margin-bottom: 50px;"></div>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+
+
+
+
+
+                                <!-- 언어 -->
+                                <li>
+                                    <div class="inner_li">
+                                        <h2>개발에 사용되는 언어</h2>
                                         <h3>
-                                            <%= sendJson.introduction %>
+                                            <% sendJson.language.forEach(function(val){ %>
+                                                <b>
+                                                    [<%= val %>]
+                                                </b>
+                                                <% }) %>
                                         </h3>
-                                        <h4>
-                                            <%= sendJson.introduction %>
-                                        </h4>
-                                    </div>
-                                    <div class="div-img">
-                                        <img src="/asset/job_seeking/front_intro.png" alt="">
-                                    </div>
+                                        <% const language=sendJson.language %>
+                                            <% const language_detail=sendJson.language_detail %>
 
-                                </div>
-                            </li>
-                            <li>
-                                <h2>프론트엔드 결과물</h2>
-                                <img src="<%= sendJson.dir_img %> " alt="" style="height: 200px;">
-                            </li>
-                            <li>
-                                <h2>언어</h2>
-                            </li>
-                            <li>
-                                <h2>^^</h2>
-                            </li>
-                        </ul>
-                        <p class="pos">
-                            <label for="pos1">소개</label>
-                            <label for="pos2">결과물</label>
-                            <label for="pos3">언어</label>
-                            <label for="pos4">학습지식</label>
-                        </p>
-                    </main>
+                                                <!-- 결과물 한 개 -->
+                                                <% language.forEach(function(paramLanguage){ %>
+                                                    <hr style="margin-bottom: 5%;">
+                                                    <div>
+
+                                                        <!-- 이미지 -->
+                                                        <div style="text-align: center;">
+                                                            <img src="<%= `${path}${paramLanguage}.png` %> " alt=""
+                                                                style="width: 40%;">
+                                                            <% console.log('under path') %>
+                                                                <% console.log(`${path}${paramLanguage}.png`) %>
+                                                        </div>
+
+                                                        <!-- 텍스트-설명 -->
+                                                        <div style="text-align: center;">
+                                                            <% language_detail[paramLanguage].forEach(function(paramLanguage_detail){
+                                                                %>
+                                                                <h4 style="font-weight: bold;">
+                                                                    "<%= paramLanguage_detail %>"
+                                                                </h4>
+                                                                <% }) %>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+
+
+
+
+
+
+
+                                                        <!-- <% sendJson.language.forEach(function(val){ %>
+                                            <div>
+                                                <p style="font-size: 10px;">
+                                                <h4>
+                                                    <b>[<%= val %>]</b> :
+                                                    <%= sendJson.language_detail[val] %>
+                                                </h4>
+                                                </p>
+                                            </div>
+                                            <div style="clear: both; margin-bottom: 50px;"></div>
+
+
+
+
+
+                                            <% }) %> -->
+
+                                    </div>
+                                </li>
+
+
+
+
+
+
+
+
+
+
+
+                                <!-- 배경지식 -->
+                                <li>
+                                    <div class="inner_li">
+                                        <h2>학습지식</h2>
+                                        <% sendJson.background.forEach(function(val){ %>
+                                            <div>
+                                                <p style="font-size: 10px;">
+                                                <h3 style="margin-bottom: 10px;">
+                                                    <b>[<%= val %>]</b>
+                                                </h3>
+                                                <h4>
+                                                    <%= sendJson.background_detail[val] %>
+                                                </h4>
+                                                </p>
+                                            </div>
+                                            <div style="clear: both; margin-bottom: 50px;"></div>
+
+                                            <% }) %>
+
+                                    </div>
+                                </li>
+
+                                <div></div>
+                                <!-- 진로 -->
+                                <li>
+                                    <div class="inner_li">
+                                        <h2>진로</h2>
+                                        <h3>
+                                            <% sendJson.company_list.forEach(function(val){ %>
+                                                <b>
+                                                    [<%= val %>]
+                                                </b>
+                                                <% }) %>
+                                        </h3>
+                                        <% sendJson.company_list.forEach(function(val){ %>
+                                            <div>
+                                                <p style="font-size: 10px;">
+                                                <h4>
+                                                    <b>[<%= val %>]</b> :
+                                                    <%= sendJson.company_list_detail[val] %>
+                                                </h4>
+                                                </p>
+                                            </div>
+                                            <div style="clear: both; margin-bottom: 50px;"></div>
+
+                                            <% }) %>
+
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <p class="pos">
+                                <label for="pos1">소개</label>
+                                <label for="pos2">결과물</label>
+                                <label for="pos3">언어</label>
+                                <label for="pos4">학습지식</label>
+                                <label for="pos5">진로</label>
+                            </p>
+
+                        </main>
+                    </div>
                 </div>
-
-            </div>
-
-            <%- include('../partials/copyright') %>
-                <%- include('../partials/top') %>
+                <%- include('../partials/copyright') %>
+                    <%- include('../partials/top') %>
 </body>
+<script>
+    let initData = JSON.parse('<%-JSON.stringify(sendJson.job)%>');
+    // console.log(typeof('<%- sendJson.job %>'));
+
+    document.getElementById(initData)
+        .style
+        .backgroundColor = 'gray'
+
+</script>
+
 
 </html>
