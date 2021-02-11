@@ -10,6 +10,7 @@
 - [언어,프레임워크,모듈](#언어,-프레임워크,-모듈-선정)
 - [개발 기능](#개발-기능)
 - [구현 방법](#구현-방법)
+- [에러 처리](#에러-처리)
 - [개발 규칙](#개발-규칙)
 
 ## 언어, 프레임워크, 모듈 선정
@@ -71,7 +72,9 @@
 - 로그인 `(계속 업데이트 예정)`
   - 로그인/회원가입 페이지 : Local, Kakao, Naver 아이디를 통한 회원 가입 구현 `일부 구현 > Naver 회원가입은 관리자외에 아직 불가`
   - 로그인 시 `header navigation`의 로그인 부분이 `마이페이지`로 변경 `구현 완료`
-  - `마이페이지` 항목은 자신의 정보 및 진로탐색결과/멘토링/스터디 상태 및 로그아웃 가능하다. `일부 구현 > 로그아웃만 구현`
+  - `마이페이지` 항목은 자신의 정보 및 진로탐색결과/멘토링/스터디 상태 및 로그아웃 가능하다. `마이 페이지 항목 > 나의 분야, 나의 멘토, 나의 작성글, 나의 계정, 로그아웃 중 나의 계정 부분 구현 완료`
+  - `마이페이지` 항목의 `나의 계정`부분에서 사용자의 이름, 핸드폰 번호, 성별, 사진, 비밀번호 변경 가능 & 회원 탈퇴 & 멘티정보(대학생/취준생 또는 직장인상태) 등록 가능
+    `구현 완료`
   - 회원가입시 중복된 email의 User를 검사하고 로그인시 Database에 등록된 User인지 검사한다. `구현 완료`
 
 > 페이지 구현 상태 `(계속 업데이트 예정)`
@@ -98,12 +101,29 @@
   <br>
   <img width=40% float:left src="https://user-images.githubusercontent.com/41010744/105857370-91bfe800-602d-11eb-834e-6c9cd581740b.png">
   <img width=31% float:right src="https://user-images.githubusercontent.com/41010744/105857768-f24f2500-602d-11eb-86df-2db454eeff3c.png">
+- 로그인 시 header navigation :
+  <br>
+  <img src="https://user-images.githubusercontent.com/41010744/107681968-19228200-6ce3-11eb-9d3e-af17894db3d0.png">
+
+- 마이페이지 : `계정 설정, 멘티 정보, 비밀번호설정, 회원탈퇴` 페이지
+  <br>
+  `계정 설정`
+  <img width=100% float:left src="https://user-images.githubusercontent.com/41010744/107676880-f7be9780-6cdc-11eb-9d5d-4201cdc3cb40.png">
+  `멘티 정보-대학생/취준생`
+  <img src="https://user-images.githubusercontent.com/41010744/107677210-613ea600-6cdd-11eb-94b1-b5612f658562.png">
+  <img src="https://user-images.githubusercontent.com/41010744/107677347-80d5ce80-6cdd-11eb-9b1d-7639e890e662.png">
+  `멘티 정보-직장인`
+  <img src="https://user-images.githubusercontent.com/41010744/107678084-4fa9ce00-6cde-11eb-97d4-9ad902432094.png">
+  `비밀번호 설정`
+  <img src="https://user-images.githubusercontent.com/41010744/107678258-8253c680-6cde-11eb-9eab-5aa41ee158e0.png">
+  `회원 탈퇴`
+  <img src="https://user-images.githubusercontent.com/41010744/107678337-9d263b00-6cde-11eb-982a-9be500a7a480.png">
 
 ## 구현 방법
 
 > 디렉터리 구성 `(계속 업데이트 예정)`
 
-<img src="https://user-images.githubusercontent.com/41010744/105860565-0fd1be00-6031-11eb-97bf-846c448e0256.png">
+<img src="https://user-images.githubusercontent.com/41010744/107678507-d494e780-6cde-11eb-8ab3-8761f3c30400.png">
 
 - `config, migrations, models, seeders` : Sequelize Module 설치 후, `npx sequelize init` 명령어 실행시 폴더 생성
   - config : `config.json`파일을 통해 id, password 등과 같은 Database 설정
@@ -115,6 +135,9 @@
 - `views` : 실제 웹 페이지에서 클라이언트와 상호작용하는 부분으로 ejs 템플릿을 사용하여 더욱 편리한 동적인 작용하는 폴더
   - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
   - [views/partials](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/partials) : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
+  - [views/job_seeking]() : `종묵 작성`
+  - [views/mentor]() : `현호 작성`
+  - [views/mypage]() : 사용자의 계정 정보(이메일 제외)를 수정할수 있는 페이지의 view로 수정항목으로는 이름, 핸드폰번호, 성별, 사진이 있다. 또한 회원탈퇴페이지와 멘티정보를 등록할수 있으며 멘티는 대학생/취준생과 직장인으로 분류된다. 또한 비밀번호를 변경가능하며, 회원탈퇴시 사용자의 불편한점을 알아내기 위해 회원탈퇴 사유를 받는다.
 - `.env` : 유출되면 안되는 비밀키를 관리
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
 - `index.js` : `npm install`을 통해 설치한 모듈들을 실제로 연동하고 설정
@@ -147,7 +170,6 @@
    - `mentor.css` : 멘토 등록 페이지 css 파일
    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
-
 - 멘토 찾기
 
 - 개발자 이야기
@@ -172,6 +194,54 @@
    - `views/home/auth.ejs` : 회원가입 페이지
    - `views/home/validate.ejs` : routes의 `res.locals.user`를 통해 로그인 및 회원가입 시 이미 DataBase에 등록한 사용자일 경우 오류 팝업창
 5. [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)를 통해 라우터 및 Database Model 연결, Passport Configuration, Passport-Session 설정
+
+- 마이페이지(계정 설정/회원 탙퇴)
+
+1. [views/mypage/account.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/account.ejs)를 통해 사용자와 상호작용을 한다. 기존 테이블(user.js)를 수정 하였다. gender, phone, path 추가 , 각각 성별, 핸드폰번호, 사용자의 사진이 저장되는 파일 경로를 나타낸다. database에 저장되어 있는 정보가 있다면 불러온다.
+
+2. [routes/mypage.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/mypage.js)를 통해 페이지를 불러오고 사용자의 정보를 갱신한다. 사용자 사진은 [public/images/user_image](https://github.com/tjfruddnjs1/lighthouse/tree/master/public/images) > `해당 폴더는 보안에 의한 gitignore 처리`에 저장되며 미리보기 화면에서는 해당 파일의 경로만 불러와서 클라이언트에 보여준다. 만약 사진을 등록하지 않았다면 해당 router 파일의 path를 제외한 정보만 등록하고 있다면 파일 경로를 포함하여 database에 갱신한다.
+
+3. 회원 탈퇴는 [views/mypage/delete.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/delete.ejs)를 통해 사용자와 상호작용한다. 새로운 테이블[models/drop.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/drop.js)를 생성하여 기존 user.js와는 1:1관계(정보의 확장)을 가지며 해당 user의 탈퇴사유 및 건의사항을 저장한다.
+
+- 마이페이지(멘티 정보)
+
+1. [views/mypage/mentee.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/mentee.ejs),[views/mypage/worker.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/worker.ejs)를 통해 사용자와 상호작용한다. 새로운 테이블[models/mentee.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentee.js)를 생성하여 기존 user.js와는 1:1관계(정보의 확장)을 가지며 user가 대학생/취준생 일때와 직장인일 때의 각자 다른 정보가 저장된다. 해당 테이블은 다른 상태를 가질수 있으므로 null을 허용한다.
+
+2. [routes/mypage.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/mypage.js)를 통해 페이지를 불러오고 멘티 정보를 생성한다. 항목은 대학생/취준생인 경우 학교,전공,재학/졸업,학년,스펙,기타 컬럼이 있을수 있으며 직장인인 경우 연차, 출신학교, 최종확력, 주요 경력사항, 기타가 있을수 있다.
+
+- 마이페이지(비밀번호 설정)
+
+1. [views/mypage/password.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/password.ejs)를 통해 사용자와 상호작용한다. 기존 테이블(user.js)를 통해 비밀번호가 database에 hash형태로 저장되어 있는데 현재비밀번호가 옳은지는 server측에서 변경할 비밀번호와 비밀번호가 같은지 확인하는 부분은 client에서 처리한다.
+
+2. [routes/mypage.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/mypage.js)를 통해 페이지를 불러오고 비밀번호를 수정할수 있다. hash형태로 저장되어있는 비밀번호를 사용자가 현재비밀번호 입력칸에 적은 정보를 바탕으로 같은지 확인하고 틀린 경우 확인 요청 메시지를 보낸다.
+
+- 그외 [views/mypage/mypage_nav](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/mypage/mypage_nav.ejs) 마이페이지에 공통적으로 존재하는 네비게이션 페이지이다. 해당 파일을 include하여 공통적으로 존재하는 네비게이션을 분리하였다.
+
+## 에러 처리
+
+> 로그인 :
+
+- user 확인 : 가입된 user 확인후 존재하지 않다면 alert
+
+> 회원가입 :
+
+- 중복 메일 가입 : 중복된 메일로 가입시 alert
+
+> 마이페이지(계정 설정) :
+
+- 이미지는 .png, .img, .jpg 형식의 파일만 등록가능하게 > input의 `accept`속성을 이용하여 사용자 환경변수의 위의 파일 형식만 나타나게
+- 이미지가 등록되지 않았다면 기본 이미지가 나타나고 `수정하기`버튼 클릭시 기본이미지 라면 이미지 첨부 alert
+- 만약 등록된 이미지가 이미 있다면 `수정하기`버튼 클릭 가능
+
+> 마이페이지(비밀번호 변경) :
+
+- 카카오, 네이버 로그인은 비밀번호를 `등대`에서 관리하지 않아 비밀번호 변경이 불가
+- 비밀번호 변경 버튼 클릭시 `새 비밀번호`와 `새 비밀번호 확인` 두 항목이 일치해야 변경 가능 > client에서 확인이 가능하도록 문구(비밀번호 일치여부)를 띄워준다
+- 현재 비밀번호 확인시 hash화된 비밀번호는 서버측에서 값 비교후 다를시 alert
+
+> 마이페이지(멘티정보 등록) :
+
+- 멘티의 필수 정보 등록이 안되어있을 경우 input의 `required`속성을 이용하여 전송 제어
 
 ## 개발 규칙
 
