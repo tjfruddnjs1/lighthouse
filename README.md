@@ -114,6 +114,7 @@
   <img src="https://user-images.githubusercontent.com/41010744/107677347-80d5ce80-6cdd-11eb-9b1d-7639e890e662.png">
   `멘티 정보-직장인`
   <img src="https://user-images.githubusercontent.com/41010744/107678084-4fa9ce00-6cde-11eb-97d4-9ad902432094.png">
+  <br>
   `비밀번호 설정`
   <img src="https://user-images.githubusercontent.com/41010744/107678258-8253c680-6cde-11eb-9eab-5aa41ee158e0.png">
   `회원 탈퇴`
