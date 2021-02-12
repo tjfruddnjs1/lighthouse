@@ -8,7 +8,7 @@
         <title>Document</title>
         <style>
             h2 {
-                color: mediumseagreen;
+                color: brown;
 
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: bold;
@@ -139,13 +139,6 @@
                 margin-left: -200%;
             }
 
-            #pos4:checked~ul {
-                margin-left: -300%;
-            }
-
-            #pos5:checked~ul {
-                margin-left: -400%;
-            }
 
             #pos1:checked~.pos>label:nth-child(1) {
                 background: #666;
@@ -159,13 +152,6 @@
                 background: #666;
             }
 
-            #pos4:checked~.pos>label:nth-child(4) {
-                background: #666;
-            }
-
-            #pos5:checked~.pos>label:nth-child(5) {
-                background: #666;
-            }
 
 
             body {
@@ -189,7 +175,7 @@
                 /* background-color: blue; */
                 /* text-align: center; */
                 /* margin: 0 auto; */
-                float: left;
+                float: right;
                 text-align: center;
                 vertical-align: middle;
             }
@@ -214,21 +200,27 @@
                 margin-right: 20px;
             }
 
-            #img-background{
+            #img-background {
                 width: 300px;
             }
 
-            .inner_li{
+            .inner_li {
                 margin-left: 5%;
                 margin-right: 5%;
                 vertical-align: middle;
             }
 
-            .inner_li *{
+            .inner_li * {}
+
+            b {
+                color: brown;
             }
 
-            b{
-                color: mediumseagreen;
+            .output_img {
+                float: right;
+                width: 40%;
+                vertical-align: middle;
+                bottom: 0;
             }
         </style>
 
@@ -252,23 +244,18 @@
                             <li id="big_data" class="nav-item"><a href="/career/job_seeking/big_data">빅데이터 전문가</a></li>
                             <li id="embedded" class="nav-item"><a href="/career/job_seeking/embedded">임베디드 개발자</a></li>
                             <li id="edu" class="nav-item"><a href="/career/job_seeking/edu">교육자</a></li>
-                            </ul>
+                        </ul>
                     </nav>
                     <main class="hoc container clear">
 
                         <input type="radio" name="pos" id="pos1" checked>
                         <input type="radio" name="pos" id="pos2">
                         <input type="radio" name="pos" id="pos3">
-                        <input type="radio" name="pos" id="pos4">
-                        <input type="radio" name="pos" id="pos5">
 
                         <p class="pos">
                             <label for="pos1">소개</label>
-                            <label for="pos2">필요성
-                            </label>
-                            <label for="pos3">역량</label>
-                            <label for="pos4">학습지식</label>
-                            <label for="pos5">진로</label>
+                            <label for="pos2">필요성</label>
+                            <label for="pos3">학습지식</label>
                         </p>
 
 
@@ -290,129 +277,79 @@
                                     <div class="div-img">
                                         <img id="intro_img" src="<%= `${sendJson.path}intro.png` %> " alt="">
                                     </div>
-    
                                 </div>
                             </li>
-
-                            <!-- 필요성
-                        -->
+                            <!-- 필요성                        -->
+                            <!-- 결과물 -->
                             <li>
                                 <div class="inner_li">
                                     <div class="div-text" style="width: 90%;">
-                                        <h2>필요성
-                                        </h2>
-                                        <h3>
-                                            <% sendJson.output.forEach(function(val){ %>
-                                                <b>
-                                                    [<%= val %>]
-                                                </b>
-                                                <% }) %>
-                                        </h3>
-                                        <% sendJson.output.forEach(function(val){ %>
-                                            <div>
-                                                <p>
-    
-                                                    <img id="img-output" src="<%= `${sendJson.path}${val}.png` %> " alt="">
-                                                <h4 style="vertical-align: middle;">
-                                                    <%= sendJson.output_detail[val] %>
-                                                </h4>
-                                                </p>
-                                            </div>
-                                            <div style="clear: both; margin-bottom: 50px;"></div>
-    
-                                            <% }) %>
+                                        <h2>필요성</h2>
+                                        <!-- 결과물 한 개 -->
+                                        <% const output=sendJson.output %>
+                                            <% const output_detail=sendJson.output_detail %>
+                                                <% output.forEach(function(param1){ %>
+                                                    <hr>
+                                                    <div class="div-output">
+                                                        <!-- 결과물 설명글 -->
+                                                        <div style="margin-left: 20px; float: LEFT; margin-right: 0;">
+                                                            <h3><b>
+                                                                    <%= param1 %>
+                                                                </b>
+                                                            </h3>
+                                                            <% output_detail[param1].forEach(function(param2){ %>
+                                                                <h4>
+                                                                    - <%= param2 %>
+                                                                </h4>
+                                                                <% }) %>
+                                                        </div>
+                                                        <!-- 결과물 이미지 -->
+                                                        <div class="div-img">
+                                                            <img id="output_img" src="<%= `${path}${param1}.png` %> "
+                                                                alt="alt" style="margin-top: 10%;">
+                                                        </div>
+                                                    </div>
+                                                    <div style="clear: both; margin-bottom: 50px;"></div>
+                                                    <% }) %>
+                                                        <hr>
+                                                        <div style="clear: both; margin-bottom: 50px;"></div>
                                     </div>
-    
                                 </div>
                             </li>
-
-                            <!-- 역량 -->
-                            <li>
-                                <div class="inner_li">
-                                    <h2>역량</h2>
-                                    <h3>
-                                        <% sendJson.language.forEach(function(val){ %>
-                                            <b>
-                                                [<%= val %>]
-                                            </b>
-                                            <% }) %>
-                                    </h3>
-                                    <% sendJson.language.forEach(function(val){ %>
-                                        <div>
-                                            <p style="font-size: 10px;">
-                                            <h4>
-                                                <b>[<%= val %>]</b> :
-                                                <%= sendJson.language_detail[val] %>
-                                            </h4>
-                                            </p>
-                                        </div>
-                                        <div style="clear: both; margin-bottom: 50px;"></div>
-    
-                                        <% }) %>
-    
-                                </div>
-                            </li>
-
                             <!-- 배경지식 -->
                             <li>
                                 <div class="inner_li">
                                     <h2>학습지식</h2>
-                                    <h3>
-                                        <% sendJson.background.forEach(function(val){ %>
-                                            <b>
-                                                [<%= val %>]
-                                            </b>
-                                            <% }) %>
-                                    </h3>
                                     <% sendJson.background.forEach(function(val){ %>
                                         <div>
                                             <p style="font-size: 10px;">
+                                            <h3 style="margin-bottom: 2.5%;">
+                                                <b>
+                                                    <%= val %>
+                                                </b>
+                                            </h3>
                                             <h4>
-                                                <b>[<%= val %>]</b> :
-                                                <%= sendJson.background_detail[val] %>
+                                                <% sendJson.background_detail[val].forEach(function(param){ %>
+                                                    <p style="margin-bottom: 10px;">
+                                                        👍🏻 <%= param %>
+                                                    </p>
+                                                    <% }) %>
+
                                             </h4>
                                             </p>
                                         </div>
                                         <div style="clear: both; margin-bottom: 50px;"></div>
-    
                                         <% }) %>
-    
                                 </div>
                             </li>
 
                             <div></div>
                             <!-- 진로 -->
-                            <li>
-                                <div class="inner_li">
-                                    <h2>진로</h2>
-                                    <h3>
-                                        <% sendJson.company_list.forEach(function(val){ %>
-                                            <b>
-                                                [<%= val %>]
-                                            </b>
-                                            <% }) %>
-                                    </h3>
-                                    <% sendJson.company_list.forEach(function(val){ %>
-                                        <div>
-                                            <p style="font-size: 10px;">
-                                            <h4>
-                                                <b>[<%= val %>]</b> :
-                                                <%= sendJson.company_list_detail[val] %>
-                                            </h4>
-                                            </p>
-                                        </div>
-                                        <div style="clear: both; margin-bottom: 50px;"></div>
-                                        <% }) %>
-                                </div>
-                            </li>
                         </ul>
                         <p class="pos">
                             <label for="pos1">소개</label>
-                            <label for="pos2">필요성
-                            </label>
-                            <label for="pos3">역량</label>
-                            <label for="pos4">학습지식</label>
-                            <label for="pos5">진로</label>
+                            <label for="pos2">필요성</label>
+                            <label for="pos3">학습지식</label>
                         </p>
 
                     </main>

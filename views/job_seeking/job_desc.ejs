@@ -93,10 +93,6 @@
 
             /* 슬라이드 안 내용물 */
 
-            #slide ul #slide-ul {
-                width: 500%;
-                transition: 1s;
-            }
 
             #slide ul:after {
                 content: "";
@@ -110,6 +106,15 @@
                 height: 100%;
             }
 
+            #slide-ul li{
+                float: left;
+                width: 15%;
+                height: 100%;
+                margin-right: 2.5%;
+                margin-left: 2.5%;
+            }
+
+
             #slide input {
                 display: none;
                 list-style: none;
@@ -119,8 +124,8 @@
                 display: inline-block;
                 vertical-align: middle;
                 width: 150px;
-                /* height: 100px; */
-                padding: 30px;
+                height: 50px;
+                padding: 15px;
                 /* border: 2px solid #666; */
                 background-color: #ccc;
                 transition: 0.3s;
@@ -133,6 +138,7 @@
                 width: 100%;
                 color: white;
                 margin-bottom: 5%;
+                margin-top: 5%;
             }
 
             #pos1:checked~ul {
@@ -233,20 +239,22 @@
                 vertical-align: middle;
             }
 
-            .inner_li * {}
-
             .output_img {
                 float: right;
                 width: 40%;
                 vertical-align: middle;
+                bottom: 0;
             }
 
             .div-output {
                 margin: 10px;
                 padding: 10px;
             }
-        </style>
 
+            .div-company p {
+                margin-bottom: 10px;
+            }
+        </style>
 </head>
 
 <body>
@@ -256,7 +264,6 @@
                 <div style="background-color: white; color: black;">
                     </h2>
                     <div id="slide">
-
                         <nav class="nav-container">
                             <ul id="ul-list">
                                 <li id="front" class="nav-item"><a href="/career/job_seeking/front">프론트엔드 개발자</a></li>
@@ -274,20 +281,22 @@
                                 <li id="edu" class="nav-item"><a href="/career/job_seeking/edu">교육자</a></li>
                             </ul>
                         </nav>
-                        <main class="hoc container clear">
 
+                        <!-- full배열 -->
+                        <!-- <main class="hoc container clear"> -->
+                        <main>
+                            
                             <input type="radio" name="pos" id="pos1" checked>
                             <input type="radio" name="pos" id="pos2">
                             <input type="radio" name="pos" id="pos3">
                             <input type="radio" name="pos" id="pos4">
                             <input type="radio" name="pos" id="pos5">
-
                             <p class="pos">
                                 <label for="pos1">소개</label>
                                 <label for="pos2">결과물</label>
                                 <label for="pos3">언어</label>
                                 <label for="pos4">학습지식</label>
-                                <label for="pos5">진로</label>
+                                <label for="pos5">기업</label>
                             </p>
                             <ul id="slide-ul">
                                 <!--   소개   -->
@@ -314,11 +323,6 @@
                                     <div class="inner_li">
                                         <div class="div-text" style="width: 90%;">
                                             <h2>사례</h2>
-
-
-
-
-
                                             <!-- 결과물 한 개 -->
                                             <% const output=sendJson.output %>
                                                 <% const output_detail=sendJson.output_detail %>
@@ -332,7 +336,6 @@
                                                                         <%= param1 %>
                                                                     </b>
                                                                 </h3>
-
                                                                 <% output_detail[param1].forEach(function(param2){ %>
                                                                     <h4>
                                                                         - <%= param2 %>
@@ -342,9 +345,9 @@
                                                             <!-- 결과물 이미지 -->
                                                             <div class="div-img">
                                                                 <img id="output_img"
-                                                                    src="<%= `${path}${param1}.png` %> " alt="alt">
+                                                                    src="<%= `${path}${param1}.png` %> " alt="alt"
+                                                                    style="margin-top: 10%;">
                                                             </div>
-
                                                         </div>
                                                         <div style="clear: both; margin-bottom: 50px;"></div>
                                                         <% }) %>
@@ -353,13 +356,6 @@
                                         </div>
                                     </div>
                                 </li>
-
-
-
-
-
-
-
                                 <!-- 언어 -->
                                 <li>
                                     <div class="inner_li">
@@ -373,20 +369,17 @@
                                         </h3>
                                         <% const language=sendJson.language %>
                                             <% const language_detail=sendJson.language_detail %>
-
                                                 <!-- 결과물 한 개 -->
                                                 <% language.forEach(function(paramLanguage){ %>
                                                     <hr style="margin-bottom: 5%;">
                                                     <div>
-
                                                         <!-- 이미지 -->
                                                         <div style="text-align: center;">
                                                             <img src="<%= `${path}${paramLanguage}.png` %> " alt=""
-                                                                style="width: 40%;">
+                                                                style="width: 40%; margin-bottom: 5px;">
                                                             <% console.log('under path') %>
                                                                 <% console.log(`${path}${paramLanguage}.png`) %>
                                                         </div>
-
                                                         <!-- 텍스트-설명 -->
                                                         <div style="text-align: center;">
                                                             <% language_detail[paramLanguage].forEach(function(paramLanguage_detail){
@@ -398,13 +391,6 @@
                                                         </div>
                                                     </div>
                                                     <% }) %>
-
-
-
-
-
-
-
                                                         <!-- <% sendJson.language.forEach(function(val){ %>
                                             <div>
                                                 <p style="font-size: 10px;">
@@ -415,26 +401,9 @@
                                                 </p>
                                             </div>
                                             <div style="clear: both; margin-bottom: 50px;"></div>
-
-
-
-
-
                                             <% }) %> -->
-
                                     </div>
                                 </li>
-
-
-
-
-
-
-
-
-
-
-
                                 <!-- 배경지식 -->
                                 <li>
                                     <div class="inner_li">
@@ -442,58 +411,76 @@
                                         <% sendJson.background.forEach(function(val){ %>
                                             <div>
                                                 <p style="font-size: 10px;">
-                                                <h3 style="margin-bottom: 10px;">
-                                                    <b>[<%= val %>]</b>
+                                                <h3 style="margin-bottom: 2.5%;">
+                                                    <b>
+                                                        <%= val %>
+                                                    </b>
                                                 </h3>
                                                 <h4>
-                                                    <%= sendJson.background_detail[val] %>
+                                                    <% sendJson.background_detail[val].forEach(function(param){ %>
+                                                        <p style="margin-bottom: 10px;">
+                                                            👍🏻 <%= param %>
+                                                        </p>
+                                                        <% }) %>
                                                 </h4>
                                                 </p>
                                             </div>
                                             <div style="clear: both; margin-bottom: 50px;"></div>
-
                                             <% }) %>
-
                                     </div>
                                 </li>
-
                                 <div></div>
                                 <!-- 진로 -->
                                 <li>
                                     <div class="inner_li">
-                                        <h2>진로</h2>
-                                        <h3>
-                                            <% sendJson.company_list.forEach(function(val){ %>
-                                                <b>
-                                                    [<%= val %>]
-                                                </b>
-                                                <% }) %>
-                                        </h3>
+                                        <h2>관련 기업</h2>
                                         <% sendJson.company_list.forEach(function(val){ %>
-                                            <div>
-                                                <p style="font-size: 10px;">
+                                            <hr>
+                                            <div style="margin-top: 20px;">
+                                                <h3 style="margin-bottom: 20px;"><b>
+                                                        <%= val %>
+                                                    </b></h3>
+                                            </div>
+                                            <div class="div-company">
                                                 <h4>
-                                                    <b>[<%= val %>]</b> :
-                                                    <%= sendJson.company_list_detail[val] %>
+                                                    <p>
+                                                        <b>
+                                                            소개 :
+                                                        </b>
+                                                        <%= sendJson.company_list_detail[val].소개 %>
+                                                    </p>
+                                                    <p>
+                                                        <b>
+                                                            규모 :
+                                                        </b>
+                                                        <%= sendJson.company_list_detail[val].회사규모 %>
+                                                    </p>
+                                                    <p>
+                                                        <b>
+                                                            하는일 :
+                                                        </b>
+                                                        <%= sendJson.company_list_detail[val].하는일 %>
+                                                    </p>
+                                                    <p>
+                                                        <b>
+                                                            위치 :
+                                                        </b>
+                                                        <%= sendJson.company_list_detail[val].회사위치 %>
+                                                    </p>
                                                 </h4>
-                                                </p>
                                             </div>
                                             <div style="clear: both; margin-bottom: 50px;"></div>
-
                                             <% }) %>
-
                                     </div>
                                 </li>
-
                             </ul>
                             <p class="pos">
                                 <label for="pos1">소개</label>
                                 <label for="pos2">결과물</label>
                                 <label for="pos3">언어</label>
                                 <label for="pos4">학습지식</label>
-                                <label for="pos5">진로</label>
+                                <label for="pos5">기업</label>
                             </p>
-
                         </main>
                     </div>
                 </div>
@@ -503,12 +490,9 @@
 <script>
     let initData = JSON.parse('<%-JSON.stringify(sendJson.job)%>');
     // console.log(typeof('<%- sendJson.job %>'));
-
     document.getElementById(initData)
         .style
         .backgroundColor = 'gray'
-
 </script>
-
 
 </html>
