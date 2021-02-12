@@ -44,21 +44,11 @@ router.get('/account',isLoggedIn,(req,res,next)=>{
 });
 
 router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=>{
-    const { email, username, phone, gender} = req.body;
+    const { username, phone, gender} = req.body;
 
     try{
-        const hasUserEmail = await User.findOne({
-            where : {
-                email
-            }
-        });
-        if((req.user.email !== email) && hasUserEmail){
-            return res.render('home/validate', {title:'중복 메일', passAuth : false, passLogin:true});
-        }
-
         if(! req.file || ! req.file.path){
         await User.update({
-                email : email,
                 username : username,
                 phone : phone,
                 gender : gender,
@@ -70,7 +60,6 @@ router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=
             path = path.replace('public','');
             
             await User.update({
-                email : email,
                 username : username,
                 phone : phone,
                 gender : gender,

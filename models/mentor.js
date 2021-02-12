@@ -2,15 +2,7 @@ const Sequelize = require('sequelize');
 
 module.exports = class Mentor extends Sequelize.Model {
   static init(sequelize) {
-    return super.init({
-      username : {
-        type: Sequelize.STRING(20),
-        allowNull: false,           
-      },
-      gender : {
-        type : Sequelize.STRING(50),
-        allowNull: false,        
-      }, 
+    return super.init({           
       firm : {
         type: Sequelize.STRING(10),
         allowNull : false,
@@ -22,12 +14,7 @@ module.exports = class Mentor extends Sequelize.Model {
       career:{
           type : Sequelize.TEXT,
           allowNull : false,
-      },      
-              
-      email : {
-        type: Sequelize.STRING(20),
-        allowNull : true,
-      }, 
+      },                         
       intro : {
         type : Sequelize.TEXT,
         allowNull : false,        

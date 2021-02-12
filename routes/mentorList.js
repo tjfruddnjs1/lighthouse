@@ -16,6 +16,9 @@ router.get('/', async (req, res, next) => {
     console.log(lang);
     let flag = true;      
     try {
+        const jobs = await Job.findAll({});
+        const langs = await Lang.findAll({});
+
         if(job && !lang){
             mentors = await Mentor.findAll({
                 include : [
@@ -95,7 +98,7 @@ router.get('/', async (req, res, next) => {
         
         // console.log(mentors[0].MentoJobs[0].Job.job);
         // console.log(mentors[0].MentoLangs[0].Lang.language);
-      res.render('mentor/mentorList', {mentors : mentors, flag : flag});
+      res.render('mentor/mentorList', {mentors : mentors, flag : flag, jobs : jobs, langs : langs});
     } catch (err) {
       console.error(err);
       next(err);

@@ -23,23 +23,22 @@ class Search{
     updateQueryStringParameter(key, value) {         
       let uri = location.href;
       let str = location.protocol +'//'+ location.host;                               
-      let modifyUrl = uri.replace(str, '');                        
+      let modifyUrl = uri.replace(str, '');           
+      let str2 = key + '=' + value;             
       let separator = uri.indexOf('?') !== -1 ? "&" : "?";        
-      if (modifyUrl.indexOf(value) !== -1 && modifyUrl.indexOf(key) !== -1) {                                 
-          console.log('오류 발생');
-          console.log(key + value);
+      if (modifyUrl.includes(str2)) { // 똑같은 key가 눌렸을 때                    
           let length = value.length;
           let keyLength = key.length;          
-          let index = modifyUrl.indexOf(value);                     
-          let startUrl = modifyUrl.substr(0,index-keyLength-2);          
-          let endUrl = modifyUrl.substr(index+length, uri.length);            
+          let index = modifyUrl.indexOf(str2); // key 시작 위치                     
+          let startUrl = modifyUrl.substr(0,index-1);                    
+          let endUrl = modifyUrl.substr(index + str2.length, modifyUrl.length);                      
           let newUrl = str + startUrl  + endUrl;             
           if(newUrl.indexOf('?') == -1){              
             newUrl = newUrl.replace('&', '?');              
-          }                          
-          return newUrl;            
-              
+          }                     
+          return newUrl;                          
       }         
+
       return uri + separator + key + "=" + value;
     }
     

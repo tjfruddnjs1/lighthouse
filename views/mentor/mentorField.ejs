@@ -4,6 +4,48 @@
 <head>
   <%- include('../partials/head') %>  
   <link rel="stylesheet" href="/css/mentor.css">    
+  <style>
+    .ref-sort ul{ 
+    height : 50px;
+    line-height : 50px;                   
+    background : #f7f7f8;            
+  }    
+  .ref-sort a{        
+    
+    text-align : center;
+    font-weight : bold;      
+  }   
+  .ref-sort div{
+    display : inline;
+    padding : 10px 10px;
+    width : 20%;
+    text-align : center;
+  } 
+  .ref-sort li{      
+    text-align : center;
+    height : 100%;            
+    /* border-bottom : 2px solid #829DA2;       */
+  }
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }
+  #image_section{
+    width : 30%;            
+  }
+  #upload{
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #829DA2;
+    cursor: pointer;
+    border : 0;
+    border-radius: .25em;
+  }
+  </style>  
 </head>
 
 <body id="top">  
@@ -19,87 +61,61 @@
       <section id="introblocks">
         <div class="sectiontitle">
           <section id="references" class="hoc container clear">
-            <nav class="ref-sort">
-              <ul>
-                <li class="current"><a href="/register">기본정보</a></li>
-                <li><a href="/register/fields">멘토링 분야</a></li>      
-              </ul>
-            </nav>
-          </section>
+            <div class="nav">
+              <nav class="ref-sort">              
+                  <ul class = "ul">
+                    <div><li class="li"><a href="/register" id = "mentorinfo">기본정보</a></li></div>
+                    <div><li class = "li"><a href="/register/fields" id = "mentorfield">멘토링 분야</a></li>                </div>
+                    
+                  </ul>              
+              </nav>
+          </div>
+          </section>   
           <a href="#info"></a>
           <h1 class="subhead">분야 선택</h1>
           <p>멘토님과 관련된 직업과 언어 선택 페이지입니다. </p>
         </div>
         <div id="updatemento">
           <form action="/register/fields" method="post" id = "mentorForm">            
-            <fieldset>              
+            <fieldset>                         
               <label for="name">멘토링 가능 분야</label>
               <div id="field">
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="1">게임
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="2">빅데이터
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="3">프론트
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="4">백엔드
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="5">보안
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="6">게임 개발자
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="7">임베디드 개발자
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="8">데스크탑 개발자
-                </div>
-                <div class="item-list">
-                  <input type="checkbox" name="job" class="job" value="9">모바일 개발자
-                </div>
+                <% for(let i =0; i< jobs.length; i++) {let flag = false%>                  
+                  <% for(let j =0; j < mentorJobs.length; j++) { %>
+                    <% if(mentorJobs[j].job_id == jobs[i].id) { flag = true %>
+                      <div class="item-list">
+                        <input type="checkbox" name="job" class="job" value="<%= jobs[i].id %>" checked><%= jobs[i].job %>
+                      </div>
+                    <%  }%>                                                     
+                  <%  }%>   
+                  <% if(!flag) {%>
+                  <div class="item-list">
+                    <input type="checkbox" name="job" class="job" value="<%= jobs[i].id %>"><%= jobs[i].job %>
+                  </div> 
+                  <% }%>              
+                <% } %>
               </div>
             </fieldset>
             <fieldset style = "margin-top: 15px;">              
               <label for="name">멘토링 가능 언어</label>
               <div id="field">
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="1">C
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="2">C++
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="3">C#
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="4">javascript
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="5">java
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="6">Jsp
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="7">PHP
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="8">node.js
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="9">Assembly
-                </div>
-                <div class="lang-list">
-                  <input type="checkbox" name="lang" class="lang" value="10">기계어
-                </div>
+                <% for(let i =0; i< langs.length; i++) { let flag = false %>  
+                  <% for(let j =0; j < mentorLangs.length; j++) { %>
+                    <% if(mentorLangs[j].lang_id == langs[i].id) { flag = true %>                
+                      <div class="lang-list">
+                        <input type="checkbox" name="lang" class="lang" value="<%= langs[i].id %>" checked><%= langs[i].language %>
+                      </div>
+                    <%  }%>                                                     
+                  <%  }%>   
+                  <% if(!flag) {%>
+                    <div class="lang-list">
+                      <input type="checkbox" name="lang" class="lang" value="<%= langs[i].id %>"><%= langs[i].language %>
+                    </div>
+                  <% }%>   
+                <% } %>
               </div>
             </fieldset>                        
-            <input type="submit" value="멘토 신청하기" id = "submit">
+            <input type="submit" value="멘토 신청하기" id = "mentor_submit">
           </form>
         </div>
       </section>
@@ -111,5 +127,13 @@
       <%- include('../partials/top') %>                                               
         <script src = "/js/mentorField.js"></script>
 </body>
+<script>
+  let current = document.getElementsByClassName('li');
+if(location.href.includes('register/fields')){
+  current[1].className = "current";
+}else{
+  current[0].className = "current";
+}
+</script>
 
 </html>

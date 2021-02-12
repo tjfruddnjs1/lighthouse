@@ -4,6 +4,48 @@
 <head>
   <%- include('../partials/head') %>  
   <link rel="stylesheet" href="/css/mentor.css">    
+  <style>
+    .ref-sort ul{ 
+    height : 50px;
+    line-height : 50px;                   
+    background : #f7f7f8;            
+  }    
+  .ref-sort a{        
+    
+    text-align : center;
+    font-weight : bold;      
+  }   
+  .ref-sort div{
+    display : inline;
+    padding : 10px 10px;
+    width : 20%;
+    text-align : center;
+  } 
+  .ref-sort li{      
+    text-align : center;
+    height : 100%;            
+    /* border-bottom : 2px solid #829DA2;       */
+  }
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }
+  #image_section{
+    width : 30%;            
+  }
+  #upload{
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #829DA2;
+    cursor: pointer;
+    border : 0;
+    border-radius: .25em;
+  }
+  </style>  
 </head>
 
 <body id="top">  
@@ -19,12 +61,15 @@
       <section id="introblocks">
         <div class="sectiontitle">
           <section id="references" class="hoc container clear">
-            <nav class="ref-sort">
-              <ul>
-                <li class="current"><a href="/register">기본정보</a></li>
-                <li><a href="/register/fields">멘토링 분야</a></li>                
-              </ul>
-            </nav>
+            <div class="nav">
+              <nav class="ref-sort">              
+                  <ul class = "ul">
+                    <div><li class="li"><a href="/register" id = "mentorinfo">기본정보</a></li></div>
+                    <div><li class = "li" ><a href="/register/fields" id = "mentorfield">멘토링 분야</a></li>                </div>
+                    
+                  </ul>              
+              </nav>
+          </div>
           </section>          
           <h1 class="subhead">기본 정보</h1>
           <p>멘토가 되기 위한 기본 정보 입력란 입니다.</p>
@@ -33,54 +78,64 @@
           <form action="/register" method="post" enctype="multipart/form-data" id = "mentorForm">
             <fieldset>
               <label for="username">이름</label>
-              <input type="text" id="username" name="username" value = "">
+              <input type="text" id="username" name="username" value = "<%= user.username %>" disabled>
             </fieldset>
             <fieldset>
-              <label for="gender">성별</label>
+              <label for="gender">성별</label>              
               <select name="gender" id="gender">
-                <option value="남자">남자</option>
-                <option value="여자">여자</option>
+                <% if(user.gender == "man") { %>
+                <option value="man" selected>남자</option>
+                <option value="woman">여자</option>
+                <%} else{ %>
+                <option value="man" selected>남자</option>
+                <option value="woman" selected>여자</option>
+                <%} %>
               </select>
             </fieldset>
             <fieldset>
               <label for="firm">회사명</label>
-              <input type="text" id="firm" name="firm">
+              <% if(mentor.firm){%>
+              <input type="text" id="firm" name="firm" value = "<%= mentor.firm ?? ''  %>">
+              <% } else {%>
+                <input type="text" id="firm" name="firm" value = "">
+              <% }%>
             </fieldset>
             <fieldset>
               <label for="department">부서</label>
-              <input type="text" id="department" name="department">
+              <input type="text" id="department" name="department" value = "<%= mentor.department ?? '' %>">
             </fieldset>
             <fieldset>
               <label for="career">주요경력</label>
-              <textarea name="career" id="career" cols="30" rows="10">
-                  </textarea>
+              <textarea name="career" id="career" cols="30" rows="10"><%= mentor.career ?? '' %></textarea>
             </fieldset> 
             <fieldset>
               <label for="phone">휴대전화 번호</label>
-              <input type="text" id="phone" name="phone">
+              <input type="text" id="phone" name="phone" value = "<%= user.phone %>">
             </fieldset>
             <fieldset>
               <label for="email">이메일</label>
-              <input type="email" id="email" name="email">
+              <input type="email" id="email" name="email" value = "<%= user.email %>" readonly >
             </fieldset>
             <fieldset>
-              <label for="intro">멘토 소개</label>
-              <textarea name="intro" id="intro" cols="30" rows="10"></textarea>
-            </fieldset>
+              <label for="intro">멘토 소개</label>              
+              <textarea name="intro" id="intro" cols="30" rows="10"><%= mentor.intro ?? '' %></textarea>
+              </fieldset>
             <fieldset>                       
             <fieldset>              
               <label for="name">프로필 사진</label>
-              <input type="file" value="업로드" name = "image" id = "image">
+              <label for="image" id = "upload">업로드</label>              
+              <input type="file" value="업로드" name = "image" id = "image" accept="image/png, image/jpeg">
+              <img id="image_section" src="<%= mentor.path ?? '' %>" alt=""/>
               <div id="imagebox">
                 <p>
                   - 얼굴이 포함된 사진을 등록해주세요. <br>
                   - 얼굴 확인이 어려울 경우, 수정 요청이 있을 수 있습니다. <br>
                   - 해당 사진의 최적 사이즈는 800 x 800px 입니다. <br>
-                  - 등록 가능한 파일 형식은 jpg, png, gif 입니다.
+                  - 등록 가능한 파일 형식은 jpg, png 입니다.
                 </p>
               </div>
-            </fieldset>
-            <input type="submit" value="다음" id = "submit">
+            </fieldset>            
+            <input type="submit" value="다음" id = "mentor_submit">
           </form>
         </div>
       </section>
@@ -92,5 +147,29 @@
       <%- include('../partials/top') %>                                               
         <script src = "/js/mentor.js"></script>
 </body>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script>
+  function readURL(input) {
+ if (input.files && input.files[0]) {
+  var reader = new FileReader();
+  
+  reader.onload = function (e) {
+   $('#image_section').attr('src', e.target.result);  
+  }
+  
+  reader.readAsDataURL(input.files[0]);
+  }
+}
 
+$("#image").change(function(){
+   readURL(this);
+});
+
+let current = document.getElementsByClassName('li');
+if(location.href.includes('register/fields')){
+  current[1].className = "current";
+}else{
+  current[0].className = "current";
+}
+</script>
 </html>
