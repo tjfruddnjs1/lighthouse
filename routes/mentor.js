@@ -48,8 +48,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
         where : {
             id : userInfo.id,
         }
-      });
-      console.log(user);
+      });      
       const mentor = await Mentor.findOne({ 
             where : {
                 user_id : userInfo.id,
@@ -146,7 +145,7 @@ router.post('/',  upload.single('image'), isLoggedIn, async(req, res, next) => {
     }
 });
 
-router.post('/fields' , async(req, res, next) => {            
+router.post('/fields' , isLoggedIn, async(req, res, next) => {            
     const {job, lang} = req.body;
     const user = req.user;            
     try{
@@ -154,25 +153,49 @@ router.post('/fields' , async(req, res, next) => {
             where : {
                 user_id : user.id,
             }
-        });                   
-        if(!mentor){
-            res.redirect('/');
-        }        
-        if(lang){
-            for(let i =0; i<job.length; i++){
-                await MentorJob.create({                
-                    mentor_id : mentor.id,
-                    job_id : job[i]
-                });                        
+        });                          
+        const mentorJob = await MentorJob.findOne({
+            where : {
+                mentor_id : mentor.id
             }
+        });
+
+        const mentorLang = await MentorLang.findOne({
+            where : {
+                mentor_id : mentor.id
+            }
+        });
+        if(mentorJob && mentorLang){
+            await MentorJob.destroy({                
+                where : {mentor_id : mentor.id},
+            });
+            await MentorLang.destroy({                
+                where : {mentor_id : mentor.id},
+            });
+                  
+        }else if(mentorJob && !mentorLang){
+            await MentorJob.destroy({                
+                where : {mentor_id : mentor.id},
+            })         
+        }else if(!mentorJob && mentorLang){
+            await MentorLang.destroy({                
+                where : {mentor_id : mentor.id},
+            });        
         }
-        
+
+        for(let i =0; i<job.length; i++){
+            await MentorJob.create({                
+                mentor_id : mentor.id,
+                job_id : job[i]
+            });                        
+        }                
         for(let i =0; i<lang.length; i++){
             await MentorLang.create({
                 mentor_id : mentor.id,
                 lang_id : lang[i],     
             });                        
-        }        
+        }         
+                   
         res.send(
             "<script>alert('멘토 등록 되었습니다.'); window.location = '/';</script>"
         );
