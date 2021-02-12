@@ -88,7 +88,7 @@ router.get('/fields', isLoggedIn,  async (req, res, next) => {
             });
             res.render('mentor/mentorField', {mentorJobs : mentorJobs, mentorLangs : mentorLangs, jobs : jobs, langs : langs });
         }                
-        res.render('mentor/mentorField', {jobs : jobs, langs : langs});
+        res.render('mentor/mentorField', {jobs : jobs, langs : langs, mentorJobs : '', mentorLangs : ''});
       } catch (err) {
         console.error(err);
         next(err);

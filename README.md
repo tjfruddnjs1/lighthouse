@@ -62,10 +62,15 @@
   - 관심 분야에 추가 버튼을 누르면 해당 분야가 관심분야로 추가
 
 - 멘토 등록
-  - 멘토 등록 페이지 : 기존 멘티 신분인 사용자를 멘토로 만들기 위한 기능 `일부 구현 > 현재 프로필 사진 등록 안할 시 오류 발생`
+  - 멘토 등록 페이지 : 기존 멘티 신분인 사용자를 멘토로 만들기 위한 기능 `구현 완료`
   - home 페이지에서 헤더의 `멘토등록` 버튼 클릭시 멘토 등록 페이지로 이동 `구현 완료`
   - 멘토 등록시 이미 등록된 멘토인지 검사 `구현 완료`
+  - 멘토 사진 등록 시 이미지 미리보기 기능 추가 `구현 완료`
+  - 이미 등록된 멘토일 경우 멘토 등록 페이지에 들어갈 시 전에 작성했던 글들을 출력 `구현 완료`
 - 멘토 찾기
+ - 사용자가 원하는 멘토들을 카테고리별로 찾을 수 있는 기능 `구현 완료`
+ - `언어`와 `직업` 2개의 카테고리로 분류해 사용자가 원하는 멘토를 자세히 찾을 수 있다.
+ - 사용자가 원하는 멘토를 클릭할 경우 해당 멘토에 대한 경력과 소개 글에 대한 페이지로 이동 `구현 예정`
 - 개발자 이야기
 - 스터디 공고
 - 홍보
@@ -91,9 +96,10 @@
 
 - 멘토 등록 : `멘토 등록` 페이지
   <br>
-  <img width=42.5% float:left src ="https://user-images.githubusercontent.com/57825856/106027266-141fd900-610e-11eb-9f97-51d187ae9686.PNG">
-  <img width=40% float:right src = "https://user-images.githubusercontent.com/57825856/106027278-16823300-610e-11eb-838d-9720abe320ef.PNG">
-- 멘토 찾기
+  <img width=43.5% float:left src ="https://user-images.githubusercontent.com/57825856/107779116-44ab7800-6d88-11eb-839f-d43cd174695f.png">
+  <img width=40% float:right src = "https://user-images.githubusercontent.com/57825856/107779629-ff3b7a80-6d88-11eb-8c34-2d8dea0cc228.png">
+- 멘토 찾기 : `멘토 리스트` 페이지
+  <img width=100% float:left src="https://user-images.githubusercontent.com/57825856/107780503-1af35080-6d8a-11eb-8ed3-0f8c0840d024.png">
 - 개발자 이야기
 - 스터디 공고
 - 홍보
@@ -160,18 +166,27 @@
 - 멘토 등록
 
 1. [models/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentor.js) 를 통해 mentor 테이블 생성
-   - `username, gender, firm, department, carrer, field, email, intro, path` 컬럼으로 구성
+   - `firm, department, carrer, field, intro, path` 컬럼으로 구성
    - [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js) 에 테이블 연결
 2. [routes/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/mentor.js) 작성
    - 프로필 이미지 저장하기 위해`upload` 폴더 생성
    - 미리 등록된 멘토인지를 판단에 따른 다른 결과 출력
-3. [views/home/mentor.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/mentor.ejs) 작성
+3. [views/mentor/mentor.ejs](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor/mentor.ejs) 작성
    - mentor 등록 페이지를 보여준는 파일
 4. [public/css/mentor.css](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/css/mentor.css), [public/js/mentor.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/js/mentor.js) 작성
    - `mentor.css` : 멘토 등록 페이지 css 파일
    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
 - 멘토 찾기
+1. [models/mentorJob.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentorJob.js)
+   - `id, mentor_id, job_id` 칼럼들로 구성
+2. [models/mentorLangs.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentorLang.js)   
+   - `id, mentor_id, lang_id` 칼럼들로 구성
+3. [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js) 에 테이블 연결   
+4. [routes/mentorList.js]() 작성
+   - 멘토 리스트를 보여주는 페이지로 연결하는 라우터 파일 
+5. [views/mentor/mentorList.ejs](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor/mentorList.ejs)
+   - 사용자들이 멘토 신분으로 등록하면 멘토 찾기 페이지에서 멘토 리스트를 보여주는 파일
 
 - 개발자 이야기
 
@@ -244,6 +259,14 @@
 
 - 멘티의 필수 정보 등록이 안되어있을 경우 input의 `required`속성을 이용하여 전송 제어
 
+> 멘토등록(기본정보 페이지) : 
+
+- 사용자가 멘토 정보를 다 채우지 않고 전송 시 alert()문으로 경고문 출력 
+- 사진은 정해진 파일(.img, .png) 형식이 아닌 경우 전송을 못하게 처리
+
+> 멘토등록(분야등록 페이지) : 
+
+- 사용자가 분야를 선택 안하고 등록시 alert() 문으로 경고문 출력
 ## 개발 규칙
 
 > Github Commit 규칙 및 README.md 작성 , `2021-01-27 적용`
