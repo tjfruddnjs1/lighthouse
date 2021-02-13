@@ -144,7 +144,7 @@
   - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
   - [views/partials](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/partials) : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
   - [views/job_seeking]() : 사용자에게 직업 탐색을 위한 개발자 직종 정보를 제공하는 view로, 일반적인 직업을 표현할 수 있는 동적 ejs파일인 `job_desc.ejs`파일과 별도의 툭수한 형태로 설명이 필요한 교육자 설명 페이지를 나타내는 `job_desc_edu.ejs`파일이 존재한다.
-  - [views/mentor]() : `현호 작성`
+  - [views/mentor](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor) : 사용자가 멘토 등록을 하기 위한 view  `mentor.ejs`, `mentorField.ejs` 파일과 사용자가 원하는 멘토를 찾기 위한 멘토 리스트 페이지인 `mentorList.ejs`파일이 있다.
   - [views/mypage]() : 사용자의 계정 정보(이메일 제외)를 수정할수 있는 페이지의 view로 수정항목으로는 이름, 핸드폰번호, 성별, 사진이 있다. 또한 회원탈퇴페이지와 멘티정보를 등록할수 있으며 멘티는 대학생/취준생과 직장인으로 분류된다. 또한 비밀번호를 변경가능하며, 회원탈퇴시 사용자의 불편한점을 알아내기 위해 회원탈퇴 사유를 받는다.
 - `.env` : 유출되면 안되는 비밀키를 관리
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
