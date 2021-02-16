@@ -8,8 +8,6 @@
         <title>Document</title>
         <style>
             h2 {
-                color: brown;
-
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: bold;
                 font-size: 3em;
@@ -17,12 +15,19 @@
 
             h2,
             h3 {
-
                 margin-bottom: 50px;
+                width: 90%;
+            }
+
+            h2,
+            h3,
+            b {
+                color: brown;
             }
 
             h3 {
                 font-size: 2em;
+                width: 90%;
             }
 
             h4 {
@@ -60,6 +65,8 @@
                 text-align: center;
                 text-decoration: none;
                 color: white;
+                display: block;
+                width: 100%;
             }
 
             .main {
@@ -77,16 +84,17 @@
             }
 
             #slide {
-                height: 100%;
                 position: relative;
             }
 
-            /* 슬라이드 안 내용물 */
             #slide ul {
-                width: 5700px;
+                width: 500%;
                 height: 100%;
                 transition: 1s;
             }
+
+            /* 슬라이드 안 내용물 */
+
 
             #slide ul:after {
                 content: "";
@@ -100,6 +108,15 @@
                 height: 100%;
             }
 
+            #slide-ul li {
+                float: left;
+                width: 15%;
+                height: 100%;
+                margin-right: 2.5%;
+                margin-left: 2.5%;
+            }
+
+
             #slide input {
                 display: none;
                 list-style: none;
@@ -109,9 +126,8 @@
                 display: inline-block;
                 vertical-align: middle;
                 width: 150px;
-                /* width: 100px;
-                height: 100px; */
-                padding: 30px;
+                height: 50px;
+                padding: 15px;
                 /* border: 2px solid #666; */
                 background-color: #ccc;
                 transition: 0.3s;
@@ -124,6 +140,7 @@
                 width: 100%;
                 color: white;
                 margin-bottom: 5%;
+                margin-top: 5%;
             }
 
             #pos1:checked~ul {
@@ -139,6 +156,13 @@
                 margin-left: -200%;
             }
 
+            #pos4:checked~ul {
+                margin-left: -300%;
+            }
+
+            #pos5:checked~ul {
+                margin-left: -400%;
+            }
 
             #pos1:checked~.pos>label:nth-child(1) {
                 background: #666;
@@ -152,6 +176,13 @@
                 background: #666;
             }
 
+            #pos4:checked~.pos>label:nth-child(4) {
+                background: #666;
+            }
+
+            #pos5:checked~.pos>label:nth-child(5) {
+                background: #666;
+            }
 
 
             body {
@@ -210,18 +241,22 @@
                 vertical-align: middle;
             }
 
-            .inner_li * {}
-
-            b {
-                color: brown;
-            }
-
             .output_img {
                 float: right;
                 width: 40%;
                 vertical-align: middle;
                 bottom: 0;
             }
+
+            .div-output {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            .div-company p {
+                margin-bottom: 10px;
+            }
+
         </style>
 
 </head>
@@ -246,7 +281,7 @@
                             <li id="edu" class="nav-item"><a href="/career/job_seeking/edu">교육자</a></li>
                         </ul>
                     </nav>
-                    <main class="hoc container clear">
+                    <main>
 
                         <input type="radio" name="pos" id="pos1" checked>
                         <input type="radio" name="pos" id="pos2">
@@ -259,7 +294,7 @@
                         </p>
 
 
-                        <ul>
+                        <ul id="slide-ul">
                             <!--   소개   -->
                             <li>
                                 <div class="inner_li">
