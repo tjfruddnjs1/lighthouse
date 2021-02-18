@@ -10,7 +10,8 @@ const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 const mypageRouter = require('./routes/mypage');
 const mentorRouter = require('./routes/mentor');
-const mentorListRouter = require('./routes/mentorList')
+const mentorListRouter = require('./routes/mentorList');
+const mentorFollow = require('./routes/mentorFollow');
 const careerRouter = require('./routes/career');
 
 const passportConfig = require('./passport');
@@ -34,7 +35,7 @@ sequelize.sync({ force: false})
 app.use(morgan('dev'));
 app.use(express.static(__dirname+'/public'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
   resave: true,
   saveUninitialized: true,
@@ -54,6 +55,7 @@ app.use('/',homeRouter);
 app.use('/auth', authRouter);
 app.use('/register', mentorRouter);
 app.use('/mentorlist', mentorListRouter);
+app.use('/follow', mentorFollow);
 
 app.use('/career', careerRouter);
 app.use('/mypage',mypageRouter);

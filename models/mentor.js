@@ -2,27 +2,28 @@ const Sequelize = require('sequelize');
 
 module.exports = class Mentor extends Sequelize.Model {
   static init(sequelize) {
-    return super.init({           
-      firm : {
+    return super.init({   
+      mentor_id : {
+        type : Sequelize.INTEGER,
+        autoIncrement : true,
+        primaryKey : true
+      },
+      mentor_firm : {
         type: Sequelize.STRING(10),
         allowNull : false,
       },
-      department : {
+      mentor_department : {
         type : Sequelize.STRING(10),
         allowNull : false,        
       },
-      career:{
+      mentor_career:{
           type : Sequelize.TEXT,
           allowNull : false,
       },                         
-      intro : {
+      mentor_intro : {
         type : Sequelize.TEXT,
         allowNull : false,        
-      },  
-      path : {
-        type : Sequelize.STRING(100),
-        allowNull: true,            
-      },  
+      },        
     }, {
       sequelize,
       timestamps: true,
@@ -37,19 +38,32 @@ module.exports = class Mentor extends Sequelize.Model {
 
   static associate(db) {
     db.Mentor.belongsTo(db.User, {
-      foreignKey : 'user_id', 
-      sourceKey : 'username',
-      onDelete : 'cascade',     
+      foreignKey : {name : 'user_id', allowNull : false}, 
+      sourceKey : 'id',
+      onDelete : 'cascade',           
     });    
     db.Mentor.hasMany(db.MentorJob, {
-      foreignKey : 'mentor_id', 
-      sourceKey : 'id',
+      foreignKey : {
+        name : 'mentor_id',
+        allowNull : false,
+        primaryKey : true,
+      },  
+      sourceKey : 'mentor_id',
       onDelete : 'cascade',           
     });
     db.Mentor.hasMany(db.MentorLang, {
-      foreignKey : 'mentor_id', 
-      sourceKey : 'id',
+      foreignKey : {
+        name : 'mentor_id',
+        allowNull : false,
+        primaryKey : true,
+      }, 
+      sourceKey : 'mentor_id',
       onDelete : 'cascade',           
+    });
+    db.Mentor.belongsToMany(db.User, {
+      foreignKey : 'mentor_id',      
+      through : 'follow',
+      timestamps : false
     });
   }
 };

@@ -82,15 +82,15 @@
               <div id="field">
                 <% for(let i =0; i< jobs.length; i++) {let flag = false%>                  
                   <% for(let j =0; j < mentorJobs.length; j++) { %>
-                    <% if(mentorJobs[j].job_id == jobs[i].id) { flag = true %>
+                    <% if(mentorJobs[j].job_id == jobs[i].job_id) { flag = true %>
                       <div class="item-list">
-                        <input type="checkbox" name="job" class="job" value="<%= jobs[i].id %>" checked><%= jobs[i].job %>
+                        <input type="checkbox" name="job" class="job" value="<%= jobs[i].job_id %>" checked><%= jobs[i].job_name %>
                       </div>
                     <%  }%>                                                     
                   <%  }%>   
                   <% if(!flag) {%>
                   <div class="item-list">
-                    <input type="checkbox" name="job" class="job" value="<%= jobs[i].id %>"><%= jobs[i].job %>
+                    <input type="checkbox" name="job" class="job" value="<%= jobs[i].job_id %>"><%= jobs[i].job_name %>
                   </div> 
                   <% }%>              
                 <% } %>
@@ -101,15 +101,15 @@
               <div id="field">
                 <% for(let i =0; i< langs.length; i++) { let flag = false %>  
                   <% for(let j =0; j < mentorLangs.length; j++) { %>
-                    <% if(mentorLangs[j].lang_id == langs[i].id) { flag = true %>                
+                    <% if(mentorLangs[j].lang_id == langs[i].lang_id) { flag = true %>                
                       <div class="lang-list">
-                        <input type="checkbox" name="lang" class="lang" value="<%= langs[i].id %>" checked><%= langs[i].language %>
+                        <input type="checkbox" name="lang" class="lang" value="<%= langs[i].lang_id %>" checked><%= langs[i].lang_name %>
                       </div>
                     <%  }%>                                                     
                   <%  }%>   
                   <% if(!flag) {%>
                     <div class="lang-list">
-                      <input type="checkbox" name="lang" class="lang" value="<%= langs[i].id %>"><%= langs[i].language %>
+                      <input type="checkbox" name="lang" class="lang" value="<%= langs[i].lang_id %>"><%= langs[i].lang_name %>
                     </div>
                   <% }%>   
                 <% } %>

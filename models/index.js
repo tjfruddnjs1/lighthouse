@@ -51,5 +51,7 @@ Lang.associate(db);
 Job.associate(db);
 MentorJob.associate(db);
 MentorLang.associate(db);
+MentorLang.removeAttribute('id');
+MentorJob.removeAttribute('id');
 
 module.exports = db;

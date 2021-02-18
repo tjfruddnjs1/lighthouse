@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <%- include('../partials/head') %>  
+  <style>
+    .head{
+        font-family : sans-serif;
+        font-weight : bold;
+        margin : 0 0 10px 0;
+    }
+    .container{
+        width : 100%; 
+        font-size : 18px;         
+        display : flex;
+    }
+    .left_box{
+        font-weight : bold;
+        width : 40%;    
+        height : 500px;    
+        display : inline-block;
+        border : 1px solid #829DA2;    
+        border-radius: 8px;
+        padding : 40px 20px; 
+        margin-right : 60px;       
+    }
+    .job_category, .lang_category{
+        font-size : 16px;        
+        margin-bottom : 10px;
+    }
+    .firm{
+        font-size : 16px;
+    }
+    .img{
+        height : 35%;
+      text-align : center;
+    }
+    .department{
+        font-size : 16px;
+        font-weight : lighter;
+    }
+    .left_box img{        
+        width : 150px;
+        height : 150px;                        
+        border : 1px solid #829DA2;
+        border-radius: 50%;
+    }
+    .right_box{                
+        width : 60%;                       
+        padding : 0 20px;       
+    }   
+ 
+  #mentor_name{
+      font-size : 28px;
+      font-weight : bold;      
+  }
+  .name{
+      margin-bottom : 15px;
+  }
+  
+  .button{
+      text-align : center;
+      margin-top : 50px;
+  }
+  .follow{    
+    width : 100%;
+    padding : 15px 30px;
+    border-radius: 5px;
+    border : 1px solid #829DA2;
+    cursor: pointer;    
+  }
+  #line { 
+      margin : 20px 0;
+  }
+  .major{
+      font-size : 24px;
+  }
+  .under_profile{
+      margin-top : 30px;
+  }
+  .follow:hover{
+    background-color : #0096884a;
+    color : #fff;
+    transition: 0.1s;
+  }
+  .intro, .career{
+    white-space: pre-line;
+    font-size : 20px;
+  }
+  .field{
+    font-weight : lighter;
+    color : #829DA2;
+  }
+  </style>  
+</head>
+
+<body id="top">  
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image:url('/images/lighthouse.jpg');">
+    <%- include('../partials/nav') %>
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <!-- main body -->
+      <!-- ################################################################################################-->      
+      <div class="container">
+        <div class="left_box"> 
+            <div class="img"><img src="<%= mentorInfo.User.path %>" alt="" class = "profile"></div>
+            <hr id = "line">
+            <div class="under_profile">
+              
+                <div class="job_category">
+                  <% for(let i = 0; i<jobs.length; i++){ %>
+                    <span><%= jobs[i].Job.job_name %></span>
+                  <% } %> 
+                </div>
+                <div class="lang_category">
+                  <% for(let i = 0; i<langs.length; i++){ %>
+                    <span><%= langs[i].Lang.lang_name %></span>
+                  <% } %> 
+                </div>
+                <div class="name">
+                    <span id = "mentor_name"><%= mentorInfo.User.username %></span>멘토                     
+                </div>              
+                <div class="firm"><h3 class="head"><%= mentorInfo.mentor_firm %></h2></div>
+                <div class="department"><h3 class = "head"><%= mentorInfo.mentor_department %></h3></div>
+                <div class="button">            
+                  <a href="" class = "follow">+팔로우</a>
+                  <a href="" class = "follow">멘토에게 질문하기</a>
+                </div>            
+            </div>
+            </div>                                                         
+              
+          <div class="right_box">
+              <h1 class = "head">대표 멘토링 분야</h1>
+              <div class="major" style = "margin-bottom : 10px;"><%= mentorInfo.mentor_department %></div>
+              <div class="field">                  
+                <% for(let i = 0; i<jobs.length; i++){ %>
+                  <span><%= `#${jobs[i].Job.job_name}` %></span>
+                <% } %>     
+                
+                <% for(let i = 0; i<langs.length; i++){ %>
+                  <span><%= `#${langs[i].Lang.lang_name}` %></span>
+                <% } %>                  
+              </div>
+              <div class="intro">
+                <h1 class="head">멘토 소개</h1>              
+                 <%= mentorInfo.intro %>
+              </div>
+              <div class="career">
+                <h1 class="head">주요 경력</h1>              
+                <%= mentorInfo.career %>
+              </div>
+          </div>           
+      </div>     
+      <div class="clear"></div>
+    </main>
+  </div>
+  <script src = "/js/mentoList.js"></script>  
+    <%- include('../partials/foot') %>
+    <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>                                                         
+</body>
+
+</html>

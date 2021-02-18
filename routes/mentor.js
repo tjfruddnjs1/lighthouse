@@ -57,12 +57,14 @@ router.get('/', isLoggedIn, async (req, res, next) => {
       if(mentor){
         res.render('mentor/mentor',{mentor : mentor, user : user});
       }
-      res.render('mentor/mentor',{user : userInfo, mentor : ''});
+      res.render('mentor/mentor',{user : user, mentor : ''});
     } catch (err) {
       console.error(err);
       next(err);
     }
 });
+
+
 
 router.get('/fields', isLoggedIn,  async (req, res, next) => {
     const user = req.user;    
@@ -78,12 +80,12 @@ router.get('/fields', isLoggedIn,  async (req, res, next) => {
         if(mentor){
             const mentorJobs = await MentorJob.findAll({
                 where : {
-                    mentor_id : mentor.id
+                    mentor_id : mentor.mentor_id
                 }
             });
             const mentorLangs = await MentorLang.findAll({
                 where : {
-                    mentor_id : mentor.id
+                    mentor_id : mentor.mentor_id
                 }
             });
             res.render('mentor/mentorField', {mentorJobs : mentorJobs, mentorLangs : mentorLangs, jobs : jobs, langs : langs });
@@ -95,110 +97,129 @@ router.get('/fields', isLoggedIn,  async (req, res, next) => {
       }
 })
 
-router.post('/',  upload.single('image'), isLoggedIn, async(req, res, next) => {            
+router.post('/' , upload.single('image'), isLoggedIn, async(req, res, next) => {         
     const {phone, gender ,firm, department, career, intro} = req.body;  
-    const userInfo = req.user;          
+    const userInfo = req.user;                
     
-    const user = req.user;
-    try{
-        await User.update({
-            phone, gender
-        },{
-            where : {id : userInfo.id}
-        })
-        const mentor = await Mentor.findOne({
+    try{        
+        
+        if(!req.file){
+            await User.update({
+                phone, gender, // 칼럼 이름 수정 예정                 
+            },{
+                where : {id : userInfo.id}
+            })  
+           
+        }else{
+            let route = req.file.path;   // 파일 경로
+            route = route.substring(6);  
+            await User.update({
+                phone, gender, // 칼럼 이름 수정 예정
+                path : route, 
+            },{
+                where : {id : userInfo.id}
+            })  
+        }
+        
+        const mentor = await Mentor.findOne({ 
             where : {
                 user_id : userInfo.id
             }
         });        
-        if(mentor){             
-            if(!req.file){
+        if(mentor){ // 해당 mentor가 있으면              
                 await Mentor.update({
-                    firm, department, career, intro,                     
+                    mentor_firm : firm, 
+                    mentor_department : department, 
+                    mentor_career : career, 
+                    mentor_intro : intro,                                                     
                 }, {
-                    where : {id : mentor.id}
-                }); 
-            }else{
-                let route = req.file.path;   // 파일 경로
-                route = route.substring(6);    
-                await Mentor.update({
-                    firm, department, career, intro,                     
-                    path : route                  
-                }, {
-                    where : { id : mentor.id}
-                }); 
-            }
-            
-        }else{
-            let route = req.file.path;   // 파일 경로
-            route = route.substring(6);
+                    where : { mentor_id : mentor.mentor_id}
+                });                     
+        }else{            
             await Mentor.create({
-                firm, department, career, intro, 
-                path : route,
-                user_id : user.id
+                mentor_firm : firm, 
+                mentor_department : department, 
+                mentor_career : career, 
+                mentor_intro : intro,   
+                user_id : userInfo.id,                             
             }); 
-        }                
-        res.redirect('/register/fields')        
+        }      
+                      
+        res.redirect('/register/fields');        
     }catch(err){
         console.error(err);
         return next(err);
     }
 });
 
-router.post('/fields' , isLoggedIn, async(req, res, next) => {            
-    const {job, lang} = req.body;
+router.post('/fields' , isLoggedIn, async(req, res, next) => {         
+    let {job, lang} = req.body;    
+    console.log(job);
+    console.log(lang);
     const user = req.user;            
     try{
         const mentor = await Mentor.findOne({ // 여기서 멘토 아이디 가져옴
-            where : {
-                user_id : user.id,
-            }
+            where : {user_id : user.id}
         });                          
         const mentorJob = await MentorJob.findOne({
-            where : {
-                mentor_id : mentor.id
-            }
+            where : {mentor_id : mentor.mentor_id}
         });
 
         const mentorLang = await MentorLang.findOne({
-            where : {
-                mentor_id : mentor.id
-            }
+            where : {mentor_id : mentor.mentor_id}
         });
         if(mentorJob && mentorLang){
             await MentorJob.destroy({                
-                where : {mentor_id : mentor.id},
+                where : {mentor_id : mentor.mentor_id},
             });
             await MentorLang.destroy({                
-                where : {mentor_id : mentor.id},
+                where : {mentor_id : mentor.mentor_id},
             });
                   
         }else if(mentorJob && !mentorLang){
             await MentorJob.destroy({                
-                where : {mentor_id : mentor.id},
+                where : {mentor_id : mentor.mentor_id},
             })         
         }else if(!mentorJob && mentorLang){
             await MentorLang.destroy({                
-                where : {mentor_id : mentor.id},
+                where : {mentor_id : mentor.mentor_id},
             });        
         }
 
         for(let i =0; i<job.length; i++){
             await MentorJob.create({                
-                mentor_id : mentor.id,
+                mentor_id : mentor.mentor_id,
                 job_id : job[i]
             });                        
         }                
         for(let i =0; i<lang.length; i++){
             await MentorLang.create({
-                mentor_id : mentor.id,
+                mentor_id : mentor.mentor_id,
                 lang_id : lang[i],     
             });                        
         }         
-                   
-        res.send(
-            "<script>alert('멘토 등록 되었습니다.'); window.location = '/';</script>"
-        );
+            // const jobResult = await Promise.all(
+            //     job.map(id => {                    
+            //         return Job.findOne({
+            //             where : {job_id : id},
+            //         })
+            //     }),
+            // );            
+            // const langResult = await Promise.all(
+            //     lang.map(id => {                    
+            //         return Lang.findOne({
+            //             where : {lang_id : id},
+            //         })
+            //     }),
+            // );            
+            
+            // const jobs = await mentor.addJobs(jobResult.map(r => r.job_id));                                                
+            // const langs = await mentor.addLangs(langResult.map(r => r.lang_id));                                                            
+            // console.log(jobs);
+            res.send(
+                "<script>alert('멘토 등록 되었습니다.'); window.location = '/';</script>"
+            );                                                 
+       
     }catch(err){
         console.error(err);
         return next(err);
