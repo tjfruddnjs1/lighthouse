@@ -9,7 +9,7 @@ module.exports = class MentorJob extends Sequelize.Model {
       timestamps: false,
       underscored: false,
       modelName: 'MentoJob',
-      tableName: 'mentorjobs',
+      tableName: 'mentor_jobs',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -19,11 +19,11 @@ module.exports = class MentorJob extends Sequelize.Model {
   static associate(db) {
     db.MentorJob.belongsTo(db.Mentor, {
       foreignKey : 'mentor_id', 
-      targetKey : 'id',          
+      targetKey : 'mentor_id',          
     });    
     db.MentorJob.belongsTo(db.Job, {
       foreignKey : 'job_id', 
-      targetKey : 'id',          
+      targetKey : 'job_id',          
     });      
   }
 };

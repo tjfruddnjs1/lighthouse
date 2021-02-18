@@ -3,7 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Lang extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      language : {
+      lang_id : {
+        type : Sequelize.INTEGER,
+        autoIncrement : true,
+        primaryKey : true
+      },
+      lang_name : {
           type : Sequelize.STRING(20),
           alloNull : false,               
       },     
@@ -21,8 +26,12 @@ module.exports = class Lang extends Sequelize.Model {
 
   static associate(db) {
     db.Lang.hasMany(db.MentorLang, {
-      foreignKey : 'lang_id', 
-      sourceKey : 'id',                        
+      foreignKey : {
+        name : 'lang_id',
+        allowNull : false,
+        primaryKey : true,
+      }, 
+      sourceKey : 'lang_id',                        
     });
   }
 };
