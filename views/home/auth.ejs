@@ -4,84 +4,222 @@
     <%- include('../partials/head') %>
   </head>
   <style>
-     .one_half{
-      margin : 0 0 0 40%;
-    }
-    
-    .btn{
-      width : 330px;
-      padding : 10px 12px 12px;
+    .one_half {
+      margin: 0 0 0 40%;
     }
 
-    #mail{
-     background-color: #8FDFFF;
-   }
+    .btn {
+      width: 330px;
+      padding: 10px 12px 12px;
+    }
 
-   #kakao{
-     background-color: yellow;
-   }
+    #mail {
+      background-color: #8fdfff;
+      font-weight: bold;
+    }
 
-   #naver{
-     background-color: #3cbf3c;
-   }
+    #kakao {
+      background-color: yellow;
+      font-weight: bold;
+    }
 
-    body input, button{
-      color : #FFFFFF;
-      border-color : transparent;
-      background-color: #829DA2;
-      display : block;
+    #naver {
+      background-color: #3cbf3c;
+      font-weight: bold;
+    }
+
+    #certified {
+      background-color: antiquewhite;
+      width: 6.5%;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #emailCertified {
+      display: flex;
+    }
+
+    body input,
+    button {
+      color: #ffffff;
+      border-color: transparent;
+      background-color: #829da2;
+      display: block;
       widows: 100%;
       padding: 14px;
-      width : 330px;
-      border : 1px solid;
+      width: 330px;
+      border: 1px solid;
     }
 
-    button{
-      cursor : pointer;
+    button {
+      cursor: pointer;
     }
 
-    img{
-      width : 30px;
+    img {
+      width: 30px;
       height: 30px;
-      float : left;
+      float: left;
     }
-
   </style>
 
   <body>
-    <div class="bgded overlay" style="background-image:url('images/lighthouse.jpg');">
+    <div
+      class="bgded overlay"
+      style="background-image: url('images/lighthouse.jpg')"
+    >
       <%- include('../partials/nav') %>
       <div id="pageintro" class="wrapper clear">
         <div class="one_half">
           <h6 class="heading">회원가입</h6>
-            <form id="login-form" action="/auth" method="post">
-              <fieldset>
-                <label for="email">Username</label>
-                <input class="btmspace-15" type="name" name="username" value placeholder="username" required autofocus>
+          <form id="authForm" action="/auth" method="post">
+            <fieldset>
+              <label for="email">닉네임</label>
+              <input
+                class="btmspace-15"
+                type="name"
+                name="username"
+                id="nickname"
+                placeholder="닉네임을 입력해주세요"
+                autofocus
+              />
 
-                <label for="email">E-Mail</label>
-                <input class="btmspace-15" type="email" name="email" value placeholder="email" required>
-      
-                <label for="password">Password</label>
-                <input class="btmspace-15" type="password" name="password" value placeholder="password">
-                
-                <button id="mail" type="submit" class="btn"><img src="/images/login/mail.png" alt="메일가입" title="메일가입">Sign in</button>
-                
-                <footer>
-                <a href="/auth/kakao" id="kakao" class="btn" style="text-align: right;"><img src="/images/login/kakao.png" alt="카카오톡" title="카카오톡">KakaoTalk Registration</a>
-                <br>
-                <a href="/auth/naver" id="naver" class="btn" style="text-align: right;"><img src="/images/login/naver.png" alt="네이버" title="네이버">Naver Registration</a>
-                </footer>
-              </fieldset>
-            </form>
+              <label for="email">이메일</label>
+              <input
+                class="btmspace-15"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="이메일을 입력해주세요"
+              />
+
+              <div id="emailCertified">
+                <input
+                  type="submit"
+                  value="전송"
+                  class="btn"
+                  id="certified"
+                  formaction="/auth/sendEmail"
+                  onclick="javascript:btn()"
+                />
+                <h5
+                  style="
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                    margin: auto;
+                    margin-right: 65%;
+                  "
+                >
+                  이메일 입력 후 인증 번호를 발급하세요
+                </h5>
+              </div>
+
+              <br />
+
+              <label for="certified">이메일 인증번호</label>
+              <input
+                class="btmspace-15"
+                type="number"
+                name="certified"
+                id="emailConfirm"
+                placeholder="인증번호를 입력해주세요"
+              />
+              <label for="password">비밀번호</label>
+              <input
+                class="btmspace-15"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
+
+              <button id="mail" type="submit" class="btn">
+                <img
+                  src="/images/login/mail.png"
+                  alt="메일가입"
+                  title="메일가입"
+                />가입하기
+              </button>
+
+              <footer>
+                <a
+                  href="/auth/kakao"
+                  id="kakao"
+                  class="btn"
+                  style="text-align: right"
+                  ><img
+                    src="/images/login/kakao.png"
+                    alt="카카오톡"
+                    title="카카오톡"
+                  />카카오톡으로 가입하기</a
+                >
+                <br />
+                <a
+                  href="/auth/naver"
+                  id="naver"
+                  class="btn"
+                  style="text-align: right"
+                  ><img
+                    src="/images/login/naver.png"
+                    alt="네이버"
+                    title="네이버"
+                  />네이버로 가입하기</a
+                >
+              </footer>
+
+              <input type="number" name="randomNumber" style="display: none" />
+            </fieldset>
+          </form>
         </div>
       </div>
     </div>
-  
-        <%- include('../partials/foot') %>
-   
-        <%- include('../partials/copyright') %>
-  
-        <%- include('../partials/top') %>
-    </body>
+
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+  <script>
+    let randomNumber = Math.floor(Math.random() * 1000000) + 100000;
+    if (randomNumber > 1000000) {
+      randomNumber -= 100000;
+    }
+
+    $("input[name=randomNumber]").attr("value", randomNumber);
+
+    function btn() {
+      alert("입력하신 이메일로 인증번호가 전송되었습니다");
+    }
+
+    let authForm = document.getElementById("authForm");
+    let nickname = document.getElementById("nickname");
+    let email = document.getElementById("email");
+    let emailConfirm = document.getElementById("emailConfirm");
+
+    let password = document.getElementById("password");
+
+    function submit() {
+      document.getElementById("mail").addEventListener("click", function (e) {
+        if (!nickname.value) {
+          alert("닉네임을 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!email.value) {
+          alert("이메일을 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!emailConfirm.value) {
+          alert("이메일 인증번호를 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!password.value) {
+          alert("비밀번호를 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (emailConfirm.value != randomNumber) {
+          alert("이메일 인증번호를 확인해주세요");
+          e.preventDefault();
+          return false;
+        }
+        authForm.submit();
+      });
+    }
+    submit();
+  </script>
 </html>

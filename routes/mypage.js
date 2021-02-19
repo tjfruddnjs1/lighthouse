@@ -101,6 +101,7 @@ router.post('/delete', isLoggedIn, async(req,res,next)=>{
         await User.destroy({
             where : {email : req.user.email}
         });
+        
         res.send(
             "<script>alert('정상적으로 탈퇴되었습니다.'); window.location='/'</script>"
         );
