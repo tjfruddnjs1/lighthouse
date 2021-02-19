@@ -6,10 +6,11 @@ module.exports = class MentorLang extends Sequelize.Model {
         
     }, {
       sequelize,
+      defaultPrimaryKey: false,
       timestamps: false,
       underscored: false,
       modelName: 'MentoLang',
-      tableName: 'mentorlangs',
+      tableName: 'mentor_langs',
       paranoid: false,
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -18,12 +19,12 @@ module.exports = class MentorLang extends Sequelize.Model {
 
   static associate(db) {
     db.MentorLang.belongsTo(db.Mentor, {
-      foreignKey : 'mentor_id', 
-      targetKey : 'id',          
+      foreignKey : 'mentor_id',
+      targetKey : 'mentor_id',          
     }); 
     db.MentorLang.belongsTo(db.Lang, {
       foreignKey : 'lang_id', 
-      targetKey : 'id',          
+      targetKey : 'lang_id',          
     });        
   }
 };

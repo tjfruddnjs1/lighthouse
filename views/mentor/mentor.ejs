@@ -93,20 +93,16 @@
               </select>
             </fieldset>
             <fieldset>
-              <label for="firm">회사명</label>
-              <% if(mentor.firm){%>
-              <input type="text" id="firm" name="firm" value = "<%= mentor.firm ?? ''  %>">
-              <% } else {%>
-                <input type="text" id="firm" name="firm" value = "">
-              <% }%>
+              <label for="firm">회사명</label>              
+              <input type="text" id="firm" name="firm" value = "<%= mentor.mentor_firm ?? ''  %>">              
             </fieldset>
             <fieldset>
               <label for="department">부서</label>
-              <input type="text" id="department" name="department" value = "<%= mentor.department ?? '' %>">
+              <input type="text" id="department" name="department" value = "<%= mentor.mentor_department ?? '' %>">
             </fieldset>
             <fieldset>
               <label for="career">주요경력</label>
-              <textarea name="career" id="career" cols="30" rows="10"><%= mentor.career ?? '' %></textarea>
+              <textarea name="career" id="career" cols="30" rows="10"><%= mentor.mentor_career ?? '' %></textarea>
             </fieldset> 
             <fieldset>
               <label for="phone">휴대전화 번호</label>
@@ -118,14 +114,14 @@
             </fieldset>
             <fieldset>
               <label for="intro">멘토 소개</label>              
-              <textarea name="intro" id="intro" cols="30" rows="10"><%= mentor.intro ?? '' %></textarea>
+              <textarea name="intro" id="intro" cols="30" rows="10"><%= mentor.mentor_intro ?? '' %></textarea>
               </fieldset>
             <fieldset>                       
             <fieldset>              
               <label for="name">프로필 사진</label>
               <label for="image" id = "upload">업로드</label>              
               <input type="file" value="업로드" name = "image" id = "image" accept="image/png, image/jpeg">
-              <img id="image_section" src="<%= mentor.path ?? '' %>" alt=""/>
+              <img id="image_section" src="<%= user.path ?? '' %>" alt=""/>
               <div id="imagebox">
                 <p>
                   - 얼굴이 포함된 사진을 등록해주세요. <br>
