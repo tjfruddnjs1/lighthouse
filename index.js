@@ -13,6 +13,7 @@ const mentorRouter = require('./routes/mentor');
 const mentorListRouter = require('./routes/mentorList');
 const mentorFollow = require('./routes/mentorFollow');
 const careerRouter = require('./routes/career');
+const essayRouter = require('./routes/essay');
 
 const passportConfig = require('./passport');
 
@@ -59,6 +60,7 @@ app.use('/follow', mentorFollow);
 
 app.use('/career', careerRouter);
 app.use('/mypage',mypageRouter);
+app.use('/essay', essayRouter)
 
 //ejs 파일에서 바로 사용가능, isAuthenticated는 user가 로그인되어 있는지
 //currentUser는 로그인된 user의 정보를 불러오는데 사용

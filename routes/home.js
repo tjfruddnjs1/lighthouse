@@ -75,16 +75,6 @@ router.get('/auth', isNotLoggedIn, async(req,res,next)=>{
   }
 });
 
-//직업소개페이지 개요
-router.get('/job_seeking/intro', async(req, res, next) => {
-  try{
-    res.render('job_seeking/intro');
-
-  }catch(err){
-    console.error(err);
-    next(err);
-  }
-});
 
 
 module.exports = router;
