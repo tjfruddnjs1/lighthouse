@@ -43,6 +43,7 @@
 - multer : 이미지, 동영상 등을 비롯한 여러 파일들을 `멀티파트(multipart/form-data)` 형식으로 업로드할 때 사용하는 미들웨어
 - nodemon : 소스 코드가 바뀔 때마다 노드를 재실행
 - morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리
+- nodemailer : 회원가입/비밀번호 찾기 기능에 이메일 정보 인증을 위한 모듈 사용
 - **[package.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/package.json)** : 사용 모듈(미들웨어) 파일
 
 ## 개발 기능
@@ -68,9 +69,9 @@
   - 멘토 사진 등록 시 이미지 미리보기 기능 추가 `구현 완료`
   - 이미 등록된 멘토일 경우 멘토 등록 페이지에 들어갈 시 전에 작성했던 글들을 출력 `구현 완료`
 - 멘토 찾기
- - 사용자가 원하는 멘토들을 카테고리별로 찾을 수 있는 기능 `구현 완료`
- - `언어`와 `직업` 2개의 카테고리로 분류해 사용자가 원하는 멘토를 자세히 찾을 수 있다.
- - 사용자가 원하는 멘토를 클릭할 경우 해당 멘토에 대한 경력과 소개 글에 대한 페이지로 이동 `구현 예정`
+- 사용자가 원하는 멘토들을 카테고리별로 찾을 수 있는 기능 `구현 완료`
+- `언어`와 `직업` 2개의 카테고리로 분류해 사용자가 원하는 멘토를 자세히 찾을 수 있다.
+- 사용자가 원하는 멘토를 클릭할 경우 해당 멘토에 대한 경력과 소개 글에 대한 페이지로 이동 `구현 예정`
 - 개발자 이야기
 - 스터디 공고
 - 홍보
@@ -81,6 +82,8 @@
   - `마이페이지` 항목의 `나의 계정`부분에서 사용자의 이름, 핸드폰 번호, 성별, 사진, 비밀번호 변경 가능 & 회원 탈퇴 & 멘티정보(대학생/취준생 또는 직장인상태) 등록 가능
     `구현 완료`
   - 회원가입시 중복된 email의 User를 검사하고 로그인시 Database에 등록된 User인지 검사한다. `구현 완료`
+  - 회원가입시 입력 이메일에 대한 인증번호 발송후 이메일 인증을 필요로 한다 `구현 완료`
+  - 비밀번호 찾기 시 해당 이메일에 대해 임시 비밀번호를 발급한다 `구현 완료`
 
 > 페이지 구현 상태 `(계속 업데이트 예정)`
 
@@ -106,8 +109,11 @@
 - 홍보
 - 로그인 : `로그인, 회원가입` 페이지
   <br>
-  <img width=40% float:left src="https://user-images.githubusercontent.com/41010744/105857370-91bfe800-602d-11eb-834e-6c9cd581740b.png">
-  <img width=31% float:right src="https://user-images.githubusercontent.com/41010744/105857768-f24f2500-602d-11eb-86df-2db454eeff3c.png">
+  <img src="https://user-images.githubusercontent.com/41010744/108615368-c9605b00-7446-11eb-8d8a-ace23ef9657a.png">
+  <img src="https://user-images.githubusercontent.com/41010744/108615386-f01e9180-7446-11eb-8d01-2026c899a08c.png">
+- 비밀번호 찾기 : `비밀번호 이메일 인증을 통한 구현` 페이지
+  <br>
+  <img src="https://user-images.githubusercontent.com/41010744/108615424-44c20c80-7447-11eb-9d9a-563d2713e67a.png">
 - 로그인 시 header navigation :
   <br>
   <img src="https://user-images.githubusercontent.com/41010744/107681968-19228200-6ce3-11eb-9d3e-af17894db3d0.png">
@@ -143,9 +149,9 @@
 - `views` : 실제 웹 페이지에서 클라이언트와 상호작용하는 부분으로 ejs 템플릿을 사용하여 더욱 편리한 동적인 작용하는 폴더
   - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
   - [views/partials](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/partials) : 각 페이지에서 공통적으로 사용하는 `header,footer,navigation` 및 `저작권 상표, 페이지 상단으로 이동시키는 버튼`을 모아 재사용 가능하게 분리
-  - [views/job_seeking]() : 사용자에게 직업 탐색을 위한 개발자 직종 정보를 제공하는 view로, 일반적인 직업을 표현할 수 있는 동적 ejs파일인 `job_desc.ejs`파일과 별도의 툭수한 형태로 설명이 필요한 교육자 설명 페이지를 나타내는 `job_desc_edu.ejs`파일이 존재한다.
-  - [views/mentor](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor) : 사용자가 멘토 등록을 하기 위한 view  `mentor.ejs`, `mentorField.ejs` 파일과 사용자가 원하는 멘토를 찾기 위한 멘토 리스트 페이지인 `mentorList.ejs`파일이 있다.
-  - [views/mypage]() : 사용자의 계정 정보(이메일 제외)를 수정할수 있는 페이지의 view로 수정항목으로는 이름, 핸드폰번호, 성별, 사진이 있다. 또한 회원탈퇴페이지와 멘티정보를 등록할수 있으며 멘티는 대학생/취준생과 직장인으로 분류된다. 또한 비밀번호를 변경가능하며, 회원탈퇴시 사용자의 불편한점을 알아내기 위해 회원탈퇴 사유를 받는다.
+  - [views/job_seeking](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/job_seeking) : 사용자에게 직업 탐색을 위한 개발자 직종 정보를 제공하는 view로, 일반적인 직업을 표현할 수 있는 동적 ejs파일인 `job_desc.ejs`파일과 별도의 툭수한 형태로 설명이 필요한 교육자 설명 페이지를 나타내는 `job_desc_edu.ejs`파일이 존재한다.
+  - [views/mentor](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor) : 사용자가 멘토 등록을 하기 위한 view `mentor.ejs`, `mentorField.ejs` 파일과 사용자가 원하는 멘토를 찾기 위한 멘토 리스트 페이지인 `mentorList.ejs`파일이 있다.
+  - [views/mypage](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mypage) : 사용자의 계정 정보(이메일 제외)를 수정할수 있는 페이지의 view로 수정항목으로는 이름, 핸드폰번호, 성별, 사진이 있다. 또한 회원탈퇴페이지와 멘티정보를 등록할수 있으며 멘티는 대학생/취준생과 직장인으로 분류된다. 또한 비밀번호를 변경가능하며, 회원탈퇴시 사용자의 불편한점을 알아내기 위해 회원탈퇴 사유를 받는다.
 - `.env` : 유출되면 안되는 비밀키를 관리
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
 - `index.js` : `npm install`을 통해 설치한 모듈들을 실제로 연동하고 설정
@@ -163,8 +169,8 @@
    - `JSON`을 사용하여 로컬(또는 데이터베이스로 바뀔 수 있음)의 ~~[public/asset/front.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/asset/front.json)~~ [public/asset/job_seeking/job.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/public/asset/job_seeking/job.json)을 읽어오고, 페이지에 표시할 정보들이 키-값으로 저장
    - 해당 버튼에 직종에 대한 정보를 함께 request, 라우터는 그 직종에 맞는 정보를 json으로부터 동적으로 읽어오고 브라우저에게 json 객체형태로 response
 4. 한 직종을 클릭하면 라우터에 `job_seeking/(직종)`을 요청, 이후 라우터에서는 `job_desc.ejs`를 렌더링
-    - ex) 프론트엔드 개발자 자세히 버튼 클릭시 `job_seeking/front`로 요청, 라우터는 `job.json`파일의 `front`에 해당하는 부분을 `job_desc.ejs`페이지 렌더링 결과와 함께 response
-4. 직종 설명 페이지에 `관심 분야에 추가`버튼 프레임을 만들어 두어 이후 마이페이지 기능 구현 후 연동되게 할 예정
+   - ex) 프론트엔드 개발자 자세히 버튼 클릭시 `job_seeking/front`로 요청, 라우터는 `job.json`파일의 `front`에 해당하는 부분을 `job_desc.ejs`페이지 렌더링 결과와 함께 response
+5. 직종 설명 페이지에 `관심 분야에 추가`버튼 프레임을 만들어 두어 이후 마이페이지 기능 구현 후 연동되게 할 예정
 
 - 멘토 등록
 
@@ -181,13 +187,14 @@
    - `mentor.js` : 멘토 등록 페이지에 처리 파일, 잘못된 입력값이나, 빈 값 전송 시 처리 파일
 
 - 멘토 찾기
+
 1. [models/mentorJob.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentorJob.js)
    - `id, mentor_id, job_id` 칼럼들로 구성
-2. [models/mentorLangs.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentorLang.js)   
+2. [models/mentorLangs.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/mentorLang.js)
    - `id, mentor_id, lang_id` 칼럼들로 구성
-3. [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js) 에 테이블 연결   
+3. [models/index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/models/index.js) 에 테이블 연결
 4. [routes/mentorList.js]() 작성
-   - 멘토 리스트를 보여주는 페이지로 연결하는 라우터 파일 
+   - 멘토 리스트를 보여주는 페이지로 연결하는 라우터 파일
 5. [views/mentor/mentorList.ejs](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor/mentorList.ejs)
    - 사용자들이 멘토 신분으로 등록하면 멘토 찾기 페이지에서 멘토 리스트를 보여주는 파일
 
@@ -209,10 +216,21 @@
    - `auth.js` : 회원가입(local,kakao,naver)에 대한 GET/POST 요청, 로그아웃에 대한 GET 요청 처리
    - `middleware.js` : 다른 라우터에서 로그인 상태인지 아닌지를 확인하기 위해 작성, `isLoggedIn`은 로그인 상태임을 알려주고 `isNotLoggedIn`은 로그인이 안된 상태임을 알려준다.
 4. [views/home/login.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/login.ejs), [views/home/auth.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/auth.ejs), [views/home/validate.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/validate.ejs)를 통한 client와 상호 작용
-   - `views/home/login.ejs` : 로그인 페이지
-   - `views/home/auth.ejs` : 회원가입 페이지
+   - `views/home/login.ejs` : 로그인 페이지 > 비밀번호 찾기 이메일 인증을 통한 구현
+   - `views/home/auth.ejs` : 회원가입 페이지 > 이메일 인증 구현
    - `views/home/validate.ejs` : routes의 `res.locals.user`를 통해 로그인 및 회원가입 시 이미 DataBase에 등록한 사용자일 경우 오류 팝업창
 5. [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)를 통해 라우터 및 Database Model 연결, Passport Configuration, Passport-Session 설정
+
+- 회원 가입 > 이메일 인증 (이메일 인증 제외한 나머지 입력부분은 로그인 부분에 설명 작성)
+
+1. [views/auth.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/auth.ejs) 기존 회원가입 페이지에서 이메일 인증을 위해 이메일 인증번호를 입력하는 view 부분 생성
+2. [routes/auth.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/auth.js) 의 sendEmail Post router를 통해 입력한 이메일에 대해 nodemailer 모듈을 통한 이메일 인증번호 발송
+3. 클라이언트 부분에서 해당 인증번호 일치여부를 판단하여 처리
+
+- 비밀번호 찾기
+
+1. [views/searchPassword.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/searchPassword.ejs)를 통해 이메일을 입력받는다
+2. [routes/home.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/routes/home.js)를 통해 User 테이블에 해당 user가 있는지 확인하여 이메일로 새롭게 바뀐 비밀번호를 전송한다.
 
 - 마이페이지(계정 설정/회원 탙퇴)
 
@@ -241,10 +259,12 @@
 > 로그인 :
 
 - user 확인 : 가입된 user 확인후 존재하지 않다면 alert
+- `비밀번호 찾기` 기능의 경우 해당 이메일이 존재하지 않거나 카카오, 네이버 이메일인 경우는 alert 메시지
 
 > 회원가입 :
 
 - 중복 메일 가입 : 중복된 메일로 가입시 alert
+- 이메일 인증 번호가 일치하지 않는 경우 alert
 
 > 마이페이지(계정 설정) :
 
@@ -262,14 +282,15 @@
 
 - 멘티의 필수 정보 등록이 안되어있을 경우 input의 `required`속성을 이용하여 전송 제어
 
-> 멘토등록(기본정보 페이지) : 
+> 멘토등록(기본정보 페이지) :
 
-- 사용자가 멘토 정보를 다 채우지 않고 전송 시 alert()문으로 경고문 출력 
+- 사용자가 멘토 정보를 다 채우지 않고 전송 시 alert()문으로 경고문 출력
 - 사진은 정해진 파일(.img, .png) 형식이 아닌 경우 전송을 못하게 처리
 
-> 멘토등록(분야등록 페이지) : 
+> 멘토등록(분야등록 페이지) :
 
 - 사용자가 분야를 선택 안하고 등록시 alert() 문으로 경고문 출력
+
 ## 개발 규칙
 
 > Github Commit 규칙 및 README.md 작성 , `2021-01-27 적용`

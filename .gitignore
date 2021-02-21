@@ -3,6 +3,8 @@
 /public/images/uploads
 .env
 
+
+
 # personal local database settings - for development
 /config
 

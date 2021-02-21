@@ -33,6 +33,7 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
   }
 });
 
+//회원가입 이메일 인증
 router.post('/sendEmail', isNotLoggedIn, async(req,res,next)=>{
   
   let email = req.body.email;
