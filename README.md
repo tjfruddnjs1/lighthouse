@@ -42,7 +42,8 @@
 - ejs : `embedded javascript templating`, HTML markup과 함께 자바스크립트 코드를 사용하여 서버와 클라이언트 간 데이터 상호작용을 편리하게 해줌
 - multer : 이미지, 동영상 등을 비롯한 여러 파일들을 `멀티파트(multipart/form-data)` 형식으로 업로드할 때 사용하는 미들웨어
 - nodemon : 소스 코드가 바뀔 때마다 노드를 재실행
-- morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리
+- morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리  
+- `socket.io` : 비동기 이벤트 처리를 위한 모듈. 페이지 리로드나 `get`, `post`처리 없이 요청에 대한 응답이 가능
 - **[package.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/package.json)** : 사용 모듈(미들웨어) 파일
 
 ## 개발 기능
@@ -72,6 +73,12 @@
  - `언어`와 `직업` 2개의 카테고리로 분류해 사용자가 원하는 멘토를 자세히 찾을 수 있다.
  - 사용자가 원하는 멘토를 클릭할 경우 해당 멘토에 대한 경력과 소개 글에 대한 페이지로 이동 `구현 예정`
 - 개발자 이야기
+
+  * 게시글 로드 `구현 완료`
+  * 게시글 카테고리화 `구현 완료`
+  * 게시글 목록에서 사용할 수 있는 기능들 `지속적인 개발 필요`
+  * 게시글 css 스타일링 `구현 중`
+  * 게시글 작성 `구현 예정`
 - 스터디 공고
 - 홍보
 - 로그인 `(계속 업데이트 예정)`
@@ -102,6 +109,10 @@
 - 멘토 찾기 : `멘토 리스트` 페이지
   <img width=100% float:left src="https://user-images.githubusercontent.com/57825856/107780503-1af35080-6d8a-11eb-8ed3-0f8c0840d024.png">
 - 개발자 이야기
+  <br>
+  <img width=100% float:left src="https://user-images.githubusercontent.com/57579709/109390062-c4be0a00-7952-11eb-9c0f-334263ab212c.png">
+  <img width=100% float:left src="https://user-images.githubusercontent.com/57579709/109390089-e4553280-7952-11eb-88c6-57c23fd9c6fe.png">
+
 - 스터디 공고
 - 홍보
 - 로그인 : `로그인, 회원가입` 페이지
@@ -139,6 +150,7 @@
 - `passport` : 로그인을 위해 passport 관련 코드 작성
 - `public` : 웹 페이지 디자인을 위한 `css,images`, 동적인 웹페이지를 위한 `js`, 중 공통적으로 사용하는 부분을 모아놓은 폴더, 경로 연결을 통한 사용
 - `routes` : 라우터를 [index.js](https://github.com/tjfruddnjs1/lighthouse/blob/master/index.js)파일을 통해 연결하면 길어지기 때문에 분리하여 `GET,POST,PUT,DELETE 등`에 대한 라우트 처리
+- `events` : `socket.io`모듈을 통한 socket이벤트들을 정의하는 자바스크립트 파일을 분리시켜놓은 폴더
 - `uploads` : 멘토 등록시 프로필 사진에 대한 파일들을 저장하는 폴더
 - `views` : 실제 웹 페이지에서 클라이언트와 상호작용하는 부분으로 ejs 템플릿을 사용하여 더욱 편리한 동적인 작용하는 폴더
   - [views/home/index.ejs](https://github.com/tjfruddnjs1/lighthouse/blob/master/views/home/index.ejs) : 메인 페이지
@@ -146,6 +158,7 @@
   - [views/job_seeking]() : 사용자에게 직업 탐색을 위한 개발자 직종 정보를 제공하는 view로, 일반적인 직업을 표현할 수 있는 동적 ejs파일인 `job_desc.ejs`파일과 별도의 툭수한 형태로 설명이 필요한 교육자 설명 페이지를 나타내는 `job_desc_edu.ejs`파일이 존재한다.
   - [views/mentor](https://github.com/tjfruddnjs1/lighthouse/tree/master/views/mentor) : 사용자가 멘토 등록을 하기 위한 view  `mentor.ejs`, `mentorField.ejs` 파일과 사용자가 원하는 멘토를 찾기 위한 멘토 리스트 페이지인 `mentorList.ejs`파일이 있다.
   - [views/mypage]() : 사용자의 계정 정보(이메일 제외)를 수정할수 있는 페이지의 view로 수정항목으로는 이름, 핸드폰번호, 성별, 사진이 있다. 또한 회원탈퇴페이지와 멘티정보를 등록할수 있으며 멘티는 대학생/취준생과 직장인으로 분류된다. 또한 비밀번호를 변경가능하며, 회원탈퇴시 사용자의 불편한점을 알아내기 위해 회원탈퇴 사유를 받는다.
+  - [views/essay]() : 멘토로 등록한 사용자만 작성할 수 있는 다양한 이야기들이나 개발자들의 동향, 멘토의 주관적인 생각 등 멘티들에게 도움이 될 수 있는 에세이들을 제공하는 페이지가 모여있는 폴더
 - `.env` : 유출되면 안되는 비밀키를 관리
 - `.gitignore` : Github 업로드 시 유출되면 안되는 `.env, config.json`파일이나 package.json으로 관리되는 `node_modules`을 배재하여 업로드
 - `index.js` : `npm install`을 통해 설치한 모듈들을 실제로 연동하고 설정

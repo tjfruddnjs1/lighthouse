@@ -78,6 +78,11 @@ app.use((err, req, res, next) => {
   console.log(err.status +' error 발생')
 })
 
-app.listen(app.get('port'), ()=> {
+let server = app.listen(app.get('port'), ()=> {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
+
+//socket
+let io = require('socket.io')(server);
+
+require('./events/essay')(io)
