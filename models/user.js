@@ -64,5 +64,9 @@ module.exports = class User extends Sequelize.Model {
       through : 'follow',
       timestamps : false
     })
+    db.User.hasOne(db.Essay, {
+      foreignKey: {name: 'essay_id', allowNull: true},
+      targetKey: 'essay_id'
+    })
   }
 };

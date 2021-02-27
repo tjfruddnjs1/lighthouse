@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!--
+Template Name: Yeinydd
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Copyright: OS-Templates.com
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+
+<head>
+  <%- include('../partials/head') %>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/css/mentorList.css" />
+    <link rel="stylesheet" href="/css/essay.css" />
+
+    <script>
+      //socket 불러오기
+      const socket = io();
+
+      let selectedCat = []; // 'cat' means 'category'
+        <% selectedCat.forEach(element => { %>
+        selectedCat.push(<%= element %>);
+          <% }) %>
+
+        //카테고리화 후 기존 게시글들을 삭제
+        function deleteChild() {
+          let parent = document.getElementById('ul-comments')
+          while (parent.hasChildNodes()) {
+            parent.removeChild(parent.firstChild)
+          }
+        }
+
+      //게시글 리로드 후 css 스타일링
+      function catStyling() { //'cat' means 'category'
+        let job = document.getElementsByClassName('job')
+        for (let i = 0; i < job.length; i++) {
+          let child = job.item(i)
+          if (selectedCat[i]) {
+            child.style.color = 'white'
+            child.style.backgroundColor = '#829da2'
+          } else {
+            child.style.color = '#829da2'
+            child.style.backgroundColor = 'white'
+          }
+        }
+      }
+
+      //카테고리 선택 시 socket event를 통해 동적으로 페이지를 리로드
+      function categorize(id) {
+        //기존 게시글들 지우기
+        deleteChild()
+
+        if (selectedCat[id]) {
+          selectedCat[id] = false
+
+        } else {
+          selectedCat[id] = true
+        }
+        socket.emit('categorize', { data: selectedCat })
+      }
+
+      //BLOB의 이미지를 처리하기 위한 함수
+      function processImg(msg) {
+        // const arrayBuffer = msg.data;
+        // return URL.createObjectURL(new Blob([arrayBuffer]));
+
+        let blob = new Blob([msg])
+        let url = URL.createObjectURL(blob)
+        return url
+      }
+
+
+      //categorize() -> socket.emit('categorize') 후 도착
+      //DB로부터 조회한 데이터를 보내면, 아래의 함수에서 html element 렌더링
+      socket.on('render category', (data) => {
+        let resultSet = data.essays
+        let jobs = data.jobs
+        console.log('**********************');
+        console.log('resultSet : ', resultSet);
+        console.log('**********************');
+        for (let i = 0; i < resultSet.length; i++) {
+          let li_essay = document.createElement("li")
+          if (i % 2 === 0) {
+            li_essay.className = 'one_half first'
+          } else {
+            li_essay.className = 'one_half'
+          }
+
+          let a_moreDetail = document.createElement('a')
+          a_moreDetail.setAttribute('href', `/essay/${resultSet[i].essay_id}`)
+
+          let div_img = document.createElement('div')
+          let img_content = document.createElement('img')
+          img_content.className = 'img-content-main'
+          if (resultSet[i].essay_title_image == null) {
+            img_content.setAttribute('src', '/images/essay_default.png') //게시글 대표이미지 src 수정 필요
+          } else {
+            // img_content.setAttribute('src', `data:image/png;base64,  ${resultSet[i].essay_title_img}`) //게시글 대표이미지 src 수정 필요
+            // img_content.setAttribute('src', 'data:image/png;base64, '+resultSet[i].essay_title_image) //게시글 대표이미지 src 수정 필요
+
+            let src = processImg(resultSet[i].essay_title_image)
+            img_content.setAttribute('src', src) //게시글 대표이미지 src 수정 필요
+
+
+          }
+
+          let header = document.createElement('header')
+          let a_mentorImg = document.createElement('a')
+          a_mentorImg.className = 'avatar'
+          a_mentorImg.setAttribute('href', '/view/' + resultSet[i].user_id)
+          let img_mentorImg = document.createElement('img')
+
+          img_mentorImg.setAttribute('src', resultSet[i][`User.path`]) //두번째 인자에 해당 유저의 사진을 넣기
+          let a_mentorName = document.createElement('a')
+          a_mentorName.setAttribute('href', '') //두번째 인자에 해당 멘토 소개페이지로 이동
+          let address_mentorName = document.createElement('address')
+          address_mentorName.append(resultSet[i][`User.username`] + ' 멘토')//인자로 멘토의 이름을 전달
+          let a_job = document.createElement('a')
+          a_job.setAttribute('href', '/career/job_seeking/' + jobs[resultSet[i].job_id].en)
+          a_job.append(jobs[resultSet[i].job_id].kr)
+
+          let div_comcont = document.createElement('div')
+          div_comcont.className = 'comcont'
+          let a_title = document.createElement('a')
+          a_title.setAttribute('href', '')
+          let p_title = document.createElement('p')
+          p_title.className = 'comcont-title'
+          p_title.append(resultSet[i].essay_title)
+          let a_context = document.createElement('a')
+          a_context.setAttribute('href', '')
+          let p_context = document.createElement('p')
+          p_context.append(resultSet[i].essay_context)
+
+          //append child element
+          header.appendChild(a_mentorImg)
+          a_mentorName.appendChild(address_mentorName)
+          header.appendChild(a_mentorName)
+          header.appendChild(a_job)
+          a_mentorImg.appendChild(img_mentorImg)
+          a_moreDetail.appendChild(div_img)
+          a_moreDetail.appendChild(header)
+          a_title.appendChild(p_title)
+          div_comcont.appendChild(a_title)
+          a_context.appendChild(p_context)
+          div_comcont.appendChild(a_context)
+          a_moreDetail.appendChild(div_comcont)
+          div_img.appendChild(img_content)
+
+          li_essay.appendChild(a_moreDetail)
+          document.getElementById("ul-comments").appendChild(li_essay)
+        }
+      })
+    </script>
+</head>
+
+<body id="top">
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- Top Background Image Wrapper -->
+  <div class="bgded overlay" style="background-image: url('/images/lighthouse.jpg')">
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+      <%- include('../partials/nav') %>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div id="breadcrumb" class="hoc clear">
+      <!-- ################################################################################################ -->
+      <h1 class="heading">개발자 이야기</h1>
+      <!-- ################################################################################################ -->
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+  <!-- End Top Background Image Wrapper -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <figcaption style="text-align: center; font-size: 24px; margin-bottom: 5%">
+        멘토들이 전하는 '진짜' 개발이야기
+      </figcaption>
+
+      <!-- <h1 class="title">직업</h1> -->
+
+      <div class="category">
+        <% for(let i=0; i< jobs.length; i++) { %>
+          <a class="job" id='job<%= i %>' href="javascript:categorize(<%= i %>);">
+            <%= jobs[i].job_name %>
+          </a>
+          <% } %>
+            <br />
+            <br>
+            <!-- <a class="job" id="cat" onclick="categorize(); return false;" href="#">적용</a> -->
+            <a id='clearCat' href="javascript:window.location.href=window.location.href">초기화</a>
+      </div>
+      <br />
+      <br />
+
+      <div></div>
+      <!-- main body -->
+      <!-- ################################################################################################ -->
+      <div class="content">
+        <!-- ################################################################################################ -->
+        <!-- ################################################################################################ -->
+        <!-- ################################################################################################ -->
+        <div id="comments">
+          <h2>Contents</h2>
+          <ul id="ul-comments">
+            <script>
+              socket.emit('categorize', { data: selectedCat })
+            </script>
+          </ul>
+        </div>
+
+        <nav class="pagination">
+          <ul>
+            <li><a href="#">&laquo; Previous</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><strong>&hellip;</strong></li>
+            <li><a href="#">6</a></li>
+            <li class="current"><strong>7</strong></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">9</a></li>
+            <li><strong>&hellip;</strong></li>
+            <li><a href="#">14</a></li>
+            <li><a href="#">15</a></li>
+            <li><a href="#">Next &raquo;</a></li>
+          </ul>
+        </nav>
+        <!-- ################################################################################################ -->
+      </div>
+      <!-- ################################################################################################ -->
+      <!-- / main body -->
+      <div class="clear"></div>
+    </main>
+  </div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div class="wrapper row4"></div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <div class="wrapper row5">
+    <div id="copyright" class="hoc clear">
+      <!-- ################################################################################################ -->
+      <p class="fl_left">
+        Copyright &copy; 2018 - All Rights Reserved -
+        <a href="#">Domain Name</a>
+      </p>
+      <p class="fl_right">
+        Template by
+        <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a>
+      </p>
+      <!-- ################################################################################################ -->
+    </div>
+  </div>
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <!-- ################################################################################################ -->
+  <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+  <!-- JAVASCRIPTS -->
+  <script>
+
+  </script>
+</body>
+
+</html>

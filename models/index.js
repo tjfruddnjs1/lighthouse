@@ -8,6 +8,7 @@ const Lang = require('./lang');
 const Job = require('./job');
 const MentorJob = require('./mentorJob');
 const MentorLang = require('./mentorLang');
+const Essay = require('./essay')
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -30,6 +31,7 @@ db.Lang = Lang;
 db.Job = Job;
 db.MentorJob = MentorJob;
 db.MentorLang = MentorLang;
+db.Essay = Essay;
 
 User.init(sequelize);
 Drop.init(sequelize);
@@ -39,6 +41,7 @@ Lang.init(sequelize);
 Job.init(sequelize);
 MentorJob.init(sequelize);
 MentorLang.init(sequelize);
+Essay.init(sequelize);
 
 
 User.associate(db);
@@ -51,6 +54,7 @@ Lang.associate(db);
 Job.associate(db);
 MentorJob.associate(db);
 MentorLang.associate(db);
+Essay.associate(db);
 MentorLang.removeAttribute('id');
 MentorJob.removeAttribute('id');
 

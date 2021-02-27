@@ -1,0 +1,84 @@
+.comcont p {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: box;
+    margin-top: 1px;
+    max-height: 80px;
+    overflow: hidden;
+    vertical-align: top;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: black;
+  }
+
+  .comcont .comcont-title{
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.2em;
+    text-overflow: ellipsis;
+  }
+  
+
+  .category .job {
+    margin: 1px;
+  }
+
+  #clearCat {
+    margin: 1px;
+    text-decoration: none;
+    border: 1px solid #829da2;
+    padding: 7px 30px;
+    border-radius: 15px;
+  }
+
+
+  /* .category label {
+    display: inline;
+    margin-right: 10px;
+    border: 1px solid #829DA2;
+    border-radius: 15px;
+    padding: 7px 30px;
+    line-height: 50px;
+  }
+
+  .category input {
+    display: none;
+    float: left;
+  }
+
+  .category input:checked {
+    color: white;
+    background-color: #829DA2;
+  }
+
+  .category {
+    display: inline-block;
+  }
+
+  .category label:hover,
+  .category label:active,
+  p .category input:hover+label,
+  .category input:active+label {
+    color: white;
+    background-color: #829DA2;
+  } */
+
+  .img-content-main{
+    height: 200px;
+    display: block;
+    margin: 0px auto;
+    margin-bottom: 1%;
+  }
+
+  /* #ul-comments li{
+    display: block;
+    width: 520px;
+    height: 360px
+  } */
+
+  .avatar img{
+    width: 50px;
+  }
