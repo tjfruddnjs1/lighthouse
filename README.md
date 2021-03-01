@@ -43,7 +43,8 @@
 - multer : 이미지, 동영상 등을 비롯한 여러 파일들을 `멀티파트(multipart/form-data)` 형식으로 업로드할 때 사용하는 미들웨어
 - nodemon : 소스 코드가 바뀔 때마다 노드를 재실행
 - morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리  
-- `socket.io` : 비동기 이벤트 처리를 위한 모듈. 페이지 리로드나 `get`, `post`처리 없이 요청에 대한 응답이 가능
+- nodemailer : 회원가입/비밀번호 찾기 기능에 이메일 정보 인증을 위한 모듈 사용
+- socket.io : 비동기 이벤트 처리를 위한 모듈. 페이지 리로드나 `get`, `post`처리 없이 요청에 대한 응답이 가능
 - **[package.json](https://github.com/tjfruddnjs1/lighthouse/blob/master/package.json)** : 사용 모듈(미들웨어) 파일
 
 ## 개발 기능
